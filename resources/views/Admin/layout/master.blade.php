@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Blank Page</title>
+  <title>Admin Page</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{asset('admin_lte/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -170,8 +171,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview ">
+              <a href="{{route('admin.home')}}" class="nav-link {{(request()->is('admin'))?"active":""}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -179,31 +180,62 @@
             </a>
           </li>  
           <li class="nav-header">MANAGE</li>
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon far fa-plus-square"></i>
+          {{-- Tab category --}}
+          <li class="nav-item has-treeview {{(request()->is('admin/category*'))?"menu-open":""}}">
+              <a class="nav-link {{(request()->is('admin/category*'))?"active":""}}">
+              <i class="nav-icon fa fa-cubes"></i>
+              {{-- <i class=""></i> --}}
               <p>
-                Extras
+                Loại sản phẩm
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">        
               <li class="nav-item">
-                <a href="../examples/blank.html" class="nav-link active">
+                <a href="{{Route('admin.category.index')}}" class="nav-link {{(request()->is('admin/category'))?"active":""}}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Blank Page</p>
+                  <p>Danh sách</p>
                 </a>
               </li>
             </ul>
             <ul class="nav nav-treeview">        
               <li class="nav-item">
-                <a href="../examples/blank.html" class="nav-link">
+                <a href="{{route('admin.category.create')}}" class="nav-link {{(request()->is('admin/category/create'))?"active":""}}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Thử</p>
+                  <p>Thêm</p>
                 </a>
               </li>
             </ul>
           </li>
+          {{--Entab Category--}}
+
+          {{-- Tab Attribute --}}
+          <li class="nav-item has-treeview {{(request()->is('admin/attribute*'))?"menu-open":""}}">
+            <a class="nav-link {{(request()->is('admin/attribute*'))?"active":""}}">
+            <i class="nav-icon fa fa-flask"></i>
+            <p>
+              Thuộc tính
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{Route('admin.attribute.index')}}" class="nav-link {{(request()->is('admin/attribute'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{route('admin.attribute.create')}}" class="nav-link {{(request()->is('admin/attribute/create'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        {{--Entab Category--}}
           {{-- Start Multi level --}}
           {{-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item has-treeview">
@@ -294,5 +326,6 @@
 <script src="{{asset('admin_lte/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin_lte/dist/js/demo.js')}}"></script>
+@yield('javascript')
 </body>
 </html>

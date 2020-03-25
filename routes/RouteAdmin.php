@@ -1,4 +1,22 @@
 <?php
 Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
-    Route::get('/','AdminController@index');
+    Route::get('/','AdminController@index')->name('admin.home');
+    Route::get('/test','AdminTestController@index')->name('admin.test');
+    Route::group(['prefix'=>'category'],function(){
+        Route::get('/','AdminCategoryController@index')->name('admin.category.index');
+        Route::get('/create','AdminCategoryController@create')->name('admin.category.create');
+        Route::post('/create','AdminCategoryController@store');
+        Route::get('/update/{id}','AdminCategoryController@edit')->name('admin.category.edit');
+        Route::post('/update/{id}','AdminCategoryController@update');
+        Route::get('/{action}/{id}','AdminCategoryController@handle')->name('admin.category.handle');
+    });
+
+    Route::group(['prefix'=>'attribute'],function(){
+        Route::get('/','AdminAttributeController@index')->name('admin.attribute.index');
+        Route::get('/create','AdminAttributeController@create')->name('admin.attribute.create');
+        Route::post('/create','AdminAttributeController@store');
+        Route::get('/update/{id}','AdminAttributeController@edit')->name('admin.attribute.edit');
+        Route::post('/update/{id}','AdminAttributeController@update');
+        Route::get('/{action}/{id}','AdminAttributeController@handle')->name('admin.attribute.handle');
+    });
 });
