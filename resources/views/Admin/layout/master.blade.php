@@ -192,7 +192,7 @@
             </a>
             <ul class="nav nav-treeview">        
               <li class="nav-item">
-                <a href="{{Route('admin.category.index')}}" class="nav-link {{(request()->is('admin/category'))?"active":""}}">
+                <a href="{{Route('admin.category.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/category'))?"active":""}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách</p>
                 </a>
@@ -200,7 +200,7 @@
             </ul>
             <ul class="nav nav-treeview">        
               <li class="nav-item">
-                <a href="{{route('admin.category.create')}}" class="nav-link {{(request()->is('admin/category/create'))?"active":""}}">
+                <a href="{{route('admin.category.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/category/create'))?"active":""}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm</p>
                 </a>
@@ -220,7 +220,8 @@
           </a>
           <ul class="nav nav-treeview">        
             <li class="nav-item">
-              <a href="{{Route('admin.attribute.index')}}" class="nav-link {{(request()->is('admin/attribute'))?"active":""}}">
+              <a href="{{Route('admin.attribute.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/attribute'))?"active":""}}">
+              
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách</p>
               </a>
@@ -228,14 +229,41 @@
           </ul>
           <ul class="nav nav-treeview">        
             <li class="nav-item">
-              <a href="{{route('admin.attribute.create')}}" class="nav-link {{(request()->is('admin/attribute/create'))?"active":""}}">
+              <a href="{{route('admin.attribute.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/attribute/create'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm</p>
               </a>
             </li>
           </ul>
         </li>
-        {{--Entab Category--}}
+        {{--End tab Attribute--}}
+        {{-- Tab product --}}
+        <li class="nav-item has-treeview {{(request()->is('admin/product*'))?'menu-open':'' }}">
+          <a class="nav-link {{(request()->is('admin/product*'))?"active":""}}">
+          <i class="nav-icon fa fa-archive"></i>
+          <p>
+            Sản phẩm
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+            <a href="{{Route('admin.product.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/product'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{route('admin.product.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link ">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm</p>
+              </a>
+            </li>
+          </ul>
+       </li>
+        {{-- End tab product --}}
           {{-- Start Multi level --}}
           {{-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item has-treeview">

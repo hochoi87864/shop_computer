@@ -19,4 +19,13 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
         Route::post('/update/{id}','AdminAttributeController@update');
         Route::get('/{action}/{id}','AdminAttributeController@handle')->name('admin.attribute.handle');
     });
+
+    Route::group(['prefix'=>'product'],function(){
+        Route::get('/','AdminProductController@index')->name('admin.product.index');
+        Route::get('/create','AdminProductController@create')->name('admin.product.create');
+        Route::post('/create','AdminProductController@store');
+        Route::get('/update/{id}','AdminProductController@edit')->name('admin.product.edit');
+        Route::post('/update/{id}','AdminProductController@update');
+        Route::get('/{action}/{id}','AdminProductController@handle')->name('admin.product.handle');
+    });
 });
