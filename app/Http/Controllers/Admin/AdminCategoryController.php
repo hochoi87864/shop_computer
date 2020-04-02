@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
+use App\Models\Attribute_AttributeValue;
 use App\Models\Category;
 use App\Models\Category_Attribute;
 use Illuminate\Support\Facades\Validator;
@@ -110,9 +111,24 @@ class AdminCategoryController extends Controller
         if($id)
         {
             Category_Attribute::where('c_a_category_id',$id)->delete();
+            
             foreach ($request->all() as $key => $value) 
             {
                 if(is_int($key)){
+                $attribute = Attribute::find($key);
+                // if($attribute->at_type != "text" &&  $attribute->at_type != "number")
+                // {
+                //     Attribute_AttributeValue::where('atv_attribute_id',$key)->delete();
+                //     $arrayAtributeValue = explode(';',$attribute->at_value);
+                //     foreach ($arrayAtributeValue as $avt) {
+                //         Attribute_AttributeValue::insert(
+                //                 [
+                //                     'atv_attribute_id' => $key,
+                //                     'atv_value' => $avt
+                //                 ]
+                //             );
+                //     }
+                // }
                 $variable  = new Category_Attribute();
                 $variable->c_a_category_id = $category->id;
                 $variable->c_a_attribute_id = $key;

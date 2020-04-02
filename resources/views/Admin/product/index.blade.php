@@ -36,7 +36,22 @@
                     <th>Thao tác</th>
                 </thead>
                 <tbody>
-                    
+                  @if(isset($products))
+                    @foreach($products as $pro)
+                      <tr>
+                        <td>{{$pro->id}}</td>
+                        <td>{{$pro->pro_name}}</td>
+                        <td>{{$pro->Category->c_name}}</td>
+                        <td><img style="width:80px;height:80px" src="{{asset('upload/pro_image/'.$pro->pro_image)}}" alt="No Avatar"/></td>
+                        <td>{{$pro->pro_status}}</td>
+                        <td>{{$pro->pro_hot}}</td>
+                        <td>
+                          <a href="{{route('admin.product.edit',$pro->id)}}">Sửa</a>
+                          <a href="{{route('admin.product.handle',['delete',$pro->id])}}">Xóa</a>
+                        </td>
+                      </tr>
+                    @endforeach
+                  @endif
                 </tbody>
             </table>
         </div>

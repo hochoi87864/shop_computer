@@ -27,5 +27,6 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
         Route::get('/update/{id}','AdminProductController@edit')->name('admin.product.edit');
         Route::post('/update/{id}','AdminProductController@update');
         Route::get('/{action}/{id}','AdminProductController@handle')->name('admin.product.handle');
+        Route::get('/getAttribute','AdminProductController@getAttribute')->name('admin.ajax.get.attribute');
     });
 });

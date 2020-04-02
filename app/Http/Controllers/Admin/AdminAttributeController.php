@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute as AppAttribute;
+use App\Models\Attribute_AttributeValue;
 use Illuminate\Support\Facades\Validator;
 
 class AdminAttributeController extends Controller
