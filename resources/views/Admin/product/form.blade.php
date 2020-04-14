@@ -40,7 +40,11 @@
     </div>
     <div class="form-group">
       <label>Ảnh minh họa:</label>
-      <img id="img_output" style="width: 100%;" class="mb-3" src="{{asset('unimg.jpg')}}"/>
+      @if(isset($product->pro_image))
+          <img  id="img_output" style="width:240px;height:180px; margin-bottom:10px" src="{{asset('upload/pro_image/'.$product->pro_image)}}"/>
+      @else
+          <img id="img_output" style="width:240px;height:180px; margin-bottom:10px" src="{{asset('unimg.jpg')}}"/>
+      @endif
       <input type="file" name="pro_image" id="img_input" class="form-control"/>
     </div>
   </div>

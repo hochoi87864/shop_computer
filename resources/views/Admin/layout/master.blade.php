@@ -264,6 +264,44 @@
           </ul>
        </li>
         {{-- End tab product --}}
+        {{-- Tab article --}}
+        <li class="nav-item has-treeview {{(request()->is('admin/article*'))?'menu-open':'' }}">
+          <a class="nav-link {{(request()->is('admin/article*'))?"active":""}}">
+          <i class="nav-icon fa fa-newspaper"></i>
+          <p>
+            Bài viết
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+            <a href="{{Route('admin.article.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/article'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{route('admin.article.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link ">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm</p>
+              </a>
+            </li>
+          </ul>
+       </li>
+        {{-- End tab article --}}
+         {{-- Tab transaction --}}
+         <li class="nav-item has-treeview {{(request()->is('admin/transaction*'))?'menu-open':'' }}">
+          <a href="{{route('admin.transaction.index')}}" class="nav-link {{(request()->is('admin/transaction*'))?"active":""}}">
+          <i class="nav-icon fas fa-file-invoice-dollar"></i>
+          <p>
+            Giao dịch
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+       </li>
+        {{-- End tab transaction --}}
           {{-- Start Multi level --}}
           {{-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item has-treeview">

@@ -29,4 +29,20 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
         Route::get('/{action}/{id}','AdminProductController@handle')->name('admin.product.handle');
         Route::get('/getAttribute','AdminProductController@getAttribute')->name('admin.ajax.get.attribute');
     });
+
+    Route::group(['prefix'=>'article'],function(){
+        Route::get('/','AdminArticleController@index')->name('admin.article.index');
+        Route::get('/create','AdminArticleController@create')->name('admin.article.create');
+        Route::post('/create','AdminArticleController@store');
+        Route::get('/update/{id}','AdminArticleController@edit')->name('admin.article.edit');
+        Route::post('/update/{id}','AdminArticleController@update');
+        Route::get('/{action}/{id}','AdminArticleController@handle')->name('admin.article.handle');
+    });
+
+    Route::group(['prefix'=>'transaction'],function(){
+        Route::get('/','AdminTransactionController@index')->name('admin.transaction.index');
+        Route::get('/orderItem/{id}','AdminTransactionController@getOrderItem')->name('admin.get.order.item');
+        Route::get('/{action}/{id}','AdminTransactionController@handle')->name('admin.transaction.handle');
+    });
+
 });

@@ -22,6 +22,10 @@ class AdminTestController extends Controller
         // dd($product->ProductAndAttributeValue);
         // -----
         //Test file function
-        test123456();
+        // test123456();
+        //test get product for category
+        $category = Category::find(3);
+        dd($category->Product->sortByDesc('id')->take(5));
+
     }
 }
