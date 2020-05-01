@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -15,5 +16,13 @@ class Product extends Model
     public function ProductAndAttributeValue()
     {
         return $this->belongsToMany(Attribute_AttributeValue::class,'product_attribute','pa_product_id','pa_attribute_value_id');
+    }
+    public function Rating()
+    {
+        return $this->hasMany(Rating::class,'ra_product_id');
+    }
+    public function FavoriteProduct()
+    {
+        return $this->belongsToMany(User::class,'favorite_product','fp_product_id','fp_user_id');
     }
 }

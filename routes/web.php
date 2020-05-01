@@ -13,6 +13,17 @@
 
 include('RouteAdmin.php');
 Route::get('/','HomeController@index')->name('home');
+
+Route::group(['prefix'=>'category'],function()
+{
+    Route::get('/{slugname}/{id}','CategoryController@index')->name('category.index');
+});
+
+Route::group(['prefix'=>'product'],function()
+{
+    Route::get('/{slugname}/{id}','ProductController@index')->name('product.index');
+});
+
 Route::group(['namespace'=>'Auth'],function()
 {
     Route::get('dang-ky','RegisterController@getRegister')->name('get.register');
@@ -27,10 +38,24 @@ Route::group(['prefix'=>'shopping'],function()
     Route::get('/','ShoppingCartController@index')->name('shopping.cart.index');
     Route::get('add/{id}','ShoppingCartController@addProduct')->name('shopping.add.product');
     Route::get('/delete/{key}','ShoppingCartController@deleteProductItem')->name('shopping.delete.product');
+    Route::post('/edit','ShoppingCartController@editProductItem')->name('shopping.edit.product');
 });
 
 Route::group(['prefix'=>'feature-user','middleware'=>'checkLoginUser'],function()
 {
     Route::get('/checkout','FeatureUserController@getFormPay')->name('feature.user.checkout');
     Route::post('/checkout','FeatureUserController@saveInfoShoppingCart');
+});
+
+Route::group(['prefix'=>'rating'],function()
+{
+    Route::post('/{id}','RatingController@saveRating')->name('post.rating.product');
+});
+
+// favorite_product
+Route::group(['prefix'=>'favorite_product'],function()
+{
+    Route::get('/','FavoriteProductController@index')->name('favorite.product.index');
+    Route::get('add/{id}','FavoriteProductController@addProduct')->name('get.add.favorite.product');
+    Route::get('delete/{id}','FavoriteProductController@deleteProduct')->name('get.delete.favorite.product');
 });

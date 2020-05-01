@@ -1,0 +1,415 @@
+@extends('customer.layout.master')
+@section('content')
+<style>
+.list_text{
+    display: inline-block;
+    margin-left: 10px;
+    position: relative;
+    background: #52b858;
+    color: #fff;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    font-size: 12px;
+    border-radius: 2px;
+    display: none;
+}
+.list_text::after{
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(82,184,88,0);
+    border-right-color: #52b858;
+    border-width: 6px;
+    margin-top: -6px;
+}
+.list_start .rating_active,.pro-rating .active{
+    color:#ff9705 !important;
+}
+.content_product_description{
+    overflow: hidden;
+}
+.content_product_description img{
+    width: 50%;
+}
+</style>
+ <!-- Begin Li's Breadcrumb Area -->
+ <div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">{{$product->Category->c_name}}</a></li>
+                <li class="active">{{$product->pro_name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- content-wraper start -->
+<div class="content-wraper">
+    <div class="container">
+        <div class="row single-product-area">
+            <div class="col-lg-5 col-md-6">
+               <!-- Product Details Left -->
+                <div class="product-details-left">
+                    <div class="product-details-images slider-navigation-1">
+                        <div class="lg-image">
+                            @if(isset($product->pro_image))
+                                <img src="{{asset('upload/pro_image/'.$product->pro_image)}}" alt="Li's Product Image">
+                            @else
+                                <img src="{{asset('noimg.png')}}" alt="Li's Product Image">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <!--// Product Details Left -->
+            </div>
+
+            <div class="col-lg-7 col-md-6">
+                <div class="product-details-view-content sp-normal-content pt-30">
+                    <div class="product-info">
+                        <h2>{{$product->pro_name}}</h2>
+                        <span class="product-details-ref">Số lượng: {{$product->pro_number}}</span>
+                        <div class="rating-box pt-20">
+                            <ul class="rating rating-with-review-item">
+                                <li><i class="fa fa-star-o"></i></li>
+                                <li><i class="fa fa-star-o"></i></li>
+                                <li><i class="fa fa-star-o"></i></li>
+                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                {{-- <li class="review-item"><a href="#">Read Review</a></li>
+                                <li class="review-item"><a href="#">Write Review</a></li> --}}
+                            </ul>
+                        </div>
+                        <div class="price-box pt-20">
+                            <span class="new-price new-price-2">{{number_format($product->pro_price,2,',','.')}} VNĐ</span>
+                        </div>
+                        <div class="product-desc">
+                            <p>
+                                <span>{{$product->pro_description}}
+                                </span>
+                            </p>
+                        </div>
+                        <div class="single-add-to-cart">
+                            <div style="display: flex">
+                                <div class="hm-wishlist mr-3" >
+                                    <a href="wishlist.html" id="hm-wishlist_by_me">
+                                        <i class="fa fa-heart-o" id="add_to_wishlist_by_me" ></i>
+                                        <style>
+                                            #hm-wishlist_by_me
+                                            {
+                                                background-color: #fed700;
+                                                color: black;
+                                            }
+                                            #hm-wishlist_by_me:hover
+                                            {
+                                                background-color: #242424;
+                                                color: white;
+                                            }
+                                        </style>
+                                    </a>
+                                </div>
+                                <div class="cart-quantity">
+                                    <button class="add-to-cart" type="submit">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="product-additional-info">
+                            <div class="product-social-sharing">
+                                <ul>
+                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
+                                    <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
+                                    <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
+                                </ul>
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+<!-- content-wraper end -->
+<!-- Begin Product Area -->
+<div class="product-area pt-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="li-product-tab">
+                    <ul class="nav li-product-menu">
+                       <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
+                       <li><a data-toggle="tab" href="#product-details"><span>Product Details</span></a></li>
+                       <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li>
+                    </ul>               
+                </div>
+                <!-- Begin Li's Tab Menu Content Area -->
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="description" class="tab-pane active show" role="tabpanel">
+                <div class="product-description">
+                    <span>{{$product->pro_content}}</span>
+                </div>
+            </div>
+            <div id="product-details" class="tab-pane" role="tabpanel">
+                <div class="product-details-manufacturer">
+                    <ul>
+                        @foreach ($product->ProductAndAttributeValue as $attribute)
+                            <li class="pt-5">{{$attribute->Attribute->at_name}}: {{$attribute->atv_value}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div id="reviews" class="tab-pane" role="tabpanel">
+                {{-- start my custom rating --}}
+                <div class="component_rating" style="margin-bottom:20px;margin-top: 25px;">
+                    <div class="component_rating_content" style="display:flex; align-items: center; border-radius:5px; border:1px solid #dedede">
+                        {{-- /// --}}
+                        <div class="rating_item" style="width:25%;position:relative">
+                            <span class="fa fa-star" style="font-size:100px;color:#ff9705;margin:0 auto; text-align:center;display:block"></span>
+                            @if($product->pro_number_of_reviewers > 0)
+                                <b style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); color:white;font-size:25px">{{round($product->pro_total_star/$product->pro_number_of_reviewers,1)}}</b>
+                            @else
+                                <b style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); color:white;font-size:25px">0</b>
+                            @endif
+                        </div>
+                        <div class="list_rating" style="width:50%;padding:20px">
+                                @for($i=5;$i>=1;$i--) 
+                                <div class="item_rating" style="display:flex; align-items: center;">
+                                    <div style="width:10%;font-size:14px">
+                                        <span>{{$i}} <div class="fa fa-star" style="width: 30%"></div></span>
+                                    </div>
+                                    <div style="width:60%;margin:0 20px">
+                                        @foreach($eachstar as $key => $value)
+                                            @if($key == $i)
+                                                @if($product->pro_total_star>0)
+                                                    <span style="width:100%;height:8px;display:block;border: 1px solid #dedede;border-radius:5px;background-color:#dedede"><b style="width:{{($value/$product->pro_number_of_reviewers)*100}}%;background-color:#f25800;display:block;height:100%;border-radius:5px;"></b></span>
+                                                @else
+                                                    <span style="width:100%;height:8px;display:block;border: 1px solid #dedede;border-radius:5px;background-color:#dedede"><b style="width:0%;background-color:#f25800;display:block;height:100%;border-radius:5px;"></b></span>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div style="width:30%">
+                                       @foreach($eachstar as $key => $value)
+                                           @if($key == $i)
+                                                @if($product->pro_total_star>0)
+                                                    <a href="#">{{$value}} đánh giá ({{round(($value/$product->pro_number_of_reviewers)*100,2)}}%)</a>
+                                                @else
+                                                    <a href="#">{{$value}} đánh giá</a>
+                                                @endif
+                                           @endif
+                                       @endforeach
+                                    </div>
+                                </div> 
+                                @endfor  
+                        </div> 
+                        <div style="width:25%">
+                            @if(Auth::check())
+                                <a href="#" class="btn btn-primary js_rating_action"> Gửi đánh giá của bạn </a>
+                            @else
+                                {{-- <a href="#" class="btn btn-primary js_rating_action"> Gửi đánh giá của bạn </a> --}}
+                                <div style="text-align: center"><b>Để đánh giá sản phẩm bạn cần</b> <a href="{{route('get.login')}}" class="btn btn-primary"> Đăng nhập </a></div>
+                            @endif
+                        </div>
+                        {{-- /// --}}
+                    </div>
+                    {{-- form rating --}}
+                    <div class="form_rating d-none">
+                        <div style="display: flex; margin-top:20px">
+                            <p style="margin-bottom:0px" >Chọn đánh giá của bạn:</p>
+                            <span style="margin: 0 15px;" class="list_start">
+                                @for($i=1; $i <=5; $i++)
+                                    <i class="fa fa-star" data-key="{{$i}}"></i>
+                                @endfor
+                            </span>
+                            <span class="list_text">Tốt</span>
+                            <input type="hidden" value="" class="number_rating"/>
+                        </div>
+                        <div style="margin-top:15px">
+                            <textarea class="form-control" cols="30" rows="3" id="content_rating"></textarea>
+                        </div>
+                        <div style="margin-top:15px">
+                            <a href="{{route('post.rating.product',$product->id)}}" class="btn btn-primary js_rating_product_button">Gửi đánh giá</a>
+                        </div>
+                    </div>
+                    {{-- end form rating --}}
+                </div> 
+                {{-- end my custom rating --}}
+                {{-- show đánh giá --}}
+                <div style="margin-top:30px; padding: 0px 25px ">
+                    @if(isset($ratings))
+                        @foreach($ratings as $rating)
+                            <div style="margintop:10px;">
+                                <div class="pro-rating">
+                                    <span><b>{{$rating->User->name}}</b></span> -
+                                    @for($i=1; $i <= 5; $i++)
+                                        <i class="fa fa-star {{$i<=$rating->ra_number?'active':''}}"></i>
+                                    @endfor
+                                    <a href="#" style="color:#1cc88a"><i class="fa fa-check-circle-o"></i> Đã đánh giá</a> - <span><i class="fa fa-clock-o"></i> {{$rating->created_at}}</span>
+                                </div>
+                                <div style="margin-top:5px;padding-left: 15px">
+                                    <span>
+                                        {{$rating->ra_content}}
+                                    </span>
+                                </div>
+                            </div>
+                            <hr style="margin: 15px 0;"/>
+                        @endforeach
+                    @endif
+                </div>
+                {{-- end show đánh giá --}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Area End Here -->
+<!-- Begin Li's Laptop Product Area -->
+<section class="product-area li-laptop-product pt-30 pb-50">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span>15 other products in the same category:</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        {{-- <div class="col-lg-12">
+                            <!-- single-product-wrap start -->
+                            <div class="single-product-wrap">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="images/product/large-size/1.jpg" alt="Li's Product Image">
+                                    </a>
+                                    <span class="sticker">New</span>
+                                </div>
+                                <div class="product_desc">
+                                    <div class="product_desc_info">
+                                        <div class="product-review">
+                                            <h5 class="manufacturer">
+                                                <a href="product-details.html">Graphic Corner</a>
+                                            </h5>
+                                            <div class="rating-box">
+                                                <ul class="rating">
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
+                                        <div class="price-box">
+                                            <span class="new-price">$46.80</span>
+                                        </div>
+                                    </div>
+                                    <div class="add-actions">
+                                        <ul class="add-actions-link">
+                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single-product-wrap end -->
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+<!-- Li's Laptop Product Area End Here -->
+@endsection
+@section('javascript')
+<script>
+    //list number equal text rate
+    listRatingText = {
+        1 : "Không thích",
+        2 : "Tạm được",
+        3 : "Bình thường",
+        4 : "Tốt",
+        5 : "Tuyệt vời",
+    }
+    // event mouse over rate
+    $(".list_start .fa").mouseover(function()
+    {
+        // get object now
+        let $this =$(this);
+        // get number rate
+        let number =$this.attr("data-key");
+        // reset star active
+        $(".list_start .fa").removeClass('rating_active');
+        //Enter number rate in textbox
+        $(".number_rating").val(number);
+        //active star
+        $.each(
+            $(".list_start .fa"),function(key, value)
+            {
+                if(key+1<=number){
+                    $(this).addClass('rating_active')
+                }
+            }
+        );
+        // show text rate
+        $(".list_text").text('').text(listRatingText[$this.attr("data-key")]).show();
+        console.log($this.attr("data-key"));
+    });
+    //hide and show form rating
+    $(".js_rating_action").click(function(event)
+    {
+        event.preventDefault();
+        if($(".form_rating").hasClass('d-none'))
+        {
+            $(".form_rating").removeClass('d-none');
+            $(".js_rating_action").text("").text("Hủy đánh giá");
+        }
+        else
+        {
+            $(".form_rating").addClass('d-none');
+            $(".js_rating_action").text("").text("Gửi đánh giá của bạn");
+        }
+    });
+    $(".js_rating_product_button").click(function(event)
+    {
+        event.preventDefault();
+        let number = $(".number_rating").val();
+        let content = $("#content_rating").val();
+        let url = $(this).attr("href");
+        $.ajax(
+            {
+                url : url,
+                type : "POST",
+                data : {
+                    _token: "{{ csrf_token() }}",
+                    number: number,
+                    content:content
+                }
+            }
+        ).done(function(result)
+        {
+            if(result.code == 1)
+            {
+                alert("Gửi đánh giá thành công !!!");
+                location.reload();
+            }
+            else
+            {
+                alert("Đánh giá thất bại !!!");
+            }
+        });
+    });
+</script>
+@endsection

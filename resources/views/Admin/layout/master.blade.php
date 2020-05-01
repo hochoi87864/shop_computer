@@ -302,6 +302,18 @@
           </a>
        </li>
         {{-- End tab transaction --}}
+      {{-- Tab transaction --}}
+      <li class="nav-item has-treeview {{(request()->is('admin/comment*'))?'menu-open':'' }}">
+        <a href="{{route('admin.comment.index')}}" class="nav-link {{(request()->is('admin/comment*'))?"active":""}}">
+        <i class="nav-icon fas fa-american-sign-language-interpreting"></i>
+        <p>
+          Đánh giá sản phẩm
+          <i class="fas fa-angle-left right"></i>
+        </p>
+        </a>
+      </li>
+      {{-- End tab transaction --}}
+       
           {{-- Start Multi level --}}
           {{-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item has-treeview">

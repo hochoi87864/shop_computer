@@ -40,9 +40,17 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
     });
 
     Route::group(['prefix'=>'transaction'],function(){
+        
         Route::get('/','AdminTransactionController@index')->name('admin.transaction.index');
         Route::get('/orderItem/{id}','AdminTransactionController@getOrderItem')->name('admin.get.order.item');
+        Route::get('/paid/{id}','AdminTransactionController@transactionPaid')->name('admin.transaction.paid');
         Route::get('/{action}/{id}','AdminTransactionController@handle')->name('admin.transaction.handle');
+    });
+
+    Route::group(['prefix'=>'comment'],function(){
+        
+        Route::get('/','AdminCommentController@index')->name('admin.comment.index');
+        Route::get('/{action}/{id}','AdminCommentController@action')->name('admin.comment.action');
     });
 
 });

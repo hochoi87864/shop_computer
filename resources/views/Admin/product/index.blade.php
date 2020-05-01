@@ -1,5 +1,10 @@
 @extends('Admin.layout.master')
 @section('content')
+<style>
+  .rating .active{
+    color: #ff9705 !important;
+  }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,7 +33,7 @@
             <table class="table table-hover table-striped">
                 <thead class="thead-dark">
                     <th>ID</th>
-                    <th>Tên sản phẩm</th>
+                    <th>Sản phẩm</th>
                     <th>Loại sản phẩm</th>
                     <th>Ảnh</th>
                     <th>Trạng thái</th>
@@ -40,9 +45,44 @@
                     @foreach($products as $pro)
                       <tr>
                         <td>{{$pro->id}}</td>
-                        <td>{{$pro->pro_name}}</td>
+                        <td>
+                          <b>{{$pro->pro_name}}</b><br/>
+                          <ul style="padding:0px">
+                            <li>Số lượng: {{$pro->pro_number}}</li>
+                            <li>Giá: {{number_format($pro->pro_price,0,',','.')}} VNĐ</li>
+                            @if($pro->pro_sale)
+                            <li>Đang giảm giá ( -{{$pro->pro_sale}}% )</li>
+                            @else
+                            <li>Không giảm giá</li>
+                            @endif
+                            <li>
+                              <?php
+                              $point= 0;
+                              if($pro->pro_number_of_reviewers>0){
+                                $point= round($pro->pro_total_star/$pro->pro_number_of_reviewers);
+                              }
+                              ?>
+                              Đánh giá: <span class="rating">
+                                @for($i=1; $i <= 5; $i++)
+                                  <i class="fa fa-star {{ $i<=$point ? 'active':''}}" style="color:#999"></i>
+                                @endfor
+                                @if($pro->pro_number_of_reviewers>0)
+                                  {{$point}} sao
+                                @else
+                                  Chưa đánh giá
+                                @endif
+                              </span>
+                            </li>
+                          </ul>
+                        </td>
                         <td>{{$pro->Category->c_name}}</td>
-                        <td><img style="width:80px;height:80px" src="{{asset('upload/pro_image/'.$pro->pro_image)}}" alt="No Avatar"/></td>
+                        <td>
+                          @if($pro->pro_image)
+                            <img style="width:80px;height:80px" src="{{asset('upload/pro_image/'.$pro->pro_image)}}" alt="No Avatar"/>
+                          @else
+                          <img style="width:80px;height:80px" src="{{asset('noimg.png')}}" alt="No Avatar"/>
+                          @endif
+                        </td>
                         <td>{{$pro->pro_status}}</td>
                         <td>{{$pro->pro_hot}}</td>
                         <td>

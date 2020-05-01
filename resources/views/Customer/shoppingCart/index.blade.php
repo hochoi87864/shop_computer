@@ -17,7 +17,22 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form action="#">
+                @if(\Session::has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Thành công!</strong> {{\Session::get('success')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                @endif
+                @if(\Session::has('warning'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Thất bại!</strong> {{\Session::get('warning')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                @endif
                     <div class="table-content table-responsive">
                         <table class="table">
                             <thead>
@@ -34,48 +49,44 @@
                                 @foreach($products as $key=>$product)
                                 <tr>
                                     <td class="li-product-remove"><a href="{{route('shopping.delete.product',$key)}}"><i class="fa fa-times"></i></a></td>
-                                    <td class="li-product-thumbnail" style="width: 16%"><a href="#"><img style="width: 100%; height: 150px;" src="{{asset('upload/pro_image/'.$product->options->image)}}" alt="Li's Product Image"></a></td>
+                                    @if($product->options->image)
+                                        <td class="li-product-thumbnail" style="width: 16%"><a href="#"><img style="width: 100%; height: 150px;" src="{{asset('upload/pro_image/'.$product->options->image)}}" alt="Li's Product Image"></a></td>
+                                    @else
+                                        <td class="li-product-thumbnail" style="width: 16%"><a href="#"><img style="width: 100%; height: 150px;" src="{{asset('noimg.png')}}" alt="Li's Product Image"></a></td>
+                                    @endif
                                     <td class="li-product-name"><a href="#">{{$product->name}}</a></td>
-                                    <td class="li-product-price"><span class="amount">{{number_format($product->price,0,',','.')}} VNĐ</span></td>
+                                    <td class="li-product-price"><span class="amount">{{number_format($product->price,2,',','.')}} VNĐ</span></td>
                                     <td class="quantity">
-                                        <label>{{$product->qty}}</label>
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
-                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                        </div>
+                                        <form action="{{route('shopping.edit.product')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="pro_id" value="{{$product->id}}"/>
+                                            <span style="color: #242424l;font-size: 16px;font-weight: 700;">{{$product->qty}} Sản phẩm</span>
+                                            <div class="cart-plus-minus">
+                                                <input class="cart-plus-minus-box" value="{{$product->qty}}" name="number_product_edit" type="text">
+                                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                            </div>
+                                            <button class="btn btn-primary mt-2">Cập nhật</button>
+                                        </form>
                                     </td>
-                                    <td class="product-subtotal"><span class="amount">{{number_format($product->price*$product->qty,0,',','.')}} VNĐ</span></td>
+                                    <td class="product-subtotal"><span class="amount">{{number_format($product->price*$product->qty,2,',','.')}} VNĐ<br/> Thành: {{number_format($product->price*$product->qty,0,',','.')}} VNĐ</span></td>
                                 </tr>                                   
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <div class="coupon-all">
-                                <div class="coupon">
-                                    <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-                                    <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                </div>
-                                <div class="coupon2">
-                                    <input class="button" name="update_cart" value="Update cart" type="submit">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
-                                <h2>Cart totals</h2>
+                                <h2>Tổng tiền cần thanh toán:</h2>
                                 <ul>
-                                    <li>Total <span>{{\Cart::subtotal(0,',','.')}} VNĐ</span></li>
+                                    <li>Tổng <span>{{\Cart::subtotal(0,',','.')}} VNĐ</span></li>
                                 </ul>
-                                <a href="{{route('feature.user.checkout')}}">Proceed to checkout</a>
+                                <a href="{{route('feature.user.checkout')}}">Thanh toán</a>
                             </div>
                         </div>
                     </div>
-                </form>
+
             </div>
         </div>
     </div>

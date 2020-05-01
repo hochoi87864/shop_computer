@@ -18,7 +18,7 @@
                         <ul>
                             @foreach($categories as $category)
                                 @if($numberListCategory <=8 )
-                                    <li class=""><a href="shop-left-sidebar.html">{{$category->c_name}}</a>  
+                                <li class=""><a href="{{route('category.index',[$category->c_name_slug,$category->id])}}">{{$category->c_name}}</a>  
                                     </li>
                                 @endif
                                 @if($numberListCategory >8 )
@@ -398,7 +398,7 @@
                             <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">
                                             @if(isset($product->pro_image))
                                                 <img src="{{asset('upload/pro_image/'.$product->pro_image)}}" alt="Li's Product Image">
                                             @else
@@ -413,7 +413,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="shop-left-sidebar.html">Số lượng: xxx</a>
+                                                    <a href="shop-left-sidebar.html">Số lượng: {{$product->pro_number}}</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -425,16 +425,16 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <h4><a class="product_name" href="single-product.html">{{$product->pro_name}}</a></h4>
+                                            <h4><a class="product_name" href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">{{$product->pro_name}}</a></h4>
                                             <div class="price-box">
                                                 <span class="new-price">{{number_format($product->pro_price,0,",",".")}} VNĐ</span>
                                             </div>
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
-                                                <li class="add-cart active"><a href="{{route('shopping.add.product',$product->id)}}">Add to cart</a></li>
-                                                <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                <li class="add-cart active"><a class="button_add_cart" href="{{route('shopping.add.product',$product->id)}}">Add to cart</a></li>
+                                                <li><a class="links-details button_add_favorite_product" href="{{route('get.add.favorite.product',$product->id)}}"><i class="fa fa-heart-o"></i></a></li>
+                                                <li><a href="{{route('product.index',[$product->pro_name_slug,$product->id])}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1252,4 +1252,67 @@
     </div>
 </section>
 <!-- Li's Trending Product | Home V2 Area End Here -->
+@endsection
+@section('javascript')
+<script>
+    $(function(){
+        $(".button_add_favorite_product").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            $.ajax(
+                {
+                    method : "GET",
+                    url : url
+                }
+            ).done(function(result)
+            {
+                if(result.status == 1)
+                {
+                    alert("Thêm thành công !!!");
+                    $(".wishlist-item-count").text(result.number_favorite_product);
+                }
+                if(result.status == 0)
+                {
+                    alert("Đã tồn tại !!!");
+                }
+                if(result.error == 1)
+                {
+                    alert("Cần đăng nhập cho chức năng này");
+                }
+            });
+        });
+        $(".button_add_cart").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            $.ajax(
+                {
+                    method : "GET",
+                    url : url
+                }
+            ).done(function(result)
+            {
+                if(result.status == 1)
+                {
+                    alert("Thêm sản phẩm thành công !!!");
+                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".price_total_cart").text(result.price_total_cart);
+                }
+                if(result.status == 2)
+                {
+                    alert("Trong kho chỉ còn "+result.product_less+" sản phẩm" );
+                }
+                if(result.status == 3)
+                {
+                    alert("Sản phẩm không tồn tại !!!");
+                }
+                if(result.status == 4)
+                {
+                    alert("Hết hàng");
+                }
+            });
+        }); 
+    });
+</script>
 @endsection
