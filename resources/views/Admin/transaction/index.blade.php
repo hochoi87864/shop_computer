@@ -59,7 +59,7 @@
                             <td>
                               <a href="{{route('admin.transaction.handle',['delete',$transaction->id])}}">Xóa</a>
                               &nbsp
-                              <a href="{{route('admin.get.order.item',$transaction->id)}}" class="js_order_item" data-toggle="modal" data-target="#showOrderItem">Xem</a>
+                            <a href="{{route('admin.get.order.item',$transaction->id)}}" data-id="{{$transaction->id}}" class="js_order_item" data-toggle="modal" data-target="#showOrderItem">Xem</a>
                             </td>
                         </tr>
 {{-- custom modal by me --}}
@@ -67,7 +67,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết đơn hàng #{{$transaction->id}}</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết đơn hàng #<span class="modal_id_transacrion"></span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -101,6 +101,7 @@
       $(".js_order_item").click(function(event)
       {
         event.preventDefault();
+        var id = $(this).attr('data-id');
         var url = $(this).attr('href');
         $.ajax({
           method : "GET",
@@ -109,7 +110,9 @@
         {
           if(result)
           {
+            $(".modal_id_transacrion").text(id);
             $(".modal-body").html('').append(result);
+
           }
         });
       });

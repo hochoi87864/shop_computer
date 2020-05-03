@@ -59,3 +59,15 @@ Route::group(['prefix'=>'favorite_product'],function()
     Route::get('add/{id}','FavoriteProductController@addProduct')->name('get.add.favorite.product');
     Route::get('delete/{id}','FavoriteProductController@deleteProduct')->name('get.delete.favorite.product');
 });
+
+Route::group(['prefix'=>'history_user'],function()
+{
+    Route::get('/','HistoryController@index')->name('history.index');
+    Route::get('/get-order-item/{id}','HistoryController@getOrderItem')->name('history.get.order.item');
+});
+
+Route::group(['prefix'=>'article'],function()
+{
+    Route::get('/','ArticleController@index')->name('article.index');
+    Route::get('/detail/{id}','ArticleController@getDetailArticle')->name('get.article.detail');
+});

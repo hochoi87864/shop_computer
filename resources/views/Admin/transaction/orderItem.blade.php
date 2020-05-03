@@ -21,9 +21,9 @@
                     @endif
                     
                     @if($order->or_sale>0)
-                        <td>{{number_format($order->or_price*((100-$order->or_sale)/100),0,',','.')}} VNĐ</td>
+                        <td>{{number_format($order->or_price*((100-$order->or_sale)/100),0,',','.')}} VNĐ/ 1 sản phẩm</td>
                     @else
-                        <td>{{number_format($order->or_price,0,',','.')}} VNĐ</td>
+                        <td>{{number_format($order->or_price,0,',','.')}} VNĐ/ 1 sản phẩm</td>
                     @endif
                     <td>{{$order->or_qty}}</td>
                     @if($order->or_sale>0)

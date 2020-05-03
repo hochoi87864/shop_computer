@@ -24,11 +24,11 @@
                             </li>
                             @endif
                             <li>
-                                <div class="ht-setting-trigger"><span>Cài đặt</span></div>
+                                <div class="ht-setting-trigger"><i class="fa fa-user">Tài khoản</i></div>
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
-                                        <li><a href="login-register.html">Tài khoản</a></li>
                                         @if(Auth::check())
+                                            <li><a href="{{route('history.index')}}">Nhật ký mua hàng</a></li>
                                             <li><a href="{{route('get.logout')}}">Đăng xuất</a></li>
                                         @else
                                             <li><a href="{{route('get.login')}}">Đăng nhập</a></li>
@@ -182,7 +182,7 @@
                                         <li><a href="index-4.html">Home Four</a></li>
                                     </ul> --}}
                                 </li>
-                                <li class="megamenu-holder"><a href="shop-left-sidebar.html"><strong>Tin tức</strong></a>
+                                <li class="megamenu-holder"><a href="{{route('article.index')}}"><strong>Tin tức</strong></a>
                                 </li>
                                 <li><a href="about-us.html"><strong>Giới thiệu</strong></a></li>
                                 <li><a href="contact.html"><strong>Liện hệ</strong></a></li>

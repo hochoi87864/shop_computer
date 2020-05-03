@@ -48,9 +48,12 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
     });
 
     Route::group(['prefix'=>'comment'],function(){
-        
         Route::get('/','AdminCommentController@index')->name('admin.comment.index');
         Route::get('/{action}/{id}','AdminCommentController@action')->name('admin.comment.action');
     });
 
+    Route::group(['prefix'=>'comment'],function(){
+        Route::get('/','AdminArticleController@index')->name('admin.comment.index');
+        Route::get('/{action}/{id}','AdminArticleController@action')->name('admin.comment.action');
+    });
 });

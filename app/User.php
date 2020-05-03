@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,5 +41,9 @@ class User extends Authenticatable
     public function FavoriteProduct()
     {
         return $this->belongsToMany(Product::class,'favorite_product','fp_user_id','fp_product_id');
+    }
+    public function Transaction()
+    {
+        return $this->hasMany(Transaction::class,'tr_user_id');
     }
 }

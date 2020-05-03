@@ -106,6 +106,8 @@ a:hover {
 
 .img-full {
     width: 100%;
+    height: 250px;
+    min-height: 250px;
     overflow: hidden;
     display: block;
 }
@@ -1814,7 +1816,7 @@ textarea:focus {
 }
 
 .setting {
-    min-width: 150px;
+    min-width: 175px;
 }
 
 .currency,
@@ -5301,7 +5303,7 @@ thead {
     line-height: 30px;
     font-weight: 600;
     text-transform: capitalize;
-    font-family: Poppins;
+    font-family: Tahoma;
     padding-bottom: 15px;
     margin: 0;
 }

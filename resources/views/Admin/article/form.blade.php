@@ -18,7 +18,7 @@
 </div>
 <div class="form-group">
   <label>Nội dung bài viết: </label>
-  <textarea class="form-control" rows="5" name="a_content" placeholder="Nhập nội dung bài viết">{{old('a_content',isset($article)?$article->a_content:"")}}</textarea>
+  <textarea class="form-control" cols="30" rows="5"  name="a_content" id="ckeditor" placeholder="Nhập nội dung bài viết">{{old('a_content',isset($article)?$article->a_content:"")}}</textarea>
 </div>
 <input type="submit" value="Lưu thông tin" class="btn btn-success" style="float: right"/>
 <div style="clear: both"></div>
@@ -39,5 +39,9 @@
     $("#img_input").change(function() {
       readURL(this);
     });
+  </script>
+  <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+  <script>
+      CKEDITOR.replace( 'ckeditor' );
   </script>
 @endsection
