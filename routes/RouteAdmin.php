@@ -52,8 +52,13 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
         Route::get('/{action}/{id}','AdminCommentController@action')->name('admin.comment.action');
     });
 
-    Route::group(['prefix'=>'comment'],function(){
-        Route::get('/','AdminArticleController@index')->name('admin.comment.index');
-        Route::get('/{action}/{id}','AdminArticleController@action')->name('admin.comment.action');
+    Route::group(['prefix'=>'user'],function(){
+        Route::get('/','AdminUserController@index')->name('admin.user.index');
+        Route::get('/create','AdminUserController@create')->name('admin.user.create');
+        Route::post('/create','AdminUserController@store');
+        Route::get('/edit/{id}','AdminUserController@edit')->name('admin.user.edit');
+        Route::post('/edit/{id}','AdminUserController@update');
+        Route::post('/changepassword/{id}','AdminUserController@changePassword')->name('admin.change.password');
+        Route::get('/{action}/{id}','AdminUserController@action')->name('admin.user.action');
     });
 });

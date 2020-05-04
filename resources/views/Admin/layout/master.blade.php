@@ -283,7 +283,7 @@
           </ul>
           <ul class="nav nav-treeview">        
             <li class="nav-item">
-              <a href="{{route('admin.article.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link ">
+              <a href="{{route('admin.article.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/article/create'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm</p>
               </a>
@@ -311,6 +311,33 @@
           <i class="fas fa-angle-left right"></i>
         </p>
         </a>
+      </li>
+      {{-- End tab transaction --}}
+      {{-- Tab transaction --}}
+      <li class="nav-item has-treeview {{(request()->is('admin/user*'))?'menu-open':'' }}">
+        <a href="{{route('admin.user.index')}}" class="nav-link {{(request()->is('admin/user*'))?"active":""}}">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+          Thành viên
+          <i class="fas fa-angle-left right"></i>
+        </p>
+        </a>
+        <ul class="nav nav-treeview">        
+          <li class="nav-item">
+          <a href="{{Route('admin.user.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/user'))?"active":""}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Danh sách</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">        
+          <li class="nav-item">
+            <a href="{{route('admin.user.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/user/create'))?"active":""}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Thêm</p>
+            </a>
+          </li>
+        </ul>
       </li>
       {{-- End tab transaction --}}
        
