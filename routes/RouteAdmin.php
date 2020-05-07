@@ -61,4 +61,9 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
         Route::post('/changepassword/{id}','AdminUserController@changePassword')->name('admin.change.password');
         Route::get('/{action}/{id}','AdminUserController@action')->name('admin.user.action');
     });
+
+    Route::group(['prefix'=>'statistics'],function(){
+        Route::get('/','AdminStatisticsController@index')->name('admin.statistics.index');
+        Route::get('/list','AdminStatisticsController@getStatistics')->name('admin.get.list.statistical');
+    });
 });

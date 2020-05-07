@@ -17,6 +17,7 @@ Route::get('/','HomeController@index')->name('home');
 Route::group(['prefix'=>'category'],function()
 {
     Route::get('/{slugname}/{id}','CategoryController@index')->name('category.index');
+    Route::get('/{slugname}/{id}/{order}','CategoryController@indexOrder')->name('category.index.order');
 });
 
 Route::group(['prefix'=>'product'],function()

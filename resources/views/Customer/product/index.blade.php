@@ -76,14 +76,27 @@
                         <h2>{{$product->pro_name}}</h2>
                         <span class="product-details-ref">Số lượng: {{$product->pro_number}}</span>
                         <div class="rating-box pt-20">
+                            <?php
+                            $point= 0;
+                            if($product->pro_number_of_reviewers>0){
+                                $point= round($product->pro_total_star/$product->pro_number_of_reviewers);
+                            }
+                            else {
+                                $point = -1;
+                            }
+                            ?>
                             <ul class="rating rating-with-review-item">
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                {{-- <li class="review-item"><a href="#">Read Review</a></li>
-                                <li class="review-item"><a href="#">Write Review</a></li> --}}
+                                Đánh giá : 
+                                @if($point == -1)
+                                <li style="color: #a4a4a4;
+                                font-size: 13px;
+                                text-transform: capitalize;
+                                transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
+                                @else
+                                    @for($i=1; $i<=5; $i++)
+                                        <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
+                                    @endfor
+                                @endif
                             </ul>
                         </div>
                         <div class="price-box pt-20">

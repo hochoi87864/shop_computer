@@ -52,9 +52,24 @@ class AdminUserController extends Controller
         $user->phone = $request->phone;
         $user->save();
     }
-    public function changePassword()
+    public function changePassword(Request $request,$id)
     {
-        
+        if($request->ajax())
+        {
+            $user = User::find($id);
+            if($request->new_password != $request->confirm_password)
+            {
+                return response()->json([
+                    'status' => 2
+                ]);
+            }
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+            return response()->json([
+                'status' => 1
+            ]);
+        }
+        dd("Looix");
     }
     public function action(Request $request,$action,$id)
     {

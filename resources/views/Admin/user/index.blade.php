@@ -61,11 +61,11 @@
       <div class="modal-body">
         <div>
           Mật khẩu mới:
-        <input type="text" name="new_password" class="form-control new_password_class">
+        <input type="password" name="new_password" class="form-control new_password_class">
         </div>
         <div>
           Nhập lại mật khẩu mới:
-        <input type="text" name="confirm_password" class="form-control confirm_password_class">
+        <input type="password" name="confirm_password" class="form-control confirm_password_class">
         </div>
         <div class="form-group">
           <button class="btn btn-success mt-2 button_appect_change_password" style="float: right">Lưu mật khẩu</button>
@@ -107,11 +107,29 @@
         var confirm_password = $('.confirm_password_class').val();
         $.ajax(
           {
-
+            type : "POST",
+            url : url,
+            data : {
+              "_token": "{{ csrf_token() }}",
+              "new_password" : new_password,
+              "confirm_password" : confirm_password
+            }
           }
         ).done(function(result)
         {
-
+          if(result.status == 1)
+          {
+            alert('Đổi mật khẩu thành công !!!');
+            $("#exampleModalCenter").modal("hide");
+          }
+          else if(result.status == 2)
+          {
+            alert('Thất bại khi đổi mật khẩu');
+          }
+          else
+          {
+            alert('Lỗi');
+          }
         });
       });
     });

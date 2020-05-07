@@ -69,7 +69,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
                                                     <a href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">
-                                                        < @if(isset($product->pro_image))
+                                                        @if(isset($product->pro_image))
                                                         <img src="{{asset('upload/pro_image/'.$product->pro_image)}}" alt="Li's Product Image">
                                                         @else
                                                             <img src="{{asset('noimg.png')}}" alt="Li's Product Image">
@@ -86,18 +86,32 @@
                                                                 <a href="product-details.html">Số lượng: {{$product->pro_number}}</a>
                                                             </h5>
                                                             <div class="rating-box">
+                                                                <?php
+                                                                $point= 0;
+                                                                if($product->pro_number_of_reviewers>0){
+                                                                    $point= round($product->pro_total_star/$product->pro_number_of_reviewers);
+                                                                }
+                                                                else {
+                                                                    $point = -1;
+                                                                }
+                                                                ?>
                                                                 <ul class="rating">
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                    @if($point == -1)
+                                                                    <li style="color: #a4a4a4;
+                                                                    font-size: 13px;
+                                                                    text-transform: capitalize;
+                                                                    transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
+                                                                    @else
+                                                                        @for($i=1; $i<=5; $i++)
+                                                                            <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
+                                                                        @endfor
+                                                                    @endif
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name" href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">{{$product->pro_name}}</a></h4>
                                                         <div class="price-box">
-                                                            <span class="new-price">{{$product->pro_price}}</span>
+                                                            <span class="new-price">{{number_format($product->pro_price,0,',','.')}} VNĐ</span>
                                                         </div>
                                                     </div>
                                                     <div class="add-actions">
@@ -115,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="list-view" class="tab-pane fade product-list-view" role="tabpanel">
+                        {{-- <div id="list-view" class="tab-pane fade product-list-view" role="tabpanel">
                             <div class="row">
                                 <div class="col">
                                     <div class="row product-layout-list">
@@ -648,7 +662,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- <div class="paginatoin-area">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 pt-xs-15">
@@ -676,7 +690,7 @@
                 <!--sidebar-categores-box start  -->
                 <div class="sidebar-categores-box">
                     <div class="sidebar-title">
-                        <h2>{{$category->c_name}}</h2>
+                        <h2><b><a href="{{route('category.index',[$category->c_name_slug,$category->id])}}">{{$category->c_name}}</a></b></h2>
                     </div>
                     <!-- category-sub-menu start -->
                     {{-- <div class="category-sub-menu">
@@ -720,100 +734,22 @@
                 <!--sidebar-categores-box start  -->
                 <div class="sidebar-categores-box">
                     <div class="sidebar-title">
-                        <h2>Bộ lọc</h2>
+                        <h2><b>Bộ lọc</b></h2>
                     </div>
-                    <!-- btn-clear-all start -->
-                    <button class="btn-clear-all mb-sm-30 mb-xs-30">Clear all</button>
-                    <!-- btn-clear-all end -->
                     <!-- filter-sub-area start -->
                     <div class="filter-sub-area">
-                        <h5 class="filter-sub-titel">Brand</h5>
-                        <div class="categori-checkbox">
-                            <form action="#">
-                                <ul>
-                                    <li><input type="checkbox" name="product-categori"><a href="#">Prime Video (13)</a></li>
-                                    <li><input type="checkbox" name="product-categori"><a href="#">Computers (12)</a></li>
-                                    <li><input type="checkbox" name="product-categori"><a href="#">Electronics (11)</a></li>
-                                </ul>
-                            </form>
+                        <div class="filter-sub-titel">Khoảng giá: </div>
+                        <div style="padding-left: 5%">
+                            <ul style="padding-top: 10px">
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'d1t'])}}">Dưới 1 triệu VNĐ</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'1t-10t'])}}">1 triệu - 10 triệu VNĐ</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'10t-20t'])}}">10 triệu - 20 triệu VNĐ</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'20t-50t'])}}">20 triệu - 50 triệu VNĐ</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'t50t'])}}">Trên 50 triệu VNĐ</a></li>
+                            </ul>
                         </div>
                      </div>
                     <!-- filter-sub-area end -->
-                    <!-- filter-sub-area start -->
-                    <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                        <h5 class="filter-sub-titel">Categories</h5>
-                        <div class="categori-checkbox">
-                            <form action="#">
-                                <ul>
-                                    <li><input type="checkbox" name="product-categori"><a href="#">Graphic Corner (10)</a></li>
-                                    <li><input type="checkbox" name="product-categori"><a href="#"> Studio Design (6)</a></li>
-                                </ul>
-                            </form>
-                        </div>
-                     </div>
-                    <!-- filter-sub-area end -->
-                    <!-- filter-sub-area start -->
-                    <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                        <h5 class="filter-sub-titel">Size</h5>
-                        <div class="size-checkbox">
-                            <form action="#">
-                                <ul>
-                                    <li><input type="checkbox" name="product-size"><a href="#">S (3)</a></li>
-                                    <li><input type="checkbox" name="product-size"><a href="#">M (3)</a></li>
-                                    <li><input type="checkbox" name="product-size"><a href="#">L (3)</a></li>
-                                    <li><input type="checkbox" name="product-size"><a href="#">XL (3)</a></li>
-                                </ul>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- filter-sub-area end -->
-                    <!-- filter-sub-area start -->
-                    <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                        <h5 class="filter-sub-titel">Color</h5>
-                        <div class="color-categoriy">
-                            <form action="#">
-                                <ul>
-                                    <li><span class="white"></span><a href="#">White (1)</a></li>
-                                    <li><span class="black"></span><a href="#">Black (1)</a></li>
-                                    <li><span class="Orange"></span><a href="#">Orange (3) </a></li>
-                                    <li><span class="Blue"></span><a href="#">Blue  (2) </a></li>
-                                </ul>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- filter-sub-area end -->
-                    <!-- filter-sub-area start -->
-                    <div class="filter-sub-area pt-sm-10 pb-sm-15 pb-xs-15">
-                        <h5 class="filter-sub-titel">Dimension</h5>
-                        <div class="categori-checkbox">
-                            <form action="#">
-                                <ul>
-                                    <li><input type="checkbox" name="product-categori"><a href="#">40x60cm (6)</a></li>
-                                    <li><input type="checkbox" name="product-categori"><a href="#">60x90cm (6)</a></li>
-                                    <li><input type="checkbox" name="product-categori"><a href="#">80x120cm (6)</a></li>
-                                </ul>
-                            </form>
-                        </div>
-                     </div>
-                    <!-- filter-sub-area end -->
-                </div>
-                <!--sidebar-categores-box end  -->
-                <!-- category-sub-menu start -->
-                <div class="sidebar-categores-box mb-sm-0 mb-xs-0">
-                    <div class="sidebar-title">
-                        <h2>Laptop</h2>
-                    </div>
-                    <div class="category-tags">
-                        <ul>
-                            <li><a href="# ">Devita</a></li>
-                            <li><a href="# ">Cameras</a></li>
-                            <li><a href="# ">Sony</a></li>
-                            <li><a href="# ">Computer</a></li>
-                            <li><a href="# ">Big Sale</a></li>
-                            <li><a href="# ">Accessories</a></li>
-                        </ul>
-                    </div>
-                    <!-- category-sub-menu end -->
                 </div>
             </div>
         </div>
