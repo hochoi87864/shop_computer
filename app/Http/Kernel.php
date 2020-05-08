@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminLoginMiddleware;
 use App\Http\Middleware\checkLoginUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -61,7 +62,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'checkLoginUser' => checkLoginUser::class
+        'checkLoginUser' => checkLoginUser::class,
+        'checkAdminLogin' =>AdminLoginMiddleware::class
     ];
 
     /**

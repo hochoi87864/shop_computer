@@ -135,6 +135,11 @@
         </div>
       </li> --}}
       <li class="nav-item">
+        <a href="{{route('admin.logout')}}" class="nav-link" alt="Đăng xuất">
+          <i class="fas fa-sign-out-alt" alt="Đăng xuất"></i>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
           <i class="fas fa-th-large"></i>
         </a>
@@ -159,10 +164,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('noimg.png')}}" class="img-circle elevation-2" alt="User Image">
+          {{-- <img src="{{asset('noimg.png')}}" class="img-circle elevation-2" alt="User Image"> --}}
         </div>
         <div class="info">
-          <a href="#" class="d-block">Khó vẽ nụ cười</a>
+          <a href="#" class="d-block">Admin - {{Auth::user()->name}} </a>
         </div>
       </div>
 

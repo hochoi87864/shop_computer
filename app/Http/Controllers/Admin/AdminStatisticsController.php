@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use Barryvdh\DomPDF\PDF;
 
 class AdminStatisticsController extends Controller
 {
@@ -24,5 +25,13 @@ class AdminStatisticsController extends Controller
             return response()->json($html);
         }
         dd("Lỗi");
+    }
+    public function exportPdf(Request $request)
+    {  
+        $transactions = Transaction::whereBetween('updated_at',[$request->statistical_date_start_pdf,$request->statistical_date_end_pdf])->get();
+        $data = ['transactions' => $transactions,'statistical_date_start'=>$request->statistical_date_start_pdf,'statistical_date_end'=>$request->statistical_date_end_pdf];	
+        $pdf = \PDF::loadView('admin.statistics.testpdf-pdf', $data);
+        return $pdf->download('statistical'.$request->statistical_date_start_pdf.'to'.$request->statistical_date_end_pdf.'.pdf');
+        // return view('admin::components.testpdf-pdf',$data);
     }
 }

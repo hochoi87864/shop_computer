@@ -81,6 +81,13 @@
             console.log("Giá trị nhập sai kiểm tra lại");
         }
         });
+        $("#export_pdf").click(function(event){
+        event.preventDefault();
+        var statistical_date_start_pdf = $("#data-statistical-date-start").attr('data-statistical-date-start');
+        var statistical_date_end_pdf = $("#data-statistical-date-end").attr('data-statistical-date-end');
+        var url = "{{route('admin.get.export.statistical')}}";
+        window.location.href = url+'?statistical_date_start_pdf='+statistical_date_start_pdf+'&&'+'statistical_date_end_pdf='+statistical_date_end_pdf;
+      });
     });
   </script>
 @endsection

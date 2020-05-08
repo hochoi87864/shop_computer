@@ -1,5 +1,8 @@
 <?php
-Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
+Route::get('admin/login','Admin\AdminController@getLogin');
+Route::post('admin/login','Admin\AdminController@postLogin')->name("admin.login");
+Route::get('admin/logout','Admin\AdminController@getLogout')->name('admin.logout');
+Route::group(['namespace'=>'Admin','prefix'=>'/admin','middleware'=>'checkAdminLogin'],function(){
     Route::get('/','AdminController@index')->name('admin.home');
     Route::get('/test','AdminTestController@index')->name('admin.test');
     Route::group(['prefix'=>'category'],function(){
@@ -65,5 +68,8 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin'],function(){
     Route::group(['prefix'=>'statistics'],function(){
         Route::get('/','AdminStatisticsController@index')->name('admin.statistics.index');
         Route::get('/list','AdminStatisticsController@getStatistics')->name('admin.get.list.statistical');
+        Route::get('/export-pdf','AdminStatisticsController@exportPdf')->name('admin.get.export.statistical');
     });
+
+
 });

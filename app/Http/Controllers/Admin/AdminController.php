@@ -8,9 +8,29 @@ use App\Models\Transaction;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function getLogin()
+    {
+        return view('admin.login.login'); 
+    }
+    public function postLogin(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if(Auth::attempt($credentials)){
+            $user = Auth::user();
+            if($user->role == 1){
+                return redirect()->route('admin.home');
+            } 
+        }
+        return redirect()->back()->with('error','Đăng nhập không thành công');
+    }
+    public function getLogout(){
+        Auth::logout();
+        return view('admin.login.login');
+    }
     public function index(){
         // get 7 day formar Y-m-d
         $today = Carbon:: today()->format('Y-m-d');
