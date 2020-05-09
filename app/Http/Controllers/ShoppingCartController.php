@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ShoppingCartController extends Controller
+class ShoppingCartController extends CustomerController
 {
     public function index()
     {

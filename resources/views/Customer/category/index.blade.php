@@ -116,9 +116,9 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="shopping-cart.html">Add to cart</a></li>
-                                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li class="add-cart active"><a class="button_add_cart" href="{{route('shopping.add.product',$product->id)}}">Add to cart</a></li>
+                                                            <li><a href="{{route('product.index',[$product->pro_name_slug,$product->id])}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a class="links-details button_add_favorite_product" href="{{route('get.add.favorite.product',$product->id)}}"><i class="fa fa-heart-o"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -756,4 +756,67 @@
     </div>
 </div>
 <!-- Content Wraper Area End Here -->
+@endsection
+@section('javascript')
+<script>
+    $(function(){
+        $(".button_add_favorite_product").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            $.ajax(
+                {
+                    method : "GET",
+                    url : url
+                }
+            ).done(function(result)
+            {
+                if(result.status == 1)
+                {
+                    alert("Thêm thành công !!!");
+                    $(".wishlist-item-count").text(result.number_favorite_product);
+                }
+                if(result.status == 0)
+                {
+                    alert("Đã tồn tại !!!");
+                }
+                if(result.error == 1)
+                {
+                    alert("Cần đăng nhập cho chức năng này");
+                }
+            });
+        });
+        $(".button_add_cart").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            $.ajax(
+                {
+                    method : "GET",
+                    url : url
+                }
+            ).done(function(result)
+            {
+                if(result.status == 1)
+                {
+                    alert("Thêm sản phẩm thành công !!!");
+                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".price_total_cart").text(result.price_total_cart);
+                }
+                if(result.status == 2)
+                {
+                    alert("Trong kho chỉ còn "+result.product_less+" sản phẩm" );
+                }
+                if(result.status == 3)
+                {
+                    alert("Sản phẩm không tồn tại !!!");
+                }
+                if(result.status == 4)
+                {
+                    alert("Hết hàng");
+                }
+            });
+        }); 
+    });
+</script>
 @endsection

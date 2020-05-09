@@ -72,3 +72,8 @@ Route::group(['prefix'=>'article'],function()
     Route::get('/','ArticleController@index')->name('article.index');
     Route::get('/detail/{id}','ArticleController@getDetailArticle')->name('get.article.detail');
 });
+
+Route::group(['prefix'=>'searh'],function()
+{
+    Route::get('/','SearhController@index')->name('searh.index');
+});

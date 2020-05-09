@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Models\Rating;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductController extends CustomerController
 {
     public function index($nameslug,$id)
     {

@@ -111,7 +111,7 @@
                         <div class="single-add-to-cart">
                             <div style="display: flex">
                                 <div class="hm-wishlist mr-3" >
-                                    <a href="wishlist.html" id="hm-wishlist_by_me">
+                                    <a  class="button_add_favorite_product" id="hm-wishlist_by_me" href="{{route('get.add.favorite.product',$product->id)}}">
                                         <i class="fa fa-heart-o" id="add_to_wishlist_by_me" ></i>
                                         <style>
                                             #hm-wishlist_by_me
@@ -128,7 +128,7 @@
                                     </a>
                                 </div>
                                 <div class="cart-quantity">
-                                    <button class="add-to-cart" type="submit">Add to cart</button>
+                                    <a href="{{route('shopping.add.product',$product->id)}}" class="button_add_cart"><button class="add-to-cart" type="submit">Add to cart</button></a>
                                 </div>
                             </div>
                         </div>
@@ -347,6 +347,67 @@
 <!-- Li's Laptop Product Area End Here -->
 @endsection
 @section('javascript')
+<script>
+    $(function(){
+        $(".button_add_favorite_product").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            $.ajax(
+                {
+                    method : "GET",
+                    url : url
+                }
+            ).done(function(result)
+            {
+                if(result.status == 1)
+                {
+                    alert("Thêm thành công !!!");
+                    $(".wishlist-item-count").text(result.number_favorite_product);
+                }
+                if(result.status == 0)
+                {
+                    alert("Đã tồn tại !!!");
+                }
+                if(result.error == 1)
+                {
+                    alert("Cần đăng nhập cho chức năng này");
+                }
+            });
+        });
+        $(".button_add_cart").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            $.ajax(
+                {
+                    method : "GET",
+                    url : url
+                }
+            ).done(function(result)
+            {
+                if(result.status == 1)
+                {
+                    alert("Thêm sản phẩm thành công !!!");
+                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".price_total_cart").text(result.price_total_cart);
+                }
+                if(result.status == 2)
+                {
+                    alert("Trong kho chỉ còn "+result.product_less+" sản phẩm" );
+                }
+                if(result.status == 3)
+                {
+                    alert("Sản phẩm không tồn tại !!!");
+                }
+                if(result.status == 4)
+                {
+                    alert("Hết hàng");
+                }
+            });
+        }); 
+    });
+</script>
 <script>
     //list number equal text rate
     listRatingText = {

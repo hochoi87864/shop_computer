@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RatingController extends Controller
+class RatingController extends CustomerController
 {
     public function saveRating(Request $request, $id)
     {

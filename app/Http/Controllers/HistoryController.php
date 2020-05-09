@@ -7,7 +7,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HistoryController extends Controller
+class HistoryController extends CustomerController
 {
     //
     public function index()

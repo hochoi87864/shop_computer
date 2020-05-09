@@ -85,11 +85,14 @@
                 <!-- Begin Header Middle Right Area -->
                 <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                     <!-- Begin Header Middle Searchbox Area -->
-                    <form action="#" class="hm-searchbox">
-                        <select class="nice-select select-search-category">
-                            <option value="0">Tất cả</option>                         
+                    <form action="{{route('searh.index')}}" class="hm-searchbox" method="GET">
+                        <select class="nice-select select-search-category" name="searh_category_id">
+                            <option value="0">Tất cả</option>  
+                            @foreach($categories_searh as $category)
+                                <option value="{{$category->id}}">{{$category->c_name}}</option>
+                            @endforeach                       
                         </select>
-                        <input type="text" placeholder="Nhập giá trị tìm kiếm ...">
+                        <input type="text" placeholder="Nhập giá trị tìm kiếm ..." name="searh_key">
                         <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                     </form>
                     <!-- Header Middle Searchbox Area End Here -->
