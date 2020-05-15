@@ -5,8 +5,8 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li class="active">Checkout</li>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li class="active">Xác nhận thanh toán</li>
             </ul>
         </div>
     </div>
@@ -25,13 +25,13 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>Họ và tên <span class="required">*</span></label>
-                                    <input placeholder="Nhập họ và tên..." type="text" name="name" value="{{Auth::user()->name}}">
+                                    <input placeholder="Nhập họ và tên..." type="text" name="name" id ="check_name" value="{{Auth::user()->name}}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>Địa chỉ <span class="required">*</span></label>
-                                    <input placeholder="Street address" name="address" type="text">
+                                    <input placeholder="Street address" name="address" id="check_address" required type="text">
                                 </div>
                             </div>
                             {{-- <div class="col-md-6">
@@ -43,14 +43,14 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>Phone  <span class="required">*</span></label>
-                                    <input name="phone" type="text">
+                                    <input name="phone" type="text" id="check_phone">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="">
                                     <div class="checkout-form-list">
                                         <label>Ghi chú</label>
-                                        <textarea id="checkout-mess" name="note" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        <textarea id="checkout-mess" name="note" cols="30" rows="10" required placeholder="Nhập ghi chú"></textarea>
                                     </div>
                                 </div>
                             </div>   
@@ -103,7 +103,38 @@
     <script>
         $(function(){
             $("#submitFormSaveInfo").click(function(){
-                $("#formSaveInfo").submit();
+                check_name = $("#check_name").val();
+                check_address = $("#check_address").val();
+                check_phone = $("#check_phone").val();
+                check_note = $("#checkout-mess").val();
+                if(!check_name || !check_address || !check_phone || !check_note)
+                {
+                    // swal("Thành công","Thanh toán không thành công","success");
+                    swal("Cảnh báo","Yêu cầu bạn nhập dữ liệu đầy đủ để dễ dàng vận chuyển hàng ! Xin cảm ơn đã sử dụng dịch vụ của chúng tôi!","warning");
+                }
+                else
+                {
+                    swal({
+                    title: "Bạn có chắc chắn?",
+                    text: "Các sản phẩm trong giỏ hàng của bạn sẽ được thanh toán ! Các sản phẩm sẽ đợi bên của hàng kiểm tra và gửi về",
+                    icon: "info",
+                    buttons: ["Không",{
+                        text: "Đồng ý",
+                        value: true,
+                        visible: true,
+                        className: "bg-success",
+                        closeModal: true
+                    }],
+                    successMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Thành công","Bạn đã đặt hàng thành công ! Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi !",'success').then(function() {
+                            $("#formSaveInfo").submit();
+                        });
+                    }
+                    });
+                }
             });
         });
     </script>

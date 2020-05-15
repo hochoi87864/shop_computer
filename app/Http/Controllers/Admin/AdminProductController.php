@@ -8,6 +8,7 @@ use App\Models\Attribute_AttributeValue;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Product_Attribute;
+use Illuminate\Support\Facades\Validator;
 
 class AdminProductController extends Controller
 {
@@ -32,7 +33,44 @@ class AdminProductController extends Controller
     // save product and return index product
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'pro_name' => 'required|unique:products,pro_name|min:3|max:255',
+            'pro_description' => 'required|min:3|max:1000',
+            'pro_content' => 'required|min:3',
+            'pro_category_id' => 'required',
+            'pro_price' => 'required|integer|gte:0',
+            'pro_number' => 'required|numeric',
+            'pro_sale' => 'required|integer|gte:0|lte:100',
+        ],
+        [
+            'pro_name.required' => 'Bạn cần nhập trường tên sản phẩm',
+            'pro_name.unique' => 'Tên sản phẩm đã tồn tại',
+            'pro_name.min' => 'Tên sản phẩm ít nhất 3 kí tự',
+            'pro_name.max' => 'Tên sản phẩm nhiều nhất nhất 255 kí tự',
+            'pro_description.required' => 'Bạn cần nhập trường mô tả sản phẩm',
+            'pro_description.min' => 'Mô tả sản phẩm ít nhất 3 kí tự',
+            'pro_description.max' => 'Mô tả sản phẩm nhiều nhất 1000 kí tự',
+            'pro_content.required' => 'Bạn cần nhập trường nội dung sản phẩm',
+            'pro_content.min' => 'Nội dung sản phẩm ít nhất 3 kí tự',
+            'pro_category_id.required' => 'Bạn cần chọn loại sản phẩm', 
+            'pro_price.required' => 'Bạn cần nhập trường giá sản phẩm',
+            'pro_price.integer' => 'Giá sản phẩm là kiểu số',
+            'pro_price.gte' => 'Giá sản phẩm phải là 1 số nguyên dương !',
+            'pro_number.required' => 'Bạn cần nhập trường số lượng sản phẩm',
+            'pro_number.numeric' => 'Số lượng sản phẩm kiểu số',
+            'pro_sale.integer' => 'Giảm giá sản phẩm là kiểu số nguyên dương',
+            'pro_sale.required' => 'Bạn cần nhập trường giảm giá sản phẩm, Nếu k muốn giảm giá hãy nhập giá trị bằng 0 xin cảm ơn !!',
+            'pro_sale.gte' => 'Giảm giá sản phẩm phải lớn hơn hoặc bằng 0 !',
+            'pro_sale.lte' => 'Giảm giá sản phẩm phải nhỏ hơn hoặc bằng 100 !',
+        ]
+        );
+        if($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator,'productErrors');
+        }
         $this->insertOrUpdate($request);
+        $request->session()->flash('create_product_success', 'Đã thêm 1 sản phẩm mới!');
         return redirect()->route('admin.product.index');
     }
     //get form edit product
@@ -51,7 +89,43 @@ class AdminProductController extends Controller
     // update product 
     public function update(Request $request,$id)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'pro_name' => 'required|min:3|max:255',
+            'pro_description' => 'required|min:3|max:1000',
+            'pro_content' => 'required|min:3',
+            'pro_category_id' => 'required',
+            'pro_price' => 'required|integer|gte:0',
+            'pro_number' => 'required|numeric',
+            'pro_sale' => 'required|integer|gte:0|lte:100',
+        ],
+        [
+            'pro_name.required' => 'Bạn cần nhập trường tên sản phẩm',
+            'pro_name.min' => 'Tên sản phẩm ít nhất 3 kí tự',
+            'pro_name.max' => 'Tên sản phẩm nhiều nhất nhất 255 kí tự',
+            'pro_description.required' => 'Bạn cần nhập trường mô tả sản phẩm',
+            'pro_description.min' => 'Mô tả sản phẩm ít nhất 3 kí tự',
+            'pro_description.max' => 'Mô tả sản phẩm nhiều nhất 1000 kí tự',
+            'pro_content.required' => 'Bạn cần nhập trường nội dung sản phẩm',
+            'pro_content.min' => 'Nội dung sản phẩm ít nhất 3 kí tự',
+            'pro_category_id.required' => 'Bạn cần chọn loại sản phẩm', 
+            'pro_price.required' => 'Bạn cần nhập trường giá sản phẩm',
+            'pro_price.integer' => 'Giá sản phẩm là kiểu số',
+            'pro_price.gte' => 'Giá sản phẩm phải là 1 số nguyên dương !',
+            'pro_number.required' => 'Bạn cần nhập trường số lượng sản phẩm',
+            'pro_number.numeric' => 'Số lượng sản phẩm kiểu số',
+            'pro_sale.integer' => 'Giảm giá sản phẩm là kiểu số nguyên dương',
+            'pro_sale.required' => 'Bạn cần nhập trường giảm giá sản phẩm, Nếu k muốn giảm giá hãy nhập giá trị bằng 0 xin cảm ơn !!',
+            'pro_sale.gte' => 'Giảm giá sản phẩm phải lớn hơn hoặc bằng 0 !',
+            'pro_sale.lte' => 'Giảm giá sản phẩm phải nhỏ hơn hoặc bằng 100 !',
+        ]
+        );
+        if($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator,'productErrors');
+        }
         $this->insertOrUpdate($request,$id);
+        $request->session()->flash('edit_product_success', 'Đã sửa thành công sản phẩm mang ID số'.$id.'!');
         return redirect()->route('admin.product.index');
     }
     //insert or update
@@ -172,6 +246,7 @@ class AdminProductController extends Controller
         switch ($action) {
             case 'delete':
                 Product_Attribute::where('pa_product_id',$id)->delete();
+                $request->session()->flash('delete_product_success', 'Đã sửa thành công sản phẩm mang ID số'.$id.'!');
                 $product->delete();
                 break;
             

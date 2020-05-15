@@ -26,7 +26,7 @@
       <div class="card">
         @if(isset($ratings))
         <div class="card-body">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Người đánh giá</th>
@@ -45,7 +45,7 @@
                           <td>{{$rating->ra_content}}</td>
                           <td>{{$rating->ra_number}}</td>
                           <td>{{$rating->created_at}}</td>
-                            <td><a href="{{route('admin.comment.action',['delete',$rating->id])}}">Xóa</a></td>
+                            <td><a href="{{route('admin.comment.action',['delete',$rating->id])}}" class="btn_delete_sweet" data-id="{{$rating->id}}">Xóa</a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -60,4 +60,35 @@
     <!-- /.content -->
 </div>
  <!-- /.content-wrapper -->
+@endsection
+@section('javascript')
+<script>
+  $(document).ready( function () {
+    $('#dataTable').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
+  });
+</script>
+<script>
+  $(".btn_delete_sweet").click(function(e)
+  {
+    e.preventDefault();
+    url = $(this).attr('href');
+    id = $(this).attr('data-id');
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn xóa đánh giá ID="+id+" không ?",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị xóa đánh giá mang ID ="+id+" !",'success').then(function() {
+                window.location.href = url;
+                });
+            }
+        });
+  });
+</script>
 @endsection

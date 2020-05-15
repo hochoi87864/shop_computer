@@ -34,7 +34,17 @@
                 <td>{{$transaction->tr_phone}}</td>
                 <td>{{$transaction->tr_note}}</td>
                 <td>{{number_format($transaction->tr_total,0,',','.')}} VNĐ</td>
-                <td>{{$transaction->tr_status}}</td>
+                <td>
+                    @if($transaction->tr_status==2)
+                    <a href="#"><span class="badge badge-success">Đã nhận hàng</span></a>
+                    @endif
+                    @if($transaction->tr_status==1)
+                    <a href="{{route('history.transaction.paid',$transaction->id)}}" id="appect_receive_products"><span class="badge badge-warning text-white">Đã gửi hàng</span></a>
+                    @endif
+                    @if($transaction->tr_status==0)
+                    <a href="#"><span class="badge badge-danger">Chưa xử lý</span></a>
+                    @endif
+                </td>
                 <td>{{$transaction->created_at}}</td>
                 
                 <td><a href="{{route('history.get.order.item',$transaction->id)}}" class="js_order_item" data-id="{{$transaction->id}}" data-toggle="modal" data-target="#showOrderItem">Xem</a></td>
@@ -70,6 +80,31 @@
 <script>
     $(function()
     {
+      $("#appect_receive_products").click(function(event)
+      {
+        event.preventDefault();
+        url = $(this).attr("href");
+        swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn đã thực sự nhận được những sản phẩm được gửi từ bên chúng tôi chưa !!",
+            icon: "info",
+            buttons: ["Không",{
+                text: "Đồng ý",
+                value: true,
+                visible: true,
+                className: "bg-success",
+                closeModal: true
+                }],
+                successMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("Thành công","Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi !",'success').then(function() 
+                        {
+                            window.location.href = url;
+                        });
+                    }
+            });
+      });
       $(".js_order_item").click(function(event)
       {
         event.preventDefault();

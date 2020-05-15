@@ -18,15 +18,37 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
-
       <!-- Default box -->
       <div class="card">
-        @if(isset($categories))
-        <div class="card-body">
-            <table class="table table-hover table-striped">
+            @if(isset($categories))
+            <div class="card-body">
+            @if(Session::has('create_category_success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Thành công !</strong> {{Session::get('create_category_success')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+            @if(Session::has('edit_category_success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Thành công !</strong> {{Session::get('edit_category_success')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+            @if(Session::has('delete_category_success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Thành công !</strong> {{Session::get('delete_category_success')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+            <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Tên loại sản phẩm</th>
@@ -50,7 +72,7 @@
                           <td>
                             <a href="{{route('admin.category.edit',$category->id)}}">Sửa</a>
                              |
-                             <a href="{{route('admin.category.handle',['delete',$category->id])}}">Xóa</a>
+                            <a class="btn_delete_sweet" href="{{route('admin.category.handle',['delete',$category->id])}}" data-id="{{$category->id}}">Xóa</a>
                             </td>
                         </tr>
                     @endforeach
@@ -61,9 +83,39 @@
         @endif
       </div>
       <!-- /.card -->
-
     </section>
     <!-- /.content -->
 </div>
  <!-- /.content-wrapper -->
+@endsection
+@section('javascript')
+<script>
+  $(document).ready( function () {
+    $('#dataTable').DataTable({
+      // "order": [[ 0, "desc" ]]
+    });
+  });
+</script>
+<script>
+  $(".btn_delete_sweet").click(function(e)
+  {
+    e.preventDefault();
+    url = $(this).attr('href');
+    id = $(this).attr('data-id');
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn xóa loại sản phẩm ID="+id+" không ? Điều này sẽ ảnh hưởng đến liên kết dữ liệu ! Bạn có thể chuyển trạng thái sang private để ngừng hiển thị sản phẩm ở giao diện khách hàng !! Xin cảm ơn !!!",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị xóa loại sản phẩm mang ID ="+id+" !",'success').then(function() {
+                window.location.href = url;
+                });
+            }
+        });
+  });
+</script>
 @endsection

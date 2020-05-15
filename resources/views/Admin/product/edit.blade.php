@@ -48,3 +48,31 @@
 </div>
  <!-- /.content-wrapper -->
 @endsection
+@section('javascript2')
+<script>
+  $(".btn_save_product").click(function(e)
+  {
+    e.preventDefault();
+    form = $(this).parent('form').get(0);
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn sửa sản phẩm ID="+{{$product->id}}+" không ?",
+            icon: "info",
+            buttons: ["Không",{
+              text: "OK",
+              value: true,
+              visible: true,
+              className: "bg-success",
+              closeModal: true,
+            }],
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị sửa sản phẩm mang ID ="+{{$product->id}}+" !",'success').then(function() {
+                    form.submit();
+                });
+            }
+          });
+  });
+</script>
+@endsection

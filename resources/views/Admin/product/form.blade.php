@@ -20,7 +20,7 @@
     <div class="form-group">
       <label>Loại sản phẩm</label>
       <select name="pro_category_id" id="select_pro_category_id" class="form-control">
-        <option>---------- Chọn loại sản phẩm ----------</option>
+        <option value="">---------- Chọn loại sản phẩm ----------</option>
         @foreach($categories as $key => $category)
           <option value="{{$category->id}}" {{old('pro_category_id',isset($product->pro_category_id)?(($product->pro_category_id==$category->id)?"selected":""):"")}}>{{$category->c_name}}</option>
         @endforeach
@@ -49,7 +49,7 @@
     </div>
   </div>
 </div>
-<input type="submit" value="Lưu thông tin" class="btn btn-success mr-3" style="float: right"/>
+<input type="submit" value="Lưu thông tin" class="btn btn-success mr-3 btn_save_product" style="float: right"/>
 <div style="clear: both"></div>
 @section('javascript')
   <script>

@@ -67,9 +67,9 @@
                             <div class="col-lg-4">
                                 <div class="shop-add-action mb-xs-30">
                                     <ul class="add-actions-link">
-                                        <li class="add-cart"><a class="button_add_cart" href="{{route('shopping.add.product',$product->id)}}">Add to cart</a></li>
-                                        <li class="wishlist"><a class="button_add_favorite_product" href="{{route('get.add.favorite.product',$product->id)}}"><i class="fa fa-heart-o"></i>Add to wishlist</a></li>
-                                        <li><a class="quick-view"  href="{{route('product.index',[$product->pro_name_slug,$product->id])}}"><i class="fa fa-eye"></i>Quick view</a></li>
+                                        <li class="add-cart"><a class="button_add_cart" data-product-name="{{$product->pro_name}}" href="{{route('shopping.add.product',$product->id)}}">Mua Hàng</a></li>
+                                        <li class="wishlist"><a class="button_add_favorite_product" href="{{route('get.add.favorite.product',$product->id)}}" data-product-name="{{$product->pro_name}}"><i class="fa fa-heart-o"></i>Thêm vào sản phẩm yêu thích</a></li>
+                                        <li><a class="quick-view"  href="{{route('product.index',[$product->pro_name_slug,$product->id])}}"><i class="fa fa-eye"></i>Xem chi tiết</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -90,6 +90,7 @@
         $(".button_add_favorite_product").click(function(event)
         {
             event.preventDefault();
+            name_product = $(this).attr("data-product-name");
             url = $(this).attr("href");
             $.ajax(
                 {
@@ -100,16 +101,16 @@
             {
                 if(result.status == 1)
                 {
-                    alert("Thêm thành công !!!");
+                    swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào sản phẩm yêu thích của bạn!", "success");
                     $(".wishlist-item-count").text(result.number_favorite_product);
                 }
                 if(result.status == 0)
                 {
-                    alert("Đã tồn tại !!!");
+                    swal("Có thể bạn chưa biết !", "Sản phẩm "+name_product+" đã tồn tại trong danh sách sản phẩm ưa thích của bạn !", "info");
                 }
-                if(result.error == 1)
+                if(result.error)
                 {
-                    alert("Cần đăng nhập cho chức năng này");
+                    swal("Cảnh báo !", "Bạn cần đăng nhập cho chức năng này!", "warning");
                 }
             });
         });
@@ -117,6 +118,7 @@
         {
             event.preventDefault();
             url = $(this).attr("href");
+            name_product = $(this).attr("data-product-name");
             $.ajax(
                 {
                     method : "GET",
@@ -126,21 +128,25 @@
             {
                 if(result.status == 1)
                 {
-                    alert("Thêm sản phẩm thành công !!!");
+                    swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào giỏ hàng !", "success");
                     $(".cart-item-count").text(result.number_product_in_cart);
                     $(".price_total_cart").text(result.price_total_cart);
                 }
                 if(result.status == 2)
                 {
-                    alert("Trong kho chỉ còn "+result.product_less+" sản phẩm" );
+                    swal("Cảnh báo !", "Trong kho chỉ còn "+result.product_less+" sản phẩm "+name_product, "warning");
                 }
                 if(result.status == 3)
                 {
-                    alert("Sản phẩm không tồn tại !!!");
+                    swal("Cảnh báo !", "Sản phẩm "+name_product+" không tồn tại !", "warning");
                 }
                 if(result.status == 4)
                 {
-                    alert("Hết hàng");
+                    swal("Cảnh báo !", "Sản phẩm "+name_product+" đã hết hàng !", "warning");
+                }
+                if(result.error)
+                {
+                    swal("Cảnh báo !", "Bạn cần đăng nhập cho chức năng này!", "warning");
                 }
             });
         }); 

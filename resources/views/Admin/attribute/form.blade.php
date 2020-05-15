@@ -9,8 +9,8 @@
      <option value="text" {{isset($attribute)?(($attribute->at_type=="text")?"selected":""):""}}>Text</option>
      <option value="number"  {{isset($attribute)?(($attribute->at_type=="number")?"selected":""):""}}>Number</option>
      <option value="select"  {{isset($attribute)?(($attribute->at_type=="select")?"selected":""):""}}>Select</option>
-     <option value="checkbox"  {{isset($attribute)?(($attribute->at_type=="checkbox")?"selected":""):""}}>Checkbox</option>
-     <option value="radiobox"  {{isset($attribute)?(($attribute->at_type=="radiobox")?"selected":""):""}}>Radio box</option>
+     {{-- <option value="checkbox"  {{isset($attribute)?(($attribute->at_type=="checkbox")?"selected":""):""}}>Checkbox</option>
+     <option value="radiobox"  {{isset($attribute)?(($attribute->at_type=="radiobox")?"selected":""):""}}>Radio box</option> --}}
    </select>
 </div>
 <div class="form-group" id="textAreaForAttribute" style="display: none">
@@ -19,7 +19,7 @@
     {{isset($attribute)?$attribute->at_value:""}}
   </textarea>
 </div>
-<input type="submit" value="Lưu thông tin" class="btn btn-success" style="float: right"/>
+<input type="submit" value="Lưu thông tin" class="btn btn-success btn_save_attribute"  style="float: right"/>
 <div style="clear: both"></div>
 @section('javascript')
   <script>

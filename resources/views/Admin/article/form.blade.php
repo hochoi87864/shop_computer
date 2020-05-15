@@ -20,7 +20,7 @@
   <label>Nội dung bài viết: </label>
   <textarea class="form-control" cols="30" rows="5"  name="a_content" id="ckeditor" placeholder="Nhập nội dung bài viết">{{old('a_content',isset($article)?$article->a_content:"")}}</textarea>
 </div>
-<input type="submit" value="Lưu thông tin" class="btn btn-success" style="float: right"/>
+<input type="submit" value="Lưu thông tin" class="btn btn-success btn_save_article" style="float: right"/>
 <div style="clear: both"></div>
 @section('javascript')
   <script>

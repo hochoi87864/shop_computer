@@ -23,7 +23,7 @@
                 </select>
             </div>
         @endif
-        @if($at->at_type=="checkbox")
+        {{-- @if($at->at_type=="checkbox")
             <div class="form-group">
                 <label>{{$at->at_name}}</label>
                 @foreach(explode(';',$at->at_value) as $value)
@@ -46,6 +46,6 @@
                 </div>
             @endforeach
         </div>
-        @endif
+        @endif --}}
     @endforeach
 @endif

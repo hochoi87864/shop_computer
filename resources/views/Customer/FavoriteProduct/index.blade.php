@@ -34,12 +34,12 @@
                             <tbody>
                                 @foreach($products as $product)
                                     <tr>
-                                        <td class="li-product-remove"><a href="{{route('get.delete.favorite.product',$product->id)}}"><i class="fa fa-times"></i></a></td>
+                                        <td class="li-product-remove"><a href="{{route('get.delete.favorite.product',$product->id)}}" data-product-name="{{$product->pro_name}}" class="delete_favorite_product"><i class="fa fa-times"></i></a></td>
                                         <td class="li-product-thumbnail"><a href="#"><img width="200px" src="{{asset('upload/pro_image/'.$product->pro_image)}}" alt=""></a></td>
                                         <td class="li-product-name"><a href="#">{{$product->pro_name}}</a></td>
                                         <td class="li-product-price"><span class="amount">{{number_format($product->pro_price,2,',','.')}} VNĐ</span></td>
-                                        <td class="li-product-stock-status"><span class="in-stock">{{$product->pro_number}}</span></td>
-                                        <td class="li-product-add-cart"><a href="{{route('shopping.add.product',$product->id)}}">add to cart</a></td>
+                                        <td class="li-product-stock-status"><span>{{$product->pro_number}}</span></td>
+                                        <td class="li-product-add-cart"><a data-product-name="{{$product->pro_name}}" class="button_add_cart" href="{{route('shopping.add.product',$product->id)}}">Mua hàng</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -51,4 +51,67 @@
     </div>
 </div>
 <!--Wishlist Area End-->
+@endsection
+@section('javascript')
+<script>
+    $(function()
+    {
+        $(".delete_favorite_product").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            name_product = $(this).attr("data-product-name");
+            swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn xóa sản phẩm "+name_product+" khỏi danh sách yêu thích!",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Bạn đã xóa sản phẩm này khỏi danh sách yêu thích của bạn !",'success').then(function() {
+                    window.location.href = url;
+                });
+            }
+            });
+        });
+        $(".button_add_cart").click(function(event)
+        {
+            event.preventDefault();
+            url = $(this).attr("href");
+            name_product = $(this).attr("data-product-name");
+            $.ajax(
+                {
+                    method : "GET",
+                    url : url
+                }
+            ).done(function(result)
+            {
+                if(result.status == 1)
+                {
+                    swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào giỏ hàng !", "success");
+                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".price_total_cart").text(result.price_total_cart);
+                }
+                if(result.status == 2)
+                {
+                    swal("Cảnh báo !", "Trong kho chỉ còn "+result.product_less+" sản phẩm "+name_product, "warning");
+                }
+                if(result.status == 3)
+                {
+                    swal("Cảnh báo !", "Sản phẩm "+name_product+" không tồn tại !", "warning");
+                }
+                if(result.status == 4)
+                {
+                    swal("Cảnh báo !", "Sản phẩm "+name_product+" đã hết hàng !", "warning");
+                }
+                if(result.error)
+                {
+                    swal("Cảnh báo !", "Bạn cần đăng nhập cho chức năng này!", "warning");
+                }
+            });
+        });
+    });
+</script>
 @endsection

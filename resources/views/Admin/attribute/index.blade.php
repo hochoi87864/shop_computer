@@ -26,7 +26,31 @@
       <div class="card">
         @if(isset($attributes))
         <div class="card-body">
-            <table class="table table-hover table-striped">
+          @if(Session::has('create_attribute_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('create_attribute_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+          @if(Session::has('edit_attribute_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('edit_attribute_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+          @if(Session::has('delete_attribute_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('delete_attribute_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+            <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Tên thuộc tính</th>
@@ -52,7 +76,7 @@
                           <td>
                             <a href="{{route('admin.attribute.edit',$attribute->id)}}">Sửa</a>
                              |
-                            <a href="{{route('admin.attribute.handle',['delete',$attribute->id])}}">Xóa</a>
+                            <a href="{{route('admin.attribute.handle',['delete',$attribute->id])}}" data-id="{{$attribute->id}}" class="btn_delete_sweet">Xóa</a>
                             </td>
                         </tr>
                     @endforeach
@@ -68,4 +92,35 @@
     <!-- /.content -->
 </div>
  <!-- /.content-wrapper -->
+@endsection
+@section('javascript')
+<script>
+  $(document).ready( function () {
+    $('#dataTable').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
+  });
+</script>
+<script>
+  $(".btn_delete_sweet").click(function(e)
+  {
+    e.preventDefault();
+    url = $(this).attr('href');
+    id= $(this).attr('data-id');
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn xóa thuộc tính ID="+id+" không ? Xin cảm ơn !!!",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị xóa thuộc tính mang ID ="+id+" !",'success').then(function() {
+                window.location.href = url;
+                });
+            }
+        });
+  });
+</script>
 @endsection

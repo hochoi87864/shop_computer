@@ -25,7 +25,31 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-body">
-            <table class="table table-hover table-striped">
+          @if(Session::has('create_user_success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Thành công !</strong> {{Session::get('create_user_success')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+            @if(Session::has('edit_user_success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Thành công !</strong> {{Session::get('edit_user_success')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+            @if(Session::has('delete_user_success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Thành công !</strong> {{Session::get('delete_user_success')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+            <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Tên hiển thị</th>
@@ -44,7 +68,7 @@
                           <td>{{$user->role}}</td>
                           <td>
                             <a href="{{route('admin.user.edit',$user->id)}}">Sửa</a> ||
-                            <a href="{{route('admin.user.action',['delete',$user->id])}}">Xóa</a> ||
+                            <a href="{{route('admin.user.action',['delete',$user->id])}}" class="btn_delete_sweet" data-id="{{$user->id}}">Xóa</a> ||
                             <a href="{{route('admin.change.password',$user->id)}}" class="button_change_password" data-email='{{$user->email}}' data-toggle="modal" data-target="#exampleModalCenter">Đổi mật khẩu</a>
                           </td>
                       </tr>
@@ -61,11 +85,11 @@
       <div class="modal-body">
         <div>
           Mật khẩu mới:
-        <input type="password" name="new_password" class="form-control new_password_class">
+        <input type="password" name="new_password" minlength="3" class="form-control new_password_class">
         </div>
         <div>
           Nhập lại mật khẩu mới:
-        <input type="password" name="confirm_password" class="form-control confirm_password_class">
+        <input type="password" name="confirm_password" minlength="3" class="form-control confirm_password_class">
         </div>
         <div class="form-group">
           <button class="btn btn-success mt-2 button_appect_change_password" style="float: right">Lưu mật khẩu</button>
@@ -90,6 +114,35 @@
  <!-- /.content-wrapper -->
 @endsection
 @section('javascript')
+<script>
+  $(document).ready( function () {
+    $('#dataTable').DataTable({
+      // "order": [[ 0, "desc" ]]
+    });
+  });
+</script>
+<script>
+  $(".btn_delete_sweet").click(function(e)
+  {
+    e.preventDefault();
+    url = $(this).attr('href');
+    id = $(this).attr('data-id');
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn xóa tài khoản ID="+id+" không ? Điều này sẽ ảnh hưởng đến liên kết dữ liệu!",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị xóa tài khoản mang ID ="+id+" !",'success').then(function() {
+                window.location.href = url;
+                });
+            }
+        });
+  });
+</script>
 <script>
   $(function()
   {
@@ -119,16 +172,18 @@
         {
           if(result.status == 1)
           {
-            alert('Đổi mật khẩu thành công !!!');
-            $("#exampleModalCenter").modal("hide");
+            swal("Thành công","Đã thay đổi mật khẩu thành công !","success").then(function(){
+              $("#exampleModalCenter").modal("hide");
+            });
+           
           }
           else if(result.status == 2)
           {
-            alert('Thất bại khi đổi mật khẩu');
+           swal("Thất bại","Đã xảy ra lỗi kiểm tra lại mật khẩu xem giống nhau không","error");
           }
           else
           {
-            alert('Lỗi');
+            swal("Thất bại","Đã xảy ra lỗi lớn","error");
           }
         });
       });

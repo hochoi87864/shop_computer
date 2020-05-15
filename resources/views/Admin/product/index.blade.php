@@ -30,7 +30,31 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-body">
-            <table class="table table-hover table-striped">
+          @if(Session::has('create_product_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('create_product_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+          @if(Session::has('edit_product_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('edit_product_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+          @if(Session::has('delete_product_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('delete_product_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+            <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Sản phẩm</th>
@@ -87,7 +111,7 @@
                         <td>{{$pro->pro_hot}}</td>
                         <td>
                           <a href="{{route('admin.product.edit',$pro->id)}}">Sửa</a>
-                          <a href="{{route('admin.product.handle',['delete',$pro->id])}}">Xóa</a>
+                          <a href="{{route('admin.product.handle',['delete',$pro->id])}}" data-id="{{$pro->id}}" class="btn_delete_sweet">Xóa</a>
                         </td>
                       </tr>
                     @endforeach
@@ -103,4 +127,35 @@
     <!-- /.content -->
 </div>
  <!-- /.content-wrapper -->
+@endsection
+@section('javascript')
+<script>
+  $(document).ready( function () {
+    $('#dataTable').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
+  });
+</script>
+<script>
+  $(".btn_delete_sweet").click(function(e)
+  {
+    e.preventDefault();
+    url = $(this).attr('href');
+    id= $(this).attr('data-id');
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn xóa sản phẩm ID="+id+" không ? Điều này sẽ ảnh hưởng đến liên kết dữ liệu !!",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị xóa sản phẩm mang ID ="+id+" !",'success').then(function() {
+                window.location.href = url;
+                });
+            }
+        });
+  });
+</script>
 @endsection

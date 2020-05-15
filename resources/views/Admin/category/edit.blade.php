@@ -21,7 +21,6 @@
 
     <!-- Main content -->
     <section class="content">
-
       <!-- Default box -->
       <div class="card">
         <div class="card-body">
@@ -47,4 +46,32 @@
     <!-- /.content -->
 </div>
  <!-- /.content-wrapper -->
+@endsection
+@section('javascript')
+<script>
+  $(".btn_save_category").click(function(e)
+  {
+    e.preventDefault();
+    form = $(this).parent('form').get(0);
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn sửa loại sản phẩm ID="+{{$category->id}}+" không ?",
+            icon: "info",
+            buttons: ["Không",{
+              text: "OK",
+              value: true,
+              visible: true,
+              className: "bg-success",
+              closeModal: true,
+            }],
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị sửa loại sản phẩm mang ID ="+{{$category->id}}+" !",'success').then(function() {
+                    form.submit();
+                });
+            }
+          });
+  });
+</script>
 @endsection

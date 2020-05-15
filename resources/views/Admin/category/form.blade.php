@@ -28,5 +28,5 @@
     </div>
     @endforeach
 </div>
-<input type="submit" value="Lưu thông tin" class="btn btn-success" style="float: right"/>
+<input type="submit" value="Lưu thông tin" class="btn btn-success btn_save_category" style="float: right"/>
 <div style="clear: both"></div>

@@ -48,23 +48,24 @@ Route::group(['prefix'=>'feature-user','middleware'=>'checkLoginUser'],function(
     Route::post('/checkout','FeatureUserController@saveInfoShoppingCart');
 });
 
-Route::group(['prefix'=>'rating'],function()
+Route::group(['prefix'=>'rating','middleware'=>'checkLoginUser'],function()
 {
     Route::post('/{id}','RatingController@saveRating')->name('post.rating.product');
 });
 
 // favorite_product
-Route::group(['prefix'=>'favorite_product'],function()
+Route::group(['prefix'=>'favorite_product','middleware'=>'checkLoginUser'],function()
 {
     Route::get('/','FavoriteProductController@index')->name('favorite.product.index');
     Route::get('add/{id}','FavoriteProductController@addProduct')->name('get.add.favorite.product');
     Route::get('delete/{id}','FavoriteProductController@deleteProduct')->name('get.delete.favorite.product');
 });
 
-Route::group(['prefix'=>'history_user'],function()
+Route::group(['prefix'=>'history_user','middleware'=>'checkLoginUser'],function()
 {
     Route::get('/','HistoryController@index')->name('history.index');
     Route::get('/get-order-item/{id}','HistoryController@getOrderItem')->name('history.get.order.item');
+    Route::get('/paid/{id}','HistoryController@transactionPaid')->name('history.transaction.paid');
 });
 
 Route::group(['prefix'=>'article'],function()

@@ -25,7 +25,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-body">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Tên khách hàng</th>
@@ -57,7 +57,7 @@
                               @endif
                             </td>
                             <td>
-                              <a href="{{route('admin.transaction.handle',['delete',$transaction->id])}}">Xóa</a>
+                              <a href="{{route('admin.transaction.handle',['delete',$transaction->id])}}" data-id="{{$transaction->id}}" class="btn_delete_sweet">Xóa</a>
                               &nbsp
                             <a href="{{route('admin.get.order.item',$transaction->id)}}" data-id="{{$transaction->id}}" class="js_order_item" data-toggle="modal" data-target="#showOrderItem">Xem</a>
                             </td>
@@ -118,4 +118,33 @@
       });
     });
   </script>
+<script>
+  $(document).ready( function () {
+    $('#dataTable').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
+  });
+</script>
+<script>
+  $(".btn_delete_sweet").click(function(e)
+  {
+    e.preventDefault();
+    url = $(this).attr('href');
+    id = $(this).attr('data-id');
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn xóa giao dịch ID="+id+" không ? Điều này sẽ ảnh hưởng đến liên kết dữ liệu !",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị xóa giao mang ID ="+id+" !",'success').then(function() {
+                window.location.href = url;
+                });
+            }
+        });
+  });
+</script>
 @endsection

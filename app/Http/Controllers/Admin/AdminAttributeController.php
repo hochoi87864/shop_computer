@@ -56,6 +56,7 @@ class AdminAttributeController extends Controller
             }
         }
         $this->insertOrUpdate($request);
+        $request->session()->flash('create_attribute_success', 'Đã thêm 1 thuộc tính mới !');
         return redirect()->route('admin.attribute.index');
     }
     public function edit($id)
@@ -97,6 +98,7 @@ class AdminAttributeController extends Controller
             }
         }
         $this->insertOrUpdate($request,$id);
+        $request->session()->flash('edit_attribute_success', 'Đã sửa thuộc tính ID='.$id.' !');
         return redirect()->route('admin.attribute.index');
     }
     public function insertOrUpdate($request,$id='')
@@ -121,6 +123,7 @@ class AdminAttributeController extends Controller
         switch ($action) {
             case 'delete':
                 $attribute->delete();
+                $request->session()->flash('delete_attribute_success', 'Đã xóa thuộc tính ID='.$id.' !');
                 break;
             
             default:

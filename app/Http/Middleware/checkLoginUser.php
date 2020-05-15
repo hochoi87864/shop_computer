@@ -18,6 +18,11 @@ class checkLoginUser
     {
         if(!Auth::check())
         {
+            if($request->ajax()) {
+                return response()->json([
+                    'error' => true
+                ]);
+            }
             return redirect()->route('get.login')->with('needLogin','Cần đăng nhập');
         }
         return $next($request);

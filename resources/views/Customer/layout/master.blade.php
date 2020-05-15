@@ -221,7 +221,8 @@
         <script src="{{asset('js/scrollUp.min.js')}}"></script>
         <!-- Main/Activator js -->
         <script src="{{asset('js/main.js')}}"></script>
-
+        {{-- Sweet Alert --}}
+        <script src="{{asset('sweetalert.min.js')}}"></script>
         @yield('javascript')
 
     </body>

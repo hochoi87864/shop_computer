@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="{{asset('admin_lte/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {{-- Datatable --}}
+  <link href="{{asset('jquery-datatables/jquery.dataTables.min.css')}}" rel="stylesheet">
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -445,6 +447,11 @@
 <script src="{{asset('admin_lte/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin_lte/dist/js/demo.js')}}"></script>
+{{-- Sweetalert --}}
+<script src="{{asset('sweetalert.min.js')}}"></script>
+{{-- Datatable --}}
+<script src="{{asset('jquery-datatables/jquery.dataTables.min.js')}}"></script>
 @yield('javascript')
+@yield('javascript2')
 </body>
 </html>

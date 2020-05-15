@@ -25,7 +25,31 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-body">
-            <table class="table table-hover table-striped">
+          @if(Session::has('create_article_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('create_article_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+          @if(Session::has('edit_article_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('edit_article_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+          @if(Session::has('delete_article_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Thành công !</strong> {{Session::get('delete_article_success')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+            <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Tên bài viết</th>
@@ -46,7 +70,7 @@
                           <td>{{$article->created_at}}</td>
                           <td>
                             <a href="{{route('admin.article.edit',$article->id)}}">Sửa</a>
-                            <a href="{{route('admin.article.handle',['delete',$article->id])}}">Xóa</a>
+                            <a href="{{route('admin.article.handle',['delete',$article->id])}}" data-id="{{$article->id}}" class="btn_delete_sweet">Xóa</a>
                           </td>
                       </tr>
                     @endforeach
@@ -61,4 +85,35 @@
     <!-- /.content -->
 </div>
  <!-- /.content-wrapper -->
+@endsection
+@section('javascript')
+<script>
+  $(document).ready( function () {
+    $('#dataTable').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
+  });
+</script>
+<script>
+  $(".btn_delete_sweet").click(function(e)
+  {
+    e.preventDefault();
+    url = $(this).attr('href');
+    id = $(this).attr('data-id');
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn xóa bài viết ID="+id+" không ? ",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị xóa bài viết mang ID ="+id+" !",'success').then(function() {
+                window.location.href = url;
+                });
+            }
+        });
+  });
+</script>
 @endsection

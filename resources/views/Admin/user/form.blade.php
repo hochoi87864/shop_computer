@@ -11,4 +11,4 @@
   <label>Số điện thoại: </label>
   <input type="text" class="form-control" name="phone" value="{{old('phone',isset($user->phone)?$user->phone:'')}}">
 </div>
-<input type="submit" class="btn btn-success" value="Lưu thông tin"/>
+<input type="submit" class="btn btn-success btn_save_user" value="Lưu thông tin"/>

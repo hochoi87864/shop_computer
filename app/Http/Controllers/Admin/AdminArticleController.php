@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use Illuminate\Support\Facades\Validator;
 
 class AdminArticleController extends Controller
 {
@@ -23,7 +24,28 @@ class AdminArticleController extends Controller
     }
     public function store(Request $request)
     {
+         // Check data input
+         $validator = Validator::make($request->all(),
+         [
+            'a_name' => 'required|unique:articles,a_name|min:3|max:255',
+            'a_description' => 'required|min:3',
+            'a_content' => 'required|min:3'
+         ],
+         [
+             'a_name.required' => 'Bạn cần nhập trường tên bài viết',
+             'a_name.unique' => 'Tên bài viết đã tồn tại',
+             'a_description.required' => 'Mô tả bài viết còn trống',
+             'a_description.min' => 'Mô tả bài viết cần ít nhất 3 kí tự',
+             'a_content.required' => 'Nội dung bài viết còn trống',
+             'a_content.min' => 'Nội dung bài viết cần ít nhất 3 kí tự',
+         ]
+         );
+         if($validator->fails())
+         {
+             return redirect()->back()->withErrors($validator,'articleErrors');
+         }
         $this->insertOrUpdate($request);
+        $request->session()->flash('create_article_success', 'Đã thêm 1 bài viết!');
         return redirect()->route('admin.article.index');
     }
     public function edit($id)
@@ -36,7 +58,27 @@ class AdminArticleController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // Check data input
+        $validator = Validator::make($request->all(),
+        [
+           'a_name' => 'required|min:3|max:255',
+           'a_description' => 'required|min:3',
+           'a_content' => 'required|min:3'
+        ],
+        [
+            'a_name.required' => 'Bạn cần nhập trường tên bài viết',
+            'a_description.required' => 'Mô tả bài viết còn trống',
+            'a_description.min' => 'Mô tả bài viết cần ít nhất 3 kí tự',
+            'a_content.required' => 'Nội dung bài viết còn trống',
+            'a_content.min' => 'Nội dung bài viết cần ít nhất 3 kí tự',
+        ]
+        );
+        if($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator,'articleErrors');
+        }
         $this->insertOrUpdate($request, $id);
+        $request->session()->flash('edit_article_success', 'Đã sửa thành công bài viết mang ID số'.$id.'!');
         return redirect()->route('admin.article.index');
     }
     public function handle(Request $request,$action,$id)
@@ -45,6 +87,7 @@ class AdminArticleController extends Controller
         switch ($action) {
             case 'delete':
                 $article->delete();
+                $request->session()->flash('delete_article_success', 'Đã xóa thành công bài viết mang ID số'.$id.'!');
                 break;
             
             default:

@@ -51,6 +51,7 @@ class AdminCategoryController extends Controller
         }
        $this->insertOrUpdate($request);
         //return view index
+        $request->session()->flash('create_category_success', 'Đã thêm 1 loại sản phẩm!');
         return redirect()->route('admin.category.index');
     }
     public function edit($id)
@@ -93,6 +94,7 @@ class AdminCategoryController extends Controller
             return redirect()->back()->withErrors($validator,'categoryErrors');
         }
         $this->insertOrUpdate($request,$id);
+        $request->session()->flash('edit_category_success', 'Đã sửa thành công loại sản phẩm mang ID số'.$id.'!');
         return redirect()->route('admin.category.index');
     }
     public function insertOrUpdate($request,$id='')
@@ -156,6 +158,7 @@ class AdminCategoryController extends Controller
         switch ($action) {
             case 'delete':
                 $category->delete();
+                $request->session()->flash('delete_category_success', 'Đã xóa thành công loại sản phẩm mang ID số'.$id.'!');
                 break;
             
             default:

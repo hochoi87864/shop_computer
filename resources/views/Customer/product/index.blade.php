@@ -111,8 +111,8 @@
                         <div class="single-add-to-cart">
                             <div style="display: flex">
                                 <div class="hm-wishlist mr-3" >
-                                    <a  class="button_add_favorite_product" id="hm-wishlist_by_me" href="{{route('get.add.favorite.product',$product->id)}}">
-                                        <i class="fa fa-heart-o" id="add_to_wishlist_by_me" ></i>
+                                    <a  class="button_add_favorite_product" id="hm-wishlist_by_me" data-product-name="{{$product->pro_name}}" href="{{route('get.add.favorite.product',$product->id)}}">
+                                        <i class="fa fa-heart-o" id="add_to_wishlist_by_me"  ></i>
                                         <style>
                                             #hm-wishlist_by_me
                                             {
@@ -128,7 +128,7 @@
                                     </a>
                                 </div>
                                 <div class="cart-quantity">
-                                    <a href="{{route('shopping.add.product',$product->id)}}" class="button_add_cart"><button class="add-to-cart" type="submit">Add to cart</button></a>
+                                    <a href="{{route('shopping.add.product',$product->id)}}" data-product-name="{{$product->pro_name}}" class="button_add_cart"><button class="add-to-cart" type="submit">Add to cart</button></a>
                                 </div>
                             </div>
                         </div>
@@ -156,9 +156,9 @@
             <div class="col-lg-12">
                 <div class="li-product-tab">
                     <ul class="nav li-product-menu">
-                       <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
-                       <li><a data-toggle="tab" href="#product-details"><span>Product Details</span></a></li>
-                       <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li>
+                       <li><a class="active" data-toggle="tab" href="#description"><span>Mô tả</span></a></li>
+                       <li><a data-toggle="tab" href="#product-details"><span>Chi tiết sản phẩm</span></a></li>
+                       <li><a data-toggle="tab" href="#reviews"><span>Đánh giá</span></a></li>
                     </ul>               
                 </div>
                 <!-- Begin Li's Tab Menu Content Area -->
@@ -352,6 +352,7 @@
         $(".button_add_favorite_product").click(function(event)
         {
             event.preventDefault();
+            name_product = $(this).attr("data-product-name");
             url = $(this).attr("href");
             $.ajax(
                 {
@@ -362,16 +363,16 @@
             {
                 if(result.status == 1)
                 {
-                    alert("Thêm thành công !!!");
+                    swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào sản phẩm yêu thích của bạn!", "success");
                     $(".wishlist-item-count").text(result.number_favorite_product);
                 }
                 if(result.status == 0)
                 {
-                    alert("Đã tồn tại !!!");
+                    swal("Có thể bạn chưa biết !", "Sản phẩm "+name_product+" đã tồn tại trong danh sách sản phẩm ưa thích của bạn !", "info");
                 }
-                if(result.error == 1)
+                if(result.error)
                 {
-                    alert("Cần đăng nhập cho chức năng này");
+                    swal("Cảnh báo !", "Bạn cần đăng nhập cho chức năng này!", "warning");
                 }
             });
         });
@@ -379,6 +380,7 @@
         {
             event.preventDefault();
             url = $(this).attr("href");
+            name_product = $(this).attr("data-product-name");
             $.ajax(
                 {
                     method : "GET",
@@ -388,21 +390,25 @@
             {
                 if(result.status == 1)
                 {
-                    alert("Thêm sản phẩm thành công !!!");
+                    swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào giỏ hàng !", "success");
                     $(".cart-item-count").text(result.number_product_in_cart);
                     $(".price_total_cart").text(result.price_total_cart);
                 }
                 if(result.status == 2)
                 {
-                    alert("Trong kho chỉ còn "+result.product_less+" sản phẩm" );
+                    swal("Cảnh báo !", "Trong kho chỉ còn "+result.product_less+" sản phẩm "+name_product, "warning");
                 }
                 if(result.status == 3)
                 {
-                    alert("Sản phẩm không tồn tại !!!");
+                    swal("Cảnh báo !", "Sản phẩm "+name_product+" không tồn tại !", "warning");
                 }
                 if(result.status == 4)
                 {
-                    alert("Hết hàng");
+                    swal("Cảnh báo !", "Sản phẩm "+name_product+" đã hết hàng !", "warning");
+                }
+                if(result.error)
+                {
+                    swal("Cảnh báo !", "Bạn cần đăng nhập cho chức năng này!", "warning");
                 }
             });
         }); 
@@ -460,6 +466,10 @@
     {
         event.preventDefault();
         let number = $(".number_rating").val();
+        if(!number)
+            {
+                swal("Lỗi xảy ra","Bạn cần chọn sao đánh giá sản phẩm !","error");
+            }
         let content = $("#content_rating").val();
         let url = $(this).attr("href");
         $.ajax(
@@ -476,12 +486,15 @@
         {
             if(result.code == 1)
             {
-                alert("Gửi đánh giá thành công !!!");
-                location.reload();
+                swal("Thành công!","Bạn đã gửi đánh giá sản phẩm thành công","success").then(function()
+                {
+                    location.reload();
+                });
+                
             }
             else
             {
-                alert("Đánh giá thất bại !!!");
+                swal("Thất bại!","Có lỗi xảy ra","error");
             }
         });
     });
