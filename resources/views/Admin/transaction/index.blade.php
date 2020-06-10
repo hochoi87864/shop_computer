@@ -25,6 +25,22 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-body">
+            @if(Session::has('OutOfStock'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Thất bại !</strong> {{Session::get('OutOfStock')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+            @if(Session::has('stopDelete'))
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Thất bại !</strong> {{Session::get('stopDelete')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
             <table class="table table-hover table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <th>ID</th>
@@ -44,7 +60,7 @@
                             <td>{{$transaction->tr_address}}</td>
                             <td>{{$transaction->tr_phone}}</td>
                             <td>{{$transaction->tr_note}}</td>
-                            <td>{{$transaction->tr_total}}</td>
+                            <td>{{number_format($transaction->tr_total,0,',','.')}} VNĐ</td>
                             <td>
                               @if($transaction->tr_status==2)
                               <a href="#"><span class="badge badge-success">Đã nhận hàng</span></a>

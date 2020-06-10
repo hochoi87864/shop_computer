@@ -46,6 +46,7 @@ Route::group(['prefix'=>'feature-user','middleware'=>'checkLoginUser'],function(
 {
     Route::get('/checkout','FeatureUserController@getFormPay')->name('feature.user.checkout');
     Route::post('/checkout','FeatureUserController@saveInfoShoppingCart');
+    Route::get('/delete/nofitication/{id}','FeatureUserController@deleteNofication')->name('feature.user.delete.nofication');
 });
 
 Route::group(['prefix'=>'rating','middleware'=>'checkLoginUser'],function()

@@ -187,6 +187,34 @@
             </a>
           </li>  
           <li class="nav-header">MANAGE</li>
+          {{-- Tab Slide --}}
+          <li class="nav-item has-treeview {{(request()->is('admin/slide*'))?"menu-open":""}}">
+            <a class="nav-link {{(request()->is('admin/slide*'))?"active":""}}">
+            <i class="nav-icon fa fa-cubes"></i>
+            {{-- <i class=""></i> --}}
+            <p>
+              Slide
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{Route('admin.slide.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/slide'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{route('admin.slide.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/slide/create'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        {{--Entab Slide--}}
           {{-- Tab category --}}
           <li class="nav-item has-treeview {{(request()->is('admin/category*'))?"menu-open":""}}">
               <a class="nav-link {{(request()->is('admin/category*'))?"active":""}}">
@@ -424,11 +452,6 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.2
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
   </footer>
 
   <!-- Control Sidebar -->

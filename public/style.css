@@ -582,7 +582,8 @@ textarea:focus {
 
 /*Home Two | Slider Background Image*/
 
-.bg-4,
+
+/* .bg-4,
 .bg-5,
 .bg-6 {
     background-image: url(images/slider/4.jpg);
@@ -599,7 +600,7 @@ textarea:focus {
 
 .bg-6 {
     background-image: url(images/slider/6.jpg);
-}
+} */
 
 
 /*Home Three | Slider Background Image*/
@@ -1943,7 +1944,7 @@ textarea:focus {
 
 .hm-wishlist {
     float: left;
-    margin-right: 25px;
+    margin-right: 15px;
     position: relative;
 }
 

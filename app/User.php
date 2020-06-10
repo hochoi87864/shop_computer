@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Nofitication;
 use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +46,9 @@ class User extends Authenticatable
     public function Transaction()
     {
         return $this->hasMany(Transaction::class,'tr_user_id');
+    }
+    public function NofiticationReceive()
+    {
+        return $this->hasMany(Nofitication::class,'nof_receiver');
     }
 }

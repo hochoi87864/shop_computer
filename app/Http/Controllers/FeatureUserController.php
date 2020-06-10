@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nofitication;
 use App\Models\Order;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -51,5 +52,11 @@ class FeatureUserController extends CustomerController
             \Cart::destroy();
         }
         return redirect()->route('home');
+    }
+    public function deleteNofication(Request $request, $id)
+    {
+        $nofication = Nofitication::find($id);
+        $nofication->delete();
+        return redirect()->back();
     }
 }

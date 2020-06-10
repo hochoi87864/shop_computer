@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2020 at 03:40 PM
+-- Generation Time: May 29, 2020 at 05:22 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -143,7 +143,8 @@ INSERT INTO `categories` (`id`, `c_name`, `c_name_slug`, `c_status`, `created_at
 (12, 'Test1', 'test1', 1, '2020-04-05 07:28:03', '2020-04-05 07:28:03'),
 (13, 'Test2', 'test2', 1, '2020-04-05 07:28:10', '2020-04-05 07:28:10'),
 (20, '12312321', '12312321', 1, '2020-05-11 20:32:29', '2020-05-11 20:32:29'),
-(22, 'tesss111', 'tesss111', 1, '2020-05-11 21:04:22', '2020-05-11 21:04:22');
+(22, 'tesss111', 'tesss111', 1, '2020-05-11 21:04:22', '2020-05-11 21:04:22'),
+(23, 'tes1235454', 'tes1235454', 1, '2020-05-27 06:54:40', '2020-05-27 06:54:40');
 
 -- --------------------------------------------------------
 
@@ -171,7 +172,8 @@ INSERT INTO `category_attribute` (`id`, `c_a_category_id`, `c_a_attribute_id`, `
 (36, 2, 7, '2020-03-31 20:12:22', '2020-03-31 20:12:22'),
 (37, 2, 8, '2020-03-31 20:12:22', '2020-03-31 20:12:22'),
 (38, 2, 9, '2020-03-31 20:12:22', '2020-03-31 20:12:22'),
-(39, 22, NULL, '2020-05-11 21:04:22', '2020-05-11 21:04:22');
+(39, 22, NULL, '2020-05-11 21:04:22', '2020-05-11 21:04:22'),
+(40, 23, 7, '2020-05-27 06:54:40', '2020-05-27 06:54:40');
 
 -- --------------------------------------------------------
 
@@ -194,7 +196,11 @@ CREATE TABLE `favorite_product` (
 INSERT INTO `favorite_product` (`id`, `fp_product_id`, `fp_user_id`, `created_at`, `updated_at`) VALUES
 (22, 10, 1, '2020-05-11 06:44:27', '2020-05-11 06:44:27'),
 (24, 1, 1, '2020-05-11 06:55:44', '2020-05-11 06:55:44'),
-(25, 2, 1, '2020-05-11 07:07:15', '2020-05-11 07:07:15');
+(25, 2, 1, '2020-05-11 07:07:15', '2020-05-11 07:07:15'),
+(26, 10, 5, '2020-05-23 08:07:58', '2020-05-23 08:07:58'),
+(27, 8, 5, '2020-05-23 08:10:20', '2020-05-23 08:10:20'),
+(28, 4, 5, '2020-05-23 08:10:24', '2020-05-23 08:10:24'),
+(29, 14, 1, '2020-05-27 06:48:50', '2020-05-27 06:48:50');
 
 -- --------------------------------------------------------
 
@@ -226,7 +232,30 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2020_04_09_143511_create_orders_table', 9),
 (15, '2020_04_23_141548_create_ratings_table', 10),
 (16, '2020_04_26_140729_create_favorite_product', 11),
-(17, '2020_05_04_132355_alter_column_table_user', 12);
+(17, '2020_05_04_132355_alter_column_table_user', 12),
+(18, '2020_05_23_140221_create_nofitication_table', 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nofitication`
+--
+
+CREATE TABLE `nofitication` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nof_sender` bigint(20) UNSIGNED DEFAULT NULL,
+  `nof_receiver` bigint(20) UNSIGNED DEFAULT NULL,
+  `nof_content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nofitication`
+--
+
+INSERT INTO `nofitication` (`id`, `nof_sender`, `nof_receiver`, `nof_content`, `created_at`, `updated_at`) VALUES
+(5, 1, 5, 'Giao dịch mã số 22 với nội dung \"\" đã bị hủy ! Có thể do thiếu số lượng sản phẩm bạn yêu cầu, liên hệ lại chủ cửa hàng để biết thêm chi tiết !!!', '2020-05-23 08:06:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -264,9 +293,12 @@ INSERT INTO `orders` (`id`, `or_transaction_id`, `or_product_id`, `or_qty`, `or_
 (14, NULL, 2, 1, 1, 1, '2020-05-11 07:22:05', '2020-05-11 07:22:05'),
 (15, NULL, 13, 1, 10000, 12, '2020-05-11 07:22:18', '2020-05-11 07:22:18'),
 (16, NULL, 10, 1, 123, 11, '2020-05-11 07:23:39', '2020-05-11 07:23:39'),
-(17, 10, 13, 1, 10000, 12, '2020-05-11 07:47:48', '2020-05-11 07:47:48'),
+(17, NULL, 13, 1, 10000, 12, '2020-05-11 07:47:48', '2020-05-11 07:47:48'),
 (18, NULL, 10, 1, 123, 11, '2020-05-12 09:00:14', '2020-05-12 09:00:14'),
-(19, 12, 13, 1, 10000, 12, '2020-05-14 08:08:30', '2020-05-14 08:08:30');
+(19, 12, 13, 1, 10000, 12, '2020-05-14 08:08:30', '2020-05-14 08:08:30'),
+(22, NULL, 8, 1, 123, 1, '2020-05-21 07:35:19', '2020-05-21 07:35:19'),
+(30, 21, 12, 1, 1, 1, '2020-05-23 08:05:28', '2020-05-23 08:05:28'),
+(32, 23, 14, 2, 1000000000000, 0, '2020-05-27 06:50:51', '2020-05-27 06:50:51');
 
 -- --------------------------------------------------------
 
@@ -316,13 +348,13 @@ INSERT INTO `products` (`id`, `pro_name`, `pro_name_slug`, `pro_category_id`, `p
 (2, 'GVN Titan M', 'gvn-titan-m', 1, 1, NULL, 1, 1, 1, 'aaa', 'aaa', NULL, 1, 0, 2, 8, '2020-03-29 09:24:29', '2020-05-11 08:06:48'),
 (4, 'abc', 'abc', 2, 123, NULL, 12, 1, 1, 'abc', 'abc', NULL, 0, 12, 0, 0, '2020-03-31 01:51:08', '2020-03-31 01:51:08'),
 (5, 'lan 2', 'lan-2', 2, 11, NULL, 1, 1, 0, '123', '123', 'Scp_31_Jane87d04d3acfe73b320b993e533ddcca8.png', 1, 111, 0, 0, '2020-03-31 01:51:41', '2020-04-15 06:14:15'),
-(8, 'asdád', 'asdad', 3, 123, NULL, 1, 1, 1, 'ádasd', 'ádsad', 'GLj_20_Feb6c276b519b276580003a6fc452bb219c.jpg', 0, 1, 0, 0, '2020-04-01 19:56:29', '2020-04-01 19:58:19'),
-(9, 'GVN Titan Mâ', 'gvn-titan-ma', 3, 123, NULL, 11, 1, 0, 'áaaa', 'aaaaa', 'qAm_20_Feb6c276b519b276580003a6fc452bb219c.jpg', 4, 119, 0, 0, '2020-04-01 19:58:50', '2020-05-11 08:06:48'),
+(8, 'asdád', 'asdad', 3, 123, NULL, 1, 1, 1, 'ádasd', 'ádsad', 'GLj_20_Feb6c276b519b276580003a6fc452bb219c.jpg', 1, 0, 0, 0, '2020-04-01 19:56:29', '2020-05-21 07:41:48'),
+(9, 'GVN Titan Mâ', 'gvn-titan-ma', 3, 123, NULL, 11, 1, 0, 'áaaa', 'aaaaa', 'qAm_20_Feb6c276b519b276580003a6fc452bb219c.jpg', 4, 119, 0, 0, '2020-04-01 19:58:50', '2020-05-23 07:40:47'),
 (10, 'abvc', 'abvc', 3, 123, NULL, 11, 1, 1, '123', '123', 'wZf_ban-phim-chuyen-van-phong-logitech-k120-2_01eb4c93f70d4e9181cf140cebcea8a3.webp', 1, 11, 0, 0, '2020-04-03 19:21:07', '2020-04-15 06:14:15'),
 (11, 'asd', 'asd', 3, 1, NULL, 1, 1, 0, '12312', '123123', 'gCL_250_47015_asus_gaming_g531gd_1.png', 1, 0, 0, 0, '2020-04-06 07:22:56', '2020-04-15 06:20:25'),
-(12, '121', '121', 3, 1, NULL, 1, 1, 0, '123', '111', 'Rpi_aminlogin.jpg', 0, 1, 1, 5, '2020-04-06 07:23:19', '2020-05-01 07:15:24'),
+(12, '121', '121', 3, 1, NULL, 1, 1, 0, '123', '111', 'Rpi_aminlogin.jpg', 0, 0, 1, 5, '2020-04-06 07:23:19', '2020-05-23 08:06:10'),
 (13, 'Thử 1', 'thu-1', 3, 10000, NULL, 12, 1, 1, 'Thử 1', 'aaaa', 'YJE_a702_800x450.jpg', 4, 0, 2, 9, '2020-04-06 19:29:34', '2020-05-14 08:08:44'),
-(14, 'Gia cao', 'gia-cao', 3, 1000000000000, NULL, 0, 1, 0, 'gia sp nay cao lam', 'gia sp nay cao lam', 'MHp_ios-13-1.jpg', 5, 5, 0, 0, '2020-04-16 06:11:41', '2020-05-06 06:47:56');
+(14, 'Gia cao', 'gia-cao', 3, 1000000000000, NULL, 0, 1, 0, 'gia sp nay cao lam', 'gia sp nay cao lam', 'MHp_ios-13-1.jpg', 7, 3, 1, 5, '2020-04-16 06:11:41', '2020-05-27 06:55:01');
 
 -- --------------------------------------------------------
 
@@ -385,7 +417,8 @@ INSERT INTO `ratings` (`id`, `ra_product_id`, `ra_number`, `ra_content`, `ra_use
 (7, 12, 5, 'cũng được', 1, '2020-05-01 07:15:24', '2020-05-01 07:15:24'),
 (8, 1, 5, 'được', 1, '2020-05-11 06:50:28', '2020-05-11 06:50:28'),
 (9, 13, 5, 'Sản phẩm này được', 1, '2020-05-11 07:00:07', '2020-05-11 07:00:07'),
-(10, 13, 4, 'Cũng được !!', 1, '2020-05-11 07:00:55', '2020-05-11 07:00:55');
+(10, 13, 4, 'Cũng được !!', 1, '2020-05-11 07:00:55', '2020-05-11 07:00:55'),
+(12, 14, 5, 'aa', 1, '2020-05-27 06:49:06', '2020-05-27 06:49:06');
 
 -- --------------------------------------------------------
 
@@ -414,8 +447,9 @@ INSERT INTO `transactions` (`id`, `tr_user_id`, `tr_total`, `tr_note`, `tr_addre
 (4, 1, 1, 'Thử', 'Thôn Vân Động Nam, Xã Vũ Lạc, Thành phố Thái Bình, Tỉnh Thái Bình', '0942674663', 2, '2020-04-15 06:02:29', '2020-04-15 06:20:25'),
 (5, 1, 9239, '1231', 'Thôn Vân Động Nam, Xã Vũ Lạc, Thành phố Thái Bình, Tỉnh Thái Bình', '123', 2, '2020-04-16 01:22:24', '2020-05-11 08:06:48'),
 (6, 4, 5000000000000, 'xả tiền', 'Thôn Vân Động Nam, Xã Vũ Lạc, Thành phố Thái Bình, Tỉnh Thái Bình', '0942674663', 2, '2020-05-06 06:46:26', '2020-05-06 06:47:56'),
-(10, 1, 8800, 'âsdasdasd', 'Thôn Vân Động Nam, Xã Vũ Lạc, Thành phố Thái Bình, Tỉnh Thái Bình', '0942674663', 2, '2020-05-11 07:47:48', '2020-05-11 08:00:15'),
-(12, 1, 8800, '21321321', '123123', '213213', 2, '2020-05-14 08:08:30', '2020-05-14 08:08:44');
+(12, 1, 8800, '21321321', '123123', '213213', 2, '2020-05-14 08:08:30', '2020-05-14 08:08:44'),
+(21, 5, 1, '123123123', 'Thôn Vân Động Nam, Xã Vũ Lạc, Thành phố Thái Bình, Tỉnh Thái Bình', '123213', 1, '2020-05-23 08:05:28', '2020-05-23 08:06:10'),
+(23, 1, 2000000000000, 'aaaaaa', 'Thôn Vân Động Nam, Xã Vũ Lạc, Thành phố Thái Bình, Tỉnh Thái Bình', '0942674663', 2, '2020-05-27 06:50:51', '2020-05-27 06:55:01');
 
 -- --------------------------------------------------------
 
@@ -445,7 +479,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `phone`, `avatar`, `role`, `code`, `time_code`) VALUES
 (1, 'Lê Tiến Trung', 'trungle87864@gmail.com', NULL, '$2y$10$0sAw01X1fGJ1DQsL662aReYdabvH9aXbBrBAwtc1DBzfmeyb5u9Bi', NULL, '2020-04-07 06:41:31', '2020-04-07 06:41:31', NULL, NULL, 1, NULL, NULL),
-(4, 'Nguyễn Văn Trọng', 'nguyentrong@gmail.com', NULL, '$2y$10$BehcLJNv5OPL7z6IUwm9o.c9kmDpTVCA1UIn0NGqC5FLKMF8jPX8C', NULL, '2020-05-04 07:40:42', '2020-05-12 08:55:01', '0913752662', NULL, 1, NULL, NULL);
+(4, 'Nguyễn Văn Trọng', 'nguyentrong@gmail.com', NULL, '$2y$10$BehcLJNv5OPL7z6IUwm9o.c9kmDpTVCA1UIn0NGqC5FLKMF8jPX8C', NULL, '2020-05-04 07:40:42', '2020-05-12 08:55:01', '0913752662', NULL, 1, NULL, NULL),
+(5, 'Thử thôi mà', 'thuthoima@gmail.com', NULL, '$2y$10$tnQx40.xunIfnCRLGL.xl.cpiqiujiZPmud5jLBObMk2AbQqVPhvu', NULL, '2020-05-23 08:04:27', '2020-05-23 08:04:27', NULL, NULL, 1, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -500,6 +535,14 @@ ALTER TABLE `favorite_product`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nofitication`
+--
+ALTER TABLE `nofitication`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nofitication_nof_sender_foreign` (`nof_sender`),
+  ADD KEY `nofitication_nof_receiver_foreign` (`nof_receiver`);
 
 --
 -- Indexes for table `orders`
@@ -579,31 +622,37 @@ ALTER TABLE `attribute_value`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `category_attribute`
 --
 ALTER TABLE `category_attribute`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `favorite_product`
 --
 ALTER TABLE `favorite_product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `nofitication`
+--
+ALTER TABLE `nofitication`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -621,19 +670,19 @@ ALTER TABLE `product_attribute`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -664,6 +713,13 @@ ALTER TABLE `category_attribute`
 ALTER TABLE `favorite_product`
   ADD CONSTRAINT `favorite_product_fp_product_id_foreign` FOREIGN KEY (`fp_product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `favorite_product_fp_user_id_foreign` FOREIGN KEY (`fp_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `nofitication`
+--
+ALTER TABLE `nofitication`
+  ADD CONSTRAINT `nofitication_nof_receiver_foreign` FOREIGN KEY (`nof_receiver`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `nofitication_nof_sender_foreign` FOREIGN KEY (`nof_sender`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `orders`

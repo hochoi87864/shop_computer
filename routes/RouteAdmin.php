@@ -70,6 +70,12 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin','middleware'=>'checkAdminL
         Route::get('/list','AdminStatisticsController@getStatistics')->name('admin.get.list.statistical');
         Route::get('/export-pdf','AdminStatisticsController@exportPdf')->name('admin.get.export.statistical');
     });
-
-
+    Route::group(['prefix'=>'slide'],function(){
+        Route::get('/','AdminSlideController@index')->name('admin.slide.index');
+        Route::get('/create','AdminSlideController@create')->name('admin.slide.create');
+        Route::post('/create','AdminSlideController@store');
+        Route::get('/update/{id}','AdminSlideController@edit')->name('admin.slide.edit');
+        Route::post('/update/{id}','AdminSlideController@update');
+        Route::get('/{action}/{id}','AdminSlideController@handle')->name('admin.slide.handle');
+    });
 });
