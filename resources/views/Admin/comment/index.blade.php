@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Comment - Danh sách</h1>
+            <h1>Đánh giá sản phẩm - Danh sách</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
-              <li class="breadcrumb-item active">Comment - Danh sách</li>
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
+              <li class="breadcrumb-item active">Đánh giá sản phẩm - Danh sách</li>
             </ol>
           </div>
         </div>
@@ -43,9 +43,9 @@
                           <td>{{$rating->User->name}}</td>
                           <td>{{$rating->Product->pro_name}}</td>
                           <td>{{$rating->ra_content}}</td>
-                          <td>{{$rating->ra_number}}</td>
+                          <td style="text-align: center; width: 5%;">{{$rating->ra_number}} sao</td>
                           <td>{{$rating->created_at}}</td>
-                            <td><a href="{{route('admin.comment.action',['delete',$rating->id])}}" class="btn_delete_sweet" data-id="{{$rating->id}}">Xóa</a></td>
+                            <td style="text-align: center; width: 10%;"><a href="{{route('admin.comment.action',['delete',$rating->id])}}" class="btn_delete_sweet btn btn-danger btn-circle" data-id="{{$rating->id}}"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

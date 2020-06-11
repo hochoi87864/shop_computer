@@ -10,7 +10,7 @@ class CustomerController extends Controller
 {
     public function __construct()
     {
-        $categories = Category::all();
+        $categories = Category::where('c_status','1')->get();
         View::share('categories_searh',$categories);
     }
 }

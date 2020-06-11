@@ -249,6 +249,14 @@ class AdminProductController extends Controller
                 $request->session()->flash('delete_product_success', 'Đã sửa thành công sản phẩm mang ID số'.$id.'!');
                 $product->delete();
                 break;
+             case 'status':
+                $product->pro_status= $product->pro_status==1?0:1;
+                $product->save();
+                break;
+             case 'hot':
+                $product->pro_hot= $product->pro_hot==1?0:1;
+                $product->save();
+                break;   
             
             default:
                 dd("Lỗi r");

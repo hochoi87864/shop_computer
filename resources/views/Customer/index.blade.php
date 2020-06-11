@@ -96,24 +96,24 @@
             <div class="col-lg-12">
                 <div class="li-section-title">
                     <h2>
-                        <span>SẢN PHẨM HOT</span>
+                        <span>SẢN PHẨM MỚI CẬP NHẬT</span>
                     </h2>
                 </div>
                 <div class="row">
                     <div class="special-product-active owl-carousel">
-                        @foreach($hotproducts as $hotproduct)              
+                        @foreach($product_news as $prn)              
                         <div class="col-lg-12">
                             <!-- single-product-wrap start -->
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="{{route('product.index',[$hotproduct->pro_name_slug,$hotproduct->id])}}">
-                                        @if(isset($hotproduct->pro_image))
-                                            <img src="{{asset('upload/pro_image/'.$hotproduct->pro_image)}}" alt="Li's Product Image">
+                                    <a href="{{route('product.index',[$prn->pro_name_slug,$prn->id])}}">
+                                        @if(isset($prn->pro_image))
+                                            <img src="{{asset('upload/pro_image/'.$prn->pro_image)}}" alt="Li's Product Image">
                                         @else
                                             <img src="{{asset('noimg.png')}}" alt="Li's Product Image">
                                         @endif
                                     </a>
-                                    @if($hotproduct->pro_hot == 1)
+                                    @if($prn->pro_hot == 1)
                                         <span class="sticker">Hot</span>
                                     @endif
                                 </div>
@@ -121,42 +121,48 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Số lượng: {{$hotproduct->pro_number}}</a>
+                                                <a href="shop-left-sidebar.html">Số lượng: {{$prn->pro_number}}</a>
                                             </h5>
                                             <div class="rating-box">
                                                 <?php
                                                 $point= 0;
-                                                if($hotproduct->pro_number_of_reviewers>0){
-                                                    $point_product_hot= round($hotproduct->pro_total_star/$hotproduct->pro_number_of_reviewers);
+                                                if($prn->pro_number_of_reviewers>0){
+                                                    $point_product_new= round($prn->pro_total_star/$prn->pro_number_of_reviewers);
                                                 }
                                                 else {
-                                                    $point_product_hot = -1;
+                                                    $point_product_new = -1;
                                                 }
                                                 ?>
                                                 <ul class="rating">
-                                                    @if($point_product_hot == -1)
+                                                    @if($point_product_new == -1)
                                                         <li style="color: #a4a4a4;
                                                         font-size: 13px;
                                                         text-transform: capitalize;
                                                         transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
                                                     @else
                                                         @for($i=1; $i<=5; $i++)
-                                                            <li class="{{$i<=$point_product_hot ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
+                                                            <li class="{{$i<=$point_product_new ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
                                                         @endfor
                                                     @endif
                                                 </ul>
                                             </div>
                                         </div>
-                                        <h4><a class="product_name" href="{{route('product.index',[$hotproduct->pro_name_slug,$hotproduct->id])}}">{{$hotproduct->pro_name}}</a></h4>
+                                        <h4><a class="product_name" href="{{route('product.index',[$prn->pro_name_slug,$prn->id])}}">{{$prn->pro_name}}</a></h4>
                                         <div class="price-box">
-                                            <span class="new-price">{{number_format($hotproduct->pro_price,0,",",".")}} VNĐ</span>
+                                            @if($prn->pro_sale>0)
+                                                <span class="new-price new-price-2">{{number_format(($prn->pro_price*(100-$prn->pro_sale))/100,0,",",".")}} VNĐ</span>
+                                                <span class="discount-percentage">-{{$prn->pro_sale}}%</span><br/>
+                                                <div class="old-price" style="padding-top: 6px">{{number_format($prn->pro_price,0,",",".")}} VNĐ</div>
+                                            @else
+                                                <span class="new-price">{{number_format($prn->pro_price,0,",",".")}} VNĐ</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$hotproduct->pro_name}}" href="{{route('shopping.add.product',$hotproduct->id)}}">Mua hàng</a></li>
-                                            <li><a class="links-details button_add_favorite_product" data-product-name="{{$hotproduct->pro_name}}" href="{{route('get.add.favorite.product',$hotproduct->id)}}"><i class="fa fa-heart-o"></i></a></li>
-                                            <li><a href="{{route('product.index',[$hotproduct->pro_name_slug,$hotproduct->id])}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
+                                            <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$prn->pro_name}}" href="{{route('shopping.add.product',$prn->id)}}">Mua hàng</a></li>
+                                            <li><a class="links-details button_add_favorite_product" data-product-name="{{$prn->pro_name}}" href="{{route('get.add.favorite.product',$prn->id)}}"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="{{route('product.index',[$prn->pro_name_slug,$prn->id])}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -173,7 +179,7 @@
 </section>
 <!-- Li's Special Product Area End Here -->
 <!-- Begin Li's Trending Product | Home V2 Area -->
-<section class="product-area li-trending-product li-trending-product-2 pt-60 pb-45">
+<section class="product-area li-trending-product li-trending-product-2 pb-45">
     <div class="container">
         <div class="row">
             <!-- Begin Li's Tab Menu Area -->
@@ -236,7 +242,13 @@
                                                     </div>
                                                     <h4><a class="product_name" href="{{route('product.index',[$product_best_pay->pro_name_slug,$product_best_pay->id])}}">{{$product_best_pay->pro_name}}</a></h4>
                                                     <div class="price-box">
-                                                        <span class="new-price">{{number_format($product_best_pay->pro_price,0,",",".")}} VNĐ</span>
+                                                        @if($product_best_pay->pro_sale>0)
+                                                            <span class="new-price new-price-2">{{number_format(($product_best_pay->pro_price*(100-$product_best_pay->pro_sale))/100,0,",",".")}} VNĐ</span>
+                                                            <span class="discount-percentage">-{{$product_best_pay->pro_sale}}%</span><br/>
+                                                            <div class="old-price" style="padding-top: 6px">{{number_format($product_best_pay->pro_price,0,",",".")}} VNĐ</div>
+                                                        @else
+                                                            <span class="new-price">{{number_format($product_best_pay->pro_price,0,",",".")}} VNĐ</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
@@ -263,14 +275,14 @@
 </section>
 <!-- Li's Trending Product | Home V2 Area End Here -->
 <!-- Begin Li's Main Blog Page Area -->
-<div class="li-main-blog-page pt-60 pb-35">
+<div class="li-main-blog-page pb-45">
     <div class="container">
         <div class="row">
             <!-- Begin Li's Main Content Area -->
             <div class="col-lg-12">
                 <div class="li-section-title">
                     <h2>
-                        <span>Tin tức mới nhất</span>
+                        <span>Bài viết mới nhất</span>
                     </h2>
                 </div>
                 <div class="row li-main-content" style="margin-top: 22px;">
@@ -284,11 +296,11 @@
                                 <div class="li-blog-details">
                                     <h5 class="li-blog-heading pt-25"><a href="{{route('get.article.detail',$article->id)}}" class="block-ellipsis">{{$article->a_name}}</a></h5>
                                     <div class="li-blog-meta" style="padding: 0px 0 10px;">
-                                        <a class="author" href="#"><i class="fa fa-user"></i>Admin</a>
+                                        <a class="author" href="#"><i class="fa fa-user"></i>{{isset($article->User->name)?$article->User->name:'Admin'}}</a>
                                         <a class="post-time" href="#"><i class="fa fa-calendar"></i> {{$article->created_at}}</a>
                                     </div>
                                     <p class="block-ellipsis-description">{{$article->a_description}}</p>
-                                    <a class="read-more" href="{{route('get.article.detail',$article->id)}}">Read More...</a>
+                                    <a class="read-more" href="{{route('get.article.detail',$article->id)}}">Xem thêm...</a>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +315,7 @@
 <!-- Li's Main Blog Page Area End Here -->
 <!-- Begin Li's Laptops Product | Home V2 Area -->
 @foreach($categories as $category)
-@if($category->Product->count()>=5)
+@if($category->Product->where('pro_status',1)->count()>=5)
 <section class="product-area li-laptop-product li-laptop-product-2 pb-45">
     <div class="container">
         <div class="row">
@@ -316,7 +328,7 @@
                 </div>
                 <div class="row">
                     <div class="product-active owl-carousel">
-                        @foreach($category->Product->sortByDesc('id')->take(5) as $product)
+                        @foreach($category->Product->where('pro_status',1)->sortByDesc('id')->take(5) as $product)
                         <div class="col-lg-12">
                             <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
@@ -364,7 +376,13 @@
                                             </div>
                                             <h4><a class="product_name" href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">{{$product->pro_name}}</a></h4>
                                             <div class="price-box">
-                                                <span class="new-price">{{number_format($product->pro_price,0,",",".")}} VNĐ</span>
+                                                @if($product->pro_sale>0)
+                                                    <span class="new-price new-price-2">{{number_format(($product->pro_price*(100-$product->pro_sale))/100,0,",",".")}} VNĐ</span>
+                                                    <span class="discount-percentage">-{{$product->pro_sale}}%</span><br/>
+                                                    <div class="old-price" style="padding-top: 6px">{{number_format($product->pro_price,0,",",".")}} VNĐ</div>
+                                                @else
+                                                    <span class="new-price">{{number_format($product->pro_price,0,",",".")}} VNĐ</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="add-actions">
@@ -436,7 +454,7 @@
                 if(result.status == 1)
                 {
                     swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào giỏ hàng !", "success");
-                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".cart-item-count-number").text(result.number_product_in_cart);
                     $(".price_total_cart").text(result.price_total_cart);
                 }
                 if(result.status == 2)

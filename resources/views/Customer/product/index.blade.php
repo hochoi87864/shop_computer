@@ -1,6 +1,12 @@
 @extends('customer.layout.master')
 @section('content')
 <style>
+.product-description p{
+    color: black;
+}
+.product-description p h1,h2,h3{
+    font-size: 22px;
+}
 .list_text{
     display: inline-block;
     margin-left: 10px;
@@ -42,8 +48,8 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html">{{$product->Category->c_name}}</a></li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li><a href="{{route('category.index',[$product->Category->c_name_slug,$product->Category->id])}}">{{$product->Category->c_name}}</a></li>
                 <li class="active">{{$product->pro_name}}</li>
             </ul>
         </div>
@@ -94,13 +100,24 @@
                                 transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
                                 @else
                                     @for($i=1; $i<=5; $i++)
-                                        <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
+                                        <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star" style="font-size: medium"></i></li>
                                     @endfor
                                 @endif
                             </ul>
                         </div>
+                        <ul>
+                            @foreach ($product->ProductAndAttributeValue as $attribute)
+                                <li class="pt-5">{{$attribute->Attribute->at_name}}: {{$attribute->atv_value}}</li>
+                            @endforeach
+                        </ul>
                         <div class="price-box pt-20">
-                            <span class="new-price new-price-2">{{number_format($product->pro_price,2,',','.')}} VNĐ</span>
+                            @if($product->pro_sale>0)
+                                <span class="new-price" style="color: black; text-decoration: line-through;">{{number_format($product->pro_price,0,",",".")}} VNĐ</span>
+                                <div class="new-price new-price-2" style="padding-top: 6px; color: black">Giảm giá {{$product->pro_sale}}% chỉ còn: <span style="color: red">{{number_format(($product->pro_price*(100-$product->pro_sale))/100,0,",",".")}} VNĐ</span></div>
+                             @else
+                             <span class="new-price">{{number_format($product->pro_price,0,",",".")}} VNĐ</span>
+                        @endif
+                            
                         </div>
                         <div class="product-desc">
                             <p>
@@ -128,7 +145,7 @@
                                     </a>
                                 </div>
                                 <div class="cart-quantity">
-                                    <a href="{{route('shopping.add.product',$product->id)}}" data-product-name="{{$product->pro_name}}" class="button_add_cart"><button class="add-to-cart" type="submit">Add to cart</button></a>
+                                    <a href="{{route('shopping.add.product',$product->id)}}" data-product-name="{{$product->pro_name}}" class="button_add_cart"><button class="add-to-cart" type="submit">MUA SẢN PHẨM</button></a>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +174,7 @@
                 <div class="li-product-tab">
                     <ul class="nav li-product-menu">
                        <li><a class="active" data-toggle="tab" href="#description"><span>Mô tả</span></a></li>
-                       <li><a data-toggle="tab" href="#product-details"><span>Chi tiết sản phẩm</span></a></li>
+                       {{-- <li><a data-toggle="tab" href="#product-details"><span>Chi tiết sản phẩm</span></a></li> --}}
                        <li><a data-toggle="tab" href="#reviews"><span>Đánh giá</span></a></li>
                     </ul>               
                 </div>
@@ -167,10 +184,10 @@
         <div class="tab-content">
             <div id="description" class="tab-pane active show" role="tabpanel">
                 <div class="product-description">
-                    <span>{{$product->pro_content}}</span>
+                    <span>{!!$product->pro_content!!}</span>
                 </div>
             </div>
-            <div id="product-details" class="tab-pane" role="tabpanel">
+            {{-- <div id="product-details" class="tab-pane" role="tabpanel">
                 <div class="product-details-manufacturer">
                     <ul>
                         @foreach ($product->ProductAndAttributeValue as $attribute)
@@ -178,7 +195,7 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <div id="reviews" class="tab-pane" role="tabpanel">
                 {{-- start my custom rating --}}
                 <div class="component_rating" style="margin-bottom:20px;margin-top: 25px;">
@@ -288,14 +305,14 @@
     <div class="container">
         <div class="row">
             <!-- Begin Li's Section Area -->
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <div class="li-section-title">
                     <h2>
                         <span>15 other products in the same category:</span>
                     </h2>
                 </div>
                 <div class="row">
-                    <div class="product-active owl-carousel">
+                    <div class="product-active owl-carousel"> --}}
                         {{-- <div class="col-lg-12">
                             <!-- single-product-wrap start -->
                             <div class="single-product-wrap">
@@ -364,7 +381,7 @@
                 if(result.status == 1)
                 {
                     swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào sản phẩm yêu thích của bạn!", "success");
-                    $(".wishlist-item-count").text(result.number_favorite_product);
+                    $(".wishlist-item-count-custom").text(result.number_favorite_product);
                 }
                 if(result.status == 0)
                 {
@@ -391,7 +408,7 @@
                 if(result.status == 1)
                 {
                     swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào giỏ hàng !", "success");
-                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".cart-item-count-number").text(result.number_product_in_cart);
                     $(".price_total_cart").text(result.price_total_cart);
                 }
                 if(result.status == 2)

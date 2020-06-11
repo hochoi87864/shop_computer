@@ -1,5 +1,15 @@
 @extends('customer.layout.master')
 @section('content')
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li class="active">Tìm kiếm</li>
+            </ul>
+        </div>
+    </div>
+</div>
     <center><h3 class="mt-10">Danh sách tìm kiếm</h3></center>
 <div class="col-sm-10 mx-auto">
 <!-- shop-products-wrapper start -->
@@ -102,7 +112,7 @@
                 if(result.status == 1)
                 {
                     swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào sản phẩm yêu thích của bạn!", "success");
-                    $(".wishlist-item-count").text(result.number_favorite_product);
+                    $(".wishlist-item-count-custom").text(result.number_favorite_product);
                 }
                 if(result.status == 0)
                 {
@@ -129,7 +139,7 @@
                 if(result.status == 1)
                 {
                     swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào giỏ hàng !", "success");
-                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".cart-item-count-number").text(result.number_product_in_cart);
                     $(".price_total_cart").text(result.price_total_cart);
                 }
                 if(result.status == 2)

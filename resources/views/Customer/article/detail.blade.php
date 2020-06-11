@@ -12,8 +12,8 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html">Tin tức</a></li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li><a href="{{route('article.index')}}">Bài viết</a></li>
                 <li class="active">{{$article->a_name}}</li>
             </ul>
         </div>
@@ -44,7 +44,7 @@
                                 <div class="li-blog-details">
                                     <h3 class="li-blog-heading pt-25"><a href="#">{{$article->a_name}}</a></h3>
                                     <div class="li-blog-meta">
-                                        <a class="author" href="#"><i class="fa fa-user"></i>Admin</a>
+                                        <a class="author" href="#"><i class="fa fa-user"></i>{{isset($article->User->name)?$article->User->name:'Admin'}}</a>
                                         <a class="post-time" href="#"><i class="fa fa-calendar"></i> {{$article->created_at}}</a>
                                     </div>
                                     <!-- Begin Blog Blockquote Area -->

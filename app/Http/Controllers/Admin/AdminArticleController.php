@@ -89,7 +89,10 @@ class AdminArticleController extends Controller
                 $article->delete();
                 $request->session()->flash('delete_article_success', 'Đã xóa thành công bài viết mang ID số'.$id.'!');
                 break;
-            
+            case 'status':
+                $article->a_status = ($article->a_status==1)?0:1;
+                $article->save();
+                break;
             default:
                 dd("Lỗi r");
                 break;

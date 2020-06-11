@@ -11,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
               <li class="breadcrumb-item active">Thành viên - Danh sách</li>
             </ol>
           </div>
@@ -55,8 +55,8 @@
                     <th>Tên hiển thị</th>
                     <th>Email</th>
                     <th>Số điện thoại</th>
-                    <th>Quyền hạn</th>
-                    <th>Xử lý</th>
+                    <th style="width: 12%;">Quyền hạn</th>
+                    <th style="width: 18%; text-align: center">Xử lý</th>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
@@ -65,11 +65,11 @@
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>{{$user->phone}}</td>
-                          <td>{{$user->role}}</td>
-                          <td>
-                            <a href="{{route('admin.user.edit',$user->id)}}">Sửa</a> ||
-                            <a href="{{route('admin.user.action',['delete',$user->id])}}" class="btn_delete_sweet" data-id="{{$user->id}}">Xóa</a> ||
-                            <a href="{{route('admin.change.password',$user->id)}}" class="button_change_password" data-email='{{$user->email}}' data-toggle="modal" data-target="#exampleModalCenter">Đổi mật khẩu</a>
+                          <td style="text-align: center"><span class="badge badge-{{($user->role==1)?"success":"secondary"}}">{{($user->role==1)?"Admin":"Người thường"}}</span></td>
+                          <td style="width: 16%">
+                            <a href="{{route('admin.user.edit',$user->id)}}" class="btn btn-success btn-circle"><i class="fas fa-edit"></i></a> &nbsp;
+                            <a href="{{route('admin.user.action',['delete',$user->id])}}" class="btn_delete_sweet btn btn-danger btn-circle" data-id="{{$user->id}}"><i class="fas fa-trash-alt"></i></a> &nbsp;
+                            <a href="{{route('admin.change.password',$user->id)}}" class="button_change_password btn btn-warning btn-circle" data-email='{{$user->email}}' data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-key"></i></a>
                           </td>
                       </tr>
 {{-- custom modal by me --}}

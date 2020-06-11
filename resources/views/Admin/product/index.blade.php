@@ -16,7 +16,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
               <li class="breadcrumb-item active">Sản phẩm - Danh sách</li>
             </ol>
           </div>
@@ -60,7 +60,7 @@
                     <th>Sản phẩm</th>
                     <th>Loại sản phẩm</th>
                     <th>Ảnh</th>
-                    <th>Trạng thái</th>
+                    <th style="width: 11%;">Trạng thái</th>
                     <th>Nổi bật</th>
                     <th>Thao tác</th>
                 </thead>
@@ -107,11 +107,11 @@
                           <img style="width:80px;height:80px" src="{{asset('noimg.png')}}" alt="No Avatar"/>
                           @endif
                         </td>
-                        <td>{{$pro->pro_status}}</td>
-                        <td>{{$pro->pro_hot}}</td>
+                        <td style="text-align: center"><a href="{{route('admin.product.handle',['status',$pro->id])}}" class="badge badge-{{($pro->pro_status==1)?"success":"danger"}}">{{($pro->pro_status==1)?"Công khai":"Riêng tư"}}</a></td>
+                        <td style="text-align: center"><a href="{{route('admin.product.handle',['hot',$pro->id])}}" class="badge badge-{{($pro->pro_hot==1)?"success":"secondary"}}">{{($pro->pro_hot==1)?"Có":"Không"}}</a></td>
                         <td>
-                          <a href="{{route('admin.product.edit',$pro->id)}}">Sửa</a>
-                          <a href="{{route('admin.product.handle',['delete',$pro->id])}}" data-id="{{$pro->id}}" class="btn_delete_sweet">Xóa</a>
+                          <a href="{{route('admin.product.edit',$pro->id)}}" class="btn btn-success btn-circle"><i class="fas fa-edit"></i></a>
+                          <a href="{{route('admin.product.handle',['delete',$pro->id])}}" data-id="{{$pro->id}}" class="btn_delete_sweet btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a>
                         </td>
                       </tr>
                     @endforeach

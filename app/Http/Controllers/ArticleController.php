@@ -10,9 +10,21 @@ class ArticleController extends CustomerController
     //
     public function index()
     {
-        $articles = Article::all();
+        $count_article = Article::where('a_status','1')->count();
+        $check_link=0;
+        if($count_article>7)
+        {
+            $articles = Article::where('a_status','1')->paginate(3);
+            $check_link=1;
+        }
+        else
+        {
+            $articles = Article::where('a_status','1')->get();
+        }
+        
         $data = [
-            'articles' => $articles
+            'articles' => $articles,
+            'check_link' => $check_link 
         ];
         return view('customer.article.index',$data);
     }

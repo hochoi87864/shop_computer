@@ -5,8 +5,8 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="{{route('home')}}">Home</a></li>
-                <li class="active">Wishlist</li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li class="active">Sản phẩm yêu thích</li>
             </ul>
         </div>
     </div>

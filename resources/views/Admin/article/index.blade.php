@@ -11,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
               <li class="breadcrumb-item active">Bài viết - Danh sách</li>
             </ol>
           </div>
@@ -63,14 +63,15 @@
                     @foreach($articles as $article)
                       <tr>
                           <td>{{$article->id}}</td>
-                          <td>{{$article->a_name}}</td>
+                          <td style="width:15%">{{$article->a_name}}</td>
                           <td><img style="width:80px;height:80px" src="{{asset('upload/a_image/'.$article->a_image)}}" alt="No Avatar"/></td>
                           <td>{{$article->a_description}}</td>
-                          <td>{{$article->a_status}}</td>
-                          <td>{{$article->created_at}}</td>
-                          <td>
-                            <a href="{{route('admin.article.edit',$article->id)}}">Sửa</a>
-                            <a href="{{route('admin.article.handle',['delete',$article->id])}}" data-id="{{$article->id}}" class="btn_delete_sweet">Xóa</a>
+                          <td style="width: 11%; text-align: center"><a href="{{route('admin.article.handle',['status',$article->id])}}" class="badge badge-{{($article->a_status==1)?"success":"danger"}}">{{($article->a_status==1)?"Công khai":"Riêng tư"}}</a></td>
+                          <td style="width:11%">{{$article->created_at}}</td>
+                          <td style="width: 11%">
+                            <a href="{{route('admin.article.edit',$article->id)}}" class="btn btn-success btn-circle"><i class="fas fa-edit"></i></a>
+                            <a href="{{route('admin.article.handle',['delete',$article->id])}}" data-id="{{$article->id}}" class="btn_delete_sweet btn btn-danger btn-circle" ><i class="fas fa-trash-alt"></i></a>
+
                           </td>
                       </tr>
                     @endforeach

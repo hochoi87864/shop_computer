@@ -5,15 +5,15 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="{{route('home')}}">Home</a></li>
-                <li class="active">History</li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li class="active">Lịch sử mua hàng</li>
             </ul>
         </div>
     </div>
 </div>
 <!-- Li's Breadcrumb Area End Here -->
 {{-- History user --}}
-<h4><center class="mt-20">NHẬT KÝ MUA HÀNG</center></h4>
+<h4><center class="mt-20">LỊCH SỬ MUA HÀNG</center></h4>
 <div class="col-sm-10 mx-auto">
 <table class="table table-hover table-striped">
     <thead class="thead-dark">

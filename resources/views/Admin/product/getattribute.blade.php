@@ -13,6 +13,12 @@
                 <input type="number" name="{{$at->id}}" required value="{{isset($product)?dataAttributeValue($at,$product):""}}" class="form-control"/>
             </div>
         @endif
+        @if($at->at_type == "numberfloat")
+            <div class="form-group">
+                <label>{{$at->at_name}}: </label>
+                <input type="number" step="any" name="{{$at->id}}" required value="{{isset($product)?dataAttributeValue($at,$product):""}}" class="form-control"/>
+            </div>
+        @endif
         @if($at->at_type=="select")
             <div class="form-group">
                 <label>{{$at->at_name}}: </label>

@@ -123,7 +123,7 @@
                                     <div class="hm-minicart-trigger">
                                         <span class="item-icon"></span>
                                         <span class="item-text"><span class="price_total_cart">{{\Cart::subtotal(0,',','.')}}</span> VNĐ
-                                            <span class="cart-item-count">{{\Cart::count()}}</span>
+                                            <span class="cart-item-count cart-item-count-number">{{\Cart::count()}}</span>
                                         </span>
                                     </div>
                                 </a>
@@ -193,13 +193,13 @@
                                         <li><a href="index-4.html">Home Four</a></li>
                                     </ul> --}}
                                 </li>
-                                <li class="megamenu-holder"><a href="{{route('article.index')}}"><strong>Tin tức</strong></a>
+                                <li class="megamenu-holder"><a href="{{route('article.index')}}"><strong>Bài viết</strong></a>
                                 </li>
-                                <li><a href="about-us.html"><strong>Giới thiệu</strong></a></li>
-                                <li><a href="contact.html"><strong>Liện hệ</strong></a></li>
+                                <li><a href="{{route('about.us')}}"><strong>Giới thiệu</strong></a></li>
+                                <li><a href="{{route('contact')}}"><strong>Liên hệ</strong></a></li>
                                 <!-- Begin Header Bottom Menu Information Area -->
                                 <li class="hb-info f-right p-0 d-sm-none d-lg-block">
-                                    <span>Thôn Vân Động Nam, Xã Vũ Lạc, Thành phố Thái Bình, Tỉnh Thái Bình</span>
+                                    <span> Đường Phú Diễn, Cầu Diễn, Bắc Từ Liêm, Hà Nội</span>
                                 </li>
                                 <!-- Header Bottom Menu Information Area End Here -->
                             </ul>

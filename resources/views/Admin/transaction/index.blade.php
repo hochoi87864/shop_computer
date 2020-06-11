@@ -11,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
               <li class="breadcrumb-item active">Giao Dịch</li>
             </ol>
           </div>
@@ -47,7 +47,7 @@
                     <th>Tên khách hàng</th>
                     <th style="width: 20%">Địa chỉ</th>
                     <th>Số điện thoại</th>
-                    <th style="width: 20%">Ghi chú</th>
+                    <th style="width: 20%; ">Ghi chú</th>
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
                     <th>Xử lý</th>
@@ -72,10 +72,10 @@
                                 <a href="{{route('admin.transaction.handle',['send',$transaction->id])}}"><span class="badge badge-danger">Chưa xử lý</span></a>
                               @endif
                             </td>
-                            <td>
-                              <a href="{{route('admin.transaction.handle',['delete',$transaction->id])}}" data-id="{{$transaction->id}}" class="btn_delete_sweet">Xóa</a>
+                            <td style="width: 11%;">
+                              <a href="{{route('admin.transaction.handle',['delete',$transaction->id])}}" data-id="{{$transaction->id}}" class="btn_delete_sweet btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a>
                               &nbsp
-                            <a href="{{route('admin.get.order.item',$transaction->id)}}" data-id="{{$transaction->id}}" class="js_order_item" data-toggle="modal" data-target="#showOrderItem">Xem</a>
+                            <a href="{{route('admin.get.order.item',$transaction->id)}}" data-id="{{$transaction->id}}" class="js_order_item btn btn-primary btn-circle" data-toggle="modal" data-target="#showOrderItem"> <i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
 {{-- custom modal by me --}}

@@ -11,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
               <li class="breadcrumb-item active">Thuộc tính - Danh sách</li>
             </ol>
           </div>
@@ -74,9 +74,9 @@
                             @endif
                           </td>
                           <td>
-                            <a href="{{route('admin.attribute.edit',$attribute->id)}}">Sửa</a>
-                             |
-                            <a href="{{route('admin.attribute.handle',['delete',$attribute->id])}}" data-id="{{$attribute->id}}" class="btn_delete_sweet">Xóa</a>
+                            <a href="{{route('admin.attribute.edit',$attribute->id)}}" class="btn btn-success btn-circle"><i class="fas fa-edit"></i></a>
+                             &nbsp;
+                            <a href="{{route('admin.attribute.handle',['delete',$attribute->id])}}" data-id="{{$attribute->id}}" class="btn_delete_sweet btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     @endforeach

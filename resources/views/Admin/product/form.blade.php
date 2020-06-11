@@ -5,13 +5,13 @@
       <label>Tên sản phẩm: </label>
       <input type="text" class="form-control" name="pro_name" value="{{old('pro_name',isset($product)?$product->pro_name:"")}}" placeholder="Nhập tên sản phẩm...">
     </div>
-    <div class="form-group">
+    <div class="form-group" style="display: none">
       <label>Mô tả sản phẩm: </label>
-      <textarea name="pro_description" placeholder="Nhập mô tả sản phẩm..." rows="3" class="form-control">{{old('pro_description',isset($product->pro_description)?$product->pro_description:"")}}</textarea>
+      <textarea name="pro_description" placeholder="Nhập mô tả sản phẩm..." rows="3" class="form-control">{{old('pro_description',isset($product->pro_description)?$product->pro_description:"")}}Bỏ qua</textarea>
     </div>
     <div class="form-group">
       <label>Nội dung sản phẩm: </label>
-      <textarea name="pro_content" rows="5" class="form-control" placeholder="Nhập nội dung sản phẩm...">{{old('pro_content',isset($product->pro_content)?$product->pro_content:"")}}</textarea>
+      <textarea name="pro_content" id="ckeditor" rows="5" class="form-control" placeholder="Nhập nội dung sản phẩm...">{{old('pro_content',isset($product->pro_content)?$product->pro_content:"")}}</textarea>
     </div>
     <div id="attribute_for_product">
     </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label>Giá sản phẩm: </label>
-      <input type="text" class="form-control" name="pro_price" value="{{old('pro_price',isset($product->pro_price)?$product->pro_price:"")}}" placeholder="Nhập giá sản phẩm...">
+      <input type="number" class="form-control" name="pro_price" value="{{old('pro_price',isset($product->pro_price)?$product->pro_price:"")}}" placeholder="Nhập giá sản phẩm...">
     </div>
     <div class="form-group">
       <label>Số lượng sản phẩm: </label>
@@ -106,5 +106,9 @@
             $("#attribute_for_product").html('').append(result);
           });
     });
+  </script>
+  <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+  <script>
+      CKEDITOR.replace( 'ckeditor' );
   </script>
 @endsection

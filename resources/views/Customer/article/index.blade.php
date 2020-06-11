@@ -23,7 +23,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="{{route('home')}}">Trang chủ</a></li>
-                <li class="active">Tin tức</li>
+                <li class="active">Bài viết</li>
             </ul>
         </div>
     </div>
@@ -46,11 +46,11 @@
                                 <div class="li-blog-details">
                                     <h3 class="li-blog-heading pt-25"><a href="{{route('get.article.detail',$article->id)}}" class="block-ellipsis">{{$article->a_name}}</a></h3>
                                     <div class="li-blog-meta">
-                                        <a class="author" href="#"><i class="fa fa-user"></i>Admin</a>
+                                        <a class="author" href="#"><i class="fa fa-user"></i>{{isset($article->User->name)?$article->User->name:'Admin'}}</a>
                                         <a class="post-time" href="#"><i class="fa fa-calendar"></i> {{$article->created_at}}</a>
                                     </div>
                                     <p>{{$article->a_description}}</p>
-                                    <a class="read-more" href="{{route('get.article.detail',$article->id)}}">Read More...</a>
+                                    <a class="read-more" href="{{route('get.article.detail',$article->id)}}">Xem thêm...</a>
                                 </div>
                             </div>
                         </div>
@@ -60,14 +60,8 @@
                     <div class="col-lg-12">
                         <div class="li-paginatoin-area text-center pt-25">
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <ul class="li-pagination-box">
-                                        <li><a class="Previous" href="#">Previous</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a class="Next" href="#">Next</a></li>
-                                    </ul>
+                                <div class="col-2 mx-auto">
+                                    {{($check_link==1)?$articles->links():''}}
                                 </div>
                             </div>
                         </div>

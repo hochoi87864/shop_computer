@@ -5,8 +5,8 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Trang chủ</a></li>
-                <li class="active">Xác nhận thanh toán</li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li class="active">Xác nhận đặt hàng</li>
             </ul>
         </div>
     </div>
@@ -31,7 +31,7 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>Địa chỉ <span class="required">*</span></label>
-                                    <input placeholder="Street address" name="address" id="check_address" required type="text">
+                                    <input placeholder="Nhập địa chỉ giao hàng của bạn..." name="address" id="check_address" required type="text">
                                 </div>
                             </div>
                             {{-- <div class="col-md-6">
@@ -42,15 +42,15 @@
                             </div> --}}
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
-                                    <label>Phone  <span class="required">*</span></label>
-                                    <input name="phone" type="text" id="check_phone">
+                                    <label>Số điện thoại  <span class="required">*</span></label>
+                                    <input name="phone" type="text" id="check_phone" placeholder="Nhập số điện thoại của bạn...">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="">
                                     <div class="checkout-form-list">
                                         <label>Ghi chú</label>
-                                        <textarea id="checkout-mess" name="note" cols="30" rows="10" required placeholder="Nhập ghi chú"></textarea>
+                                        <textarea id="checkout-mess" name="note" cols="30" rows="10" required placeholder="Nhập ghi chú..."></textarea>
                                     </div>
                                 </div>
                             </div>   
@@ -88,7 +88,7 @@
                     <div class="payment-method">
                         <div class="payment-accordion">
                             <div class="order-button-payment">
-                                <input value="Thanh toán" type="submit" id="submitFormSaveInfo">
+                                <input value="Đặt Hàng" type="submit" id="submitFormSaveInfo">
                             </div>
                         </div>
                     </div>

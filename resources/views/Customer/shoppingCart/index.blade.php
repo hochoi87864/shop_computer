@@ -5,8 +5,8 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li class="active">Shopping Cart</li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li class="active">Giỏ hàng</li>
             </ul>
         </div>
     </div>
@@ -82,11 +82,11 @@
                                 <ul>
                                     <li>Tổng <span>{{\Cart::subtotal(0,',','.')}} VNĐ</span></li>
                                 </ul>
-                                <a href="{{route('feature.user.checkout')}}">Thanh toán</a>
+                                <a href="{{route('feature.user.checkout')}}" style="float: right">Xác nhận đặt hàng</a>
+                                <div style="clear: both"></div>
                             </div>
                         </div>
                     </div>
-
             </div>
         </div>
     </div>

@@ -1,11 +1,16 @@
 @extends('customer.layout.master')
 @section('content')
+<style>
+    .sort_product li{
+        padding: 6px 0px;
+    }
+</style>
 <!-- Begin Li's Breadcrumb Area -->
 <div class="breadcrumb-area">
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
                 <li class="active">Loại sản phẩm: {{$category->c_name}}</li>
             </ul>
         </div>
@@ -62,7 +67,7 @@
                     <div class="tab-content">
                         <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
                             <div class="product-area shop-product-area">
-                                <div class="row" style="    margin-top: -35px;">
+                                <div class="row" style="    margin-top: -82px;">
                                     @foreach($products as $product)
                                         <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
                                             <!-- single-product-wrap start -->
@@ -111,7 +116,13 @@
                                                         </div>
                                                         <h4><a class="product_name" href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">{{$product->pro_name}}</a></h4>
                                                         <div class="price-box">
-                                                            <span class="new-price">{{number_format($product->pro_price,0,',','.')}} VNĐ</span>
+                                                            @if($product->pro_sale>0)
+                                                                <span class="new-price new-price-2">{{number_format(($product->pro_price*(100-$product->pro_sale))/100,0,",",".")}} VNĐ</span>
+                                                                <span class="discount-percentage">-{{$product->pro_sale}}%</span><br/>
+                                                                <div class="old-price" style="padding-top: 6px">{{number_format($product->pro_price,0,",",".")}} VNĐ</div>
+                                                            @else
+                                                                <span class="new-price">{{number_format($product->pro_price,0,",",".")}} VNĐ</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="add-actions">
@@ -129,6 +140,9 @@
                                 </div>
                             </div>
                         </div>
+                    <div>
+                        <div style="margin-top:88px; text-align: center">{{$checklink==1?$products->links():''}}</div>
+                    </div>
                         {{-- <div id="list-view" class="tab-pane fade product-list-view" role="tabpanel">
                             <div class="row">
                                 <div class="col">
@@ -688,64 +702,39 @@
             </div>
             <div class="col-lg-3 order-2 order-lg-1">
                 <!--sidebar-categores-box start  -->
-                <div class="sidebar-categores-box">
-                    <div class="sidebar-title">
-                        <h2><b><a href="{{route('category.index',[$category->c_name_slug,$category->id])}}">{{$category->c_name}}</a></b></h2>
+                <div class="">
+                    <div style="text-align: center">
+                        <h2><b style="color: #a4a4a4"><a href="{{route('category.index',[$category->c_name_slug,$category->id])}}" style="text-transform: uppercase; text-align: center">► {{$category->c_name}}</a></b></h2>
+                        <hr style="margin: 30px 0"/>
                     </div>
-                    <!-- category-sub-menu start -->
-                    {{-- <div class="category-sub-menu">
-                        <ul>
-                            <li class="has-sub"><a href="# ">Prime Video</a>
-                                <ul>
-                                    <li><a href="#">All Videos</a></li>
-                                    <li><a href="#">Blouses</a></li>
-                                    <li><a href="#">Evening Dresses</a></li>
-                                    <li><a href="#">Summer Dresses</a></li>
-                                    <li><a href="#">T-Rent or Buy</a></li>
-                                    <li><a href="#">Your Watchlist</a></li>
-                                    <li><a href="#">Watch Anywhere</a></li>
-                                    <li><a href="#">Getting Started</a></li>  
-                                </ul>
-                            </li>
-                            <li class="has-sub"><a href="#">Computer</a>
-                                <ul>
-                                    <li><a href="#">TV & Video</a></li>
-                                    <li><a href="#">Audio & Theater</a></li>
-                                    <li><a href="#">Camera, Photo</a></li>
-                                    <li><a href="#">Cell Phones</a></li>
-                                    <li><a href="#">Headphones</a></li>
-                                    <li><a href="#">Video Games</a></li>
-                                    <li><a href="#">Wireless Speakers</a></li> 
-                                </ul>
-                            </li>
-                            <li class="has-sub"><a href="#">Electronics</a>
-                                <ul>
-                                    <li><a href="#">Amazon Home</a></li>
-                                    <li><a href="#">Kitchen & Dining</a></li>
-                                    <li><a href="#">Bed & Bath</a></li>
-                                    <li><a href="#">Appliances</a></li>    
-                                </ul>
-                            </li>
-                        </ul>
-                    </div> --}}
-                    <!-- category-sub-menu end -->
                 </div>
                 <!--sidebar-categores-box end  -->
                 <!--sidebar-categores-box start  -->
-                <div class="sidebar-categores-box">
+                <div class="sidebar-categores-box mt-50">
                     <div class="sidebar-title">
-                        <h2><b>Bộ lọc</b></h2>
+                        <h2><b>Sắp xếp</b></h2>
                     </div>
                     <!-- filter-sub-area start -->
                     <div class="filter-sub-area">
                         <div class="filter-sub-titel">Khoảng giá: </div>
                         <div style="padding-left: 5%">
-                            <ul style="padding-top: 10px">
+                            <ul class="sort_product" style="padding: 6px">
                                 <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'d1t'])}}">Dưới 1 triệu VNĐ</a></li>
                                 <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'1t-10t'])}}">1 triệu - 10 triệu VNĐ</a></li>
                                 <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'10t-20t'])}}">10 triệu - 20 triệu VNĐ</a></li>
                                 <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'20t-50t'])}}">20 triệu - 50 triệu VNĐ</a></li>
                                 <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'t50t'])}}">Trên 50 triệu VNĐ</a></li>
+                            </ul>
+                        </div>
+                        <div class="filter-sub-titel mt-3">Khác: </div>
+                        <div style="padding-left: 5%">
+                            <ul class="sort_product" style="padding: 6px">
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'az'])}}">Theo chữ cái A-Z</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'za'])}}">Theo chữ cái Z-A</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'mn'])}}">Sản phẩm mới trước</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'cn'])}}">Sản phẩm cũ trước</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'td'])}}">Giá tăng dần</a></li>
+                                <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'gd'])}}">Giá giảm dần</a></li>
                             </ul>
                         </div>
                      </div>
@@ -775,7 +764,7 @@
                 if(result.status == 1)
                 {
                     swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào sản phẩm yêu thích của bạn!", "success");
-                    $(".wishlist-item-count").text(result.number_favorite_product);
+                    $(".wishlist-item-count-custom").text(result.number_favorite_product);
                 }
                 if(result.status == 0)
                 {
@@ -802,7 +791,7 @@
                 if(result.status == 1)
                 {
                     swal("Thành công !","Đã thêm sản phẩm "+name_product+" vào giỏ hàng !", "success");
-                    $(".cart-item-count").text(result.number_product_in_cart);
+                    $(".cart-item-count-number").text(result.number_product_in_cart);
                     $(".price_total_cart").text(result.price_total_cart);
                 }
                 if(result.status == 2)

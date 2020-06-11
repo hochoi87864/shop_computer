@@ -27,7 +27,7 @@
                     <input class="mb-0" type="text" name="name" placeholder="Nhập họ và tên của bạn...">
                 </div>
                 <div class="col-md-12 mb-20">
-                    <label>Email Address*</label>
+                    <label>Email*</label>
                     <input class="mb-0" type="email" name="email" placeholder="Nhập địa chỉ email của bạn...">
                 </div>
                 <div class="col-md-6 mb-20">

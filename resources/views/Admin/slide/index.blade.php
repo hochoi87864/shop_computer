@@ -1,5 +1,6 @@
 @extends('Admin.layout.master')
 @section('content')
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -68,9 +69,8 @@
                             @endif
                           </td>
                           <td>
-                            <a href="{{route('admin.slide.edit',$slide->id)}}">Sửa</a>
-                             |
-                            <a class="btn_delete_sweet" href="{{route('admin.slide.handle',['delete',$slide->id])}}" data-id="{{$slide->id}}">Xóa</a>
+                            <a href="{{route('admin.slide.edit',$slide->id)}}" class="btn btn-success btn-circle"><i class="fas fa-edit"></i></a> &nbsp
+                            <a class="btn_delete_sweet btn btn-danger btn-circle" href="{{route('admin.slide.handle',['delete',$slide->id])}}" data-id="{{$slide->id}}"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     @endforeach

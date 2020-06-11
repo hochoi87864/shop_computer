@@ -11,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
               <li class="breadcrumb-item active">Loại sản phẩm - Danh sách</li>
             </ol>
           </div>
@@ -52,7 +52,7 @@
                 <thead class="thead-dark">
                     <th>ID</th>
                     <th>Tên loại sản phẩm</th>
-                    <th>Trạng thái</th>
+                    <th style="width: 11%;">Trạng thái</th>
                     <th>Thuộc tính</th>
                     <th>Thao tác</th>
                 </thead>
@@ -61,7 +61,7 @@
                         <tr>
                           <td>{{$category->id}}</td>
                           <td>{{$category->c_name}}</td>
-                          <td><span class="badge badge-{{($category->c_status==1)?"success":"danger"}}">{{($category->c_status==1)?"public":"private"}}</span></td>
+                          <td style="text-align: center"><a href="{{route('admin.category.handle',['status',$category->id])}}" class="badge badge-{{($category->c_status==1)?"success":"danger"}}">{{($category->c_status==1)?"Công khai":"Riêng tư"}}</a></td>
                           <td>
                             <ul>
                             @foreach ($category->Attributes as $at)
@@ -70,9 +70,9 @@
                             </ul>
                           </td>
                           <td>
-                            <a href="{{route('admin.category.edit',$category->id)}}">Sửa</a>
-                             |
-                            <a class="btn_delete_sweet" href="{{route('admin.category.handle',['delete',$category->id])}}" data-id="{{$category->id}}">Xóa</a>
+                            <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-success btn-circle"><i class="fas fa-edit"></i></a>
+                             &nbsp;
+                            <a class="btn_delete_sweet btn btn-danger btn-circle" href="{{route('admin.category.handle',['delete',$category->id])}}" data-id="{{$category->id}}"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     @endforeach

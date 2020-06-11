@@ -56,6 +56,7 @@ class AdminTransactionController extends Controller
                                     'created_at' => Carbon::now(),
                                 ]
                                 );
+                                $transaction->delete();
                         }
                         else if($transaction->tr_status == 1)
                         {
@@ -80,12 +81,12 @@ class AdminTransactionController extends Controller
                                     'created_at' => Carbon::now()
                                 ]
                                 );
+                            $transaction->delete();
                         }
                         else
                         {
                             $request->session()->flash('stopDelete', 'Giao dịch này đã thành công hoặc có dữ liệu quan trọng không thể xóa !!!');
                         }
-                        $transaction->delete();
                         return redirect()->route('admin.transaction.index')->with('success','Đã hủy giao dịch thành công');
                     break;
                 case 'send':

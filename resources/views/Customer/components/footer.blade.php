@@ -13,8 +13,8 @@
                                 <img src="{{asset('images/shipping-icon/1.png')}}" alt="Shipping Icon">
                             </div>
                             <div class="shipping-text">
-                                <h2>Free Delivery</h2>
-                                <p>And free returns. See checkout for delivery dates.</p>
+                                <h2>Miễn phí vận chuyển</h2>
+                                <p>Miễn phí trả lại. Hãy xem thanh toán cho ngày giao dịch.</p>
                             </div>
                         </div>
                     </div>
@@ -26,8 +26,8 @@
                                 <img src="{{asset('images/shipping-icon/2.png')}}" alt="Shipping Icon">
                             </div>
                             <div class="shipping-text">
-                                <h2>Safe Payment</h2>
-                                <p>Pay with the world's most popular and secure payment methods.</p>
+                                <h2>Tiết kiệm chi phí</h2>
+                                <p>Giá thành sản phẩm sẽ vì lợi ích của khách hàng.</p>
                             </div>
                         </div>
                     </div>
@@ -39,8 +39,8 @@
                                 <img src="{{asset('images/shipping-icon/3.png')}}" alt="Shipping Icon">
                             </div>
                             <div class="shipping-text">
-                                <h2>Shop with Confidence</h2>
-                                <p>Our Buyer Protection covers your purchasefrom click to delivery.</p>
+                                <h2>Bảo mật thông tin</h2>
+                                <p>Thông tin của khách hàng sẽ không được chia sẻ với bên thứ ba.</p>
                             </div>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
                                 <img src="{{asset('images/shipping-icon/4.png')}}" alt="Shipping Icon">
                             </div>
                             <div class="shipping-text">
-                                <h2>24/7 Help Center</h2>
-                                <p>Have a question? Call a Specialist or chat online.</p>
+                                <h2>Hỗ trợ 24/7</h2>
+                                <p>Nếu bạn có câu hỏi? Hãy liên hệ ngay với chúng tôi.</p>
                             </div>
                         </div>
                     </div>
@@ -74,21 +74,21 @@
                         <div class="footer-logo">
                             <img src="{{asset('images/menu/logo/1.jpg')}}" alt="Footer Logo">
                             <p class="info">
-                                We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.
+                                Website này hiện tại đang trong giai đoạn thử nghiệm và phát triển để hoàn thiện hơn trước khi đưa vào kinh doanh, thương mại hóa.
                             </p>
                         </div>
                         <ul class="des">
                             <li>
-                                <span>Address: </span>
-                                6688Princess Road, London, Greater London BAS 23JK, UK
+                                <span>Địa chỉ: </span>
+                                41A Đường Phú Diễn, Cầu Diễn, Bắc Từ Liêm, Hà Nội
                             </li>
                             <li>
-                                <span>Phone: </span>
-                                <a href="#">(+123) 123 321 345</a>
+                                <span>Số điện thoại: </span>
+                                <a href="#">0942674663</a>
                             </li>
                             <li>
                                 <span>Email: </span>
-                                <a href="mailto://info@yourdomain.com">info@yourdomain.com</a>
+                                <a href="mailto://trungle87864@gmail.com">trungle87864@gmail.com</a>
                             </li>
                         </ul>
                     </div>
@@ -96,12 +96,12 @@
                     <!-- Begin Footer Block Area -->
                     <div class="col-lg-2 col-md-3 col-sm-6">
                         <div class="footer-block">
-                            <h3 class="footer-block-title">Product</h3>
+                            <h3 class="footer-block-title">Nổi Bật</h3>
                             <ul>
-                                <li><a href="#">Prices drop</a></li>
-                                <li><a href="#">New products</a></li>
-                                <li><a href="#">Best sales</a></li>
-                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">Miến phí vận chuyển</a></li>
+                                <li><a href="#">Tiết kiệm chi phí</a></li>
+                                <li><a href="#">Bảo mật</a></li>
+                                <li><a href="#">Hỗ trợ 24/7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -109,12 +109,12 @@
                     <!-- Begin Footer Block Area -->
                     <div class="col-lg-2 col-md-3 col-sm-6">
                         <div class="footer-block">
-                            <h3 class="footer-block-title">Our company</h3>
+                            <h3 class="footer-block-title">Tính năng</h3>
                             <ul>
-                                <li><a href="#">Delivery</a></li>
-                                <li><a href="#">Legal Notice</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Contact us</a></li>
+                                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                                <li><a href="{{route('article.index')}}">Bài viết</a></li>
+                                <li><a href="{{route('about.us')}}">Giới thiệu</a></li>
+                                <li><a href="{{route('contact')}}">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
@@ -122,42 +122,11 @@
                     <!-- Begin Footer Block Area -->
                     <div class="col-lg-4">
                         <div class="footer-block">
-                            <h3 class="footer-block-title">Follow Us</h3>
-                            <ul class="social-link">
-                                <li class="twitter">
-                                    <a href="https://twitter.com/" data-toggle="tooltip" target="_blank" title="Twitter">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="rss">
-                                    <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">
-                                        <i class="fa fa-rss"></i>
-                                    </a>
-                                </li>
-                                <li class="google-plus">
-                                    <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google +">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                </li>
-                                <li class="facebook">
-                                    <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="youtube">
-                                    <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank" title="Youtube">
-                                        <i class="fa fa-youtube"></i>
-                                    </a>
-                                </li>
-                                <li class="instagram">
-                                    <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank" title="Instagram">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <h3 class="footer-block-title">Fanpage Facebook</h3>
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FKinh-doanh-linh-ki%E1%BB%87n-m%C3%A1y-t%C3%ADnh-Gaming-106134001140160%2F&tabs=messages&width=340&height=333&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1429073443913134" width="340" height="333" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
                         </div>
                         <!-- Begin Footer Newsletter Area -->
-                        <div class="footer-newsletter">
+                        {{-- <div class="footer-newsletter">
                             <h4>Sign up to newsletter</h4>
                             <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
                                <div id="mc_embed_signup_scroll">
@@ -167,7 +136,7 @@
                                   </div>
                                </div>
                             </form>
-                        </div>
+                        </div> --}}
                         <!-- Footer Newsletter Area End Here -->
                     </div>
                     <!-- Footer Block Area End Here -->
@@ -182,7 +151,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <!-- Begin Footer Links Area -->
-                    <div class="footer-links">
+                    {{-- <div class="footer-links">
                         <ul>
                             <li><a href="#">Online Shopping</a></li>
                             <li><a href="#">Promotions</a></li>
@@ -204,19 +173,15 @@
                             <li><a href="#">Refunds</a></li>
                             <li><a href="#">Policy Shipping</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <!-- Footer Links Area End Here -->
                     <!-- Begin Footer Payment Area -->
-                    <div class="copyright text-center">
-                        <a href="#">
-                            <img src="{{asset('images/payment/1.png')}}" alt="">
-                        </a>
-                    </div>
+                    
                     <!-- Footer Payment Area End Here -->
                     <!-- Begin Copyright Area -->
-                    <div class="copyright text-center pt-25">
+                    {{-- <div class="copyright text-center pt-25">
                         <span><a href="https://www.templatespoint.net" target="_blank">Templates Point</a></span>
-                    </div>
+                    </div> --}}
                     <!-- Copyright Area End Here -->
                 </div>
             </div>

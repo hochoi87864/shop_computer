@@ -160,7 +160,10 @@ class AdminCategoryController extends Controller
                 $category->delete();
                 $request->session()->flash('delete_category_success', 'Đã xóa thành công loại sản phẩm mang ID số'.$id.'!');
                 break;
-            
+            case 'status':
+                $category->c_status= $category->c_status==1?0:1;
+                $category->save();
+                break;
             default:
                 dd('Lỗi !!');
                 break;

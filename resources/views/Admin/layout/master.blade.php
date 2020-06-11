@@ -18,6 +18,17 @@
   {{-- Datatable --}}
   <link href="{{asset('jquery-datatables/jquery.dataTables.min.css')}}" rel="stylesheet">
   @yield('css')
+  <style>
+    .btn-circle { 
+      border-radius: 100%;
+      height: 2.5rem;
+      width: 2.5rem;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+        }
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -30,7 +41,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('admin.home')}}" class="nav-link">Home</a>
+        <a href="{{route('admin.home')}}" class="nav-link">Trang chủ</a>
       </li>
       {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -153,7 +164,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
+    <a href="{{route('admin.home')}}" class="brand-link">
       <img src="{{asset('admin_lte/dist/img/AdminLTELogo.png')}}"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"

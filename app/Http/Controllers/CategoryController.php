@@ -10,19 +10,41 @@ class CategoryController extends CustomerController
 {
     public function index($slugname, $id)
     {
-        $category = Category::find($id);
-        $products = Product::where([
+        $checklink = 0;
+        $checkproduct = Product::where([
             'pro_category_id' =>$id,
             'pro_status'       => 1
-        ])->get();
+        ])->count();
+        $category = Category::find($id);
+        if($checkproduct>9)
+        {
+            $checklink = 1;
+            $products = Product::where([
+                'pro_category_id' =>$id,
+                'pro_status'       => 1
+            ])->paginate(9);
+        }
+        else
+        {
+            $products = Product::where([
+                'pro_category_id' =>$id,
+                'pro_status'       => 1
+            ])->get();
+        }
         $data =  [
             'category' => $category,
-            'products' => $products
+            'products' => $products,
+            'checklink' =>$checklink
         ];
         return view('customer.category.index',$data);
     }
     public function indexOrder($slugname, $id, $order)
     {
+        $checklink = 0;
+        $checkproduct = Product::where([
+            'pro_category_id' =>$id,
+            'pro_status'       => 1
+        ])->count();
         $category = Category::find($id);
         $products = Product::where([
             'pro_category_id' =>$id,
@@ -44,14 +66,41 @@ class CategoryController extends CustomerController
             case 't50t':
                 $products->where('pro_price','>',50000000);
             break;
+            case 'az':
+                $products->orderBy('pro_name','ASC');
+                break;
+            case 'za':
+                $products->orderBy('pro_name','DESC');
+                break;
+            case 'mn':
+                $products->orderBy('created_at','DESC');
+                break;
+            case 'cn':
+                $products->orderBy('created_at','ASC');
+                break;
+            case 'td':
+                $products->orderBy('pro_price','ASC');
+                break;
+            case 'gd':
+                $products->orderBy('pro_price','DESC');
+                break;
             default:
                 dd("Lỗi");
                 break;
         }
-        $products =$products->orderBy('id','DESC')->paginate(9);
+        if($checkproduct>9)
+        {
+            $checklink = 1;
+            $products =$products->paginate(3);
+        }
+        else
+        {
+            $products =$products->get();
+        }
         $data =  [
             'category' => $category,
-            'products' => $products
+            'products' => $products,
+            'checklink' => $checklink
         ];
         return view('customer.category.index',$data);
     }
