@@ -63,6 +63,7 @@
                 </div> --}}
                 <!-- shop-top-bar end -->
                 <!-- shop-products-wrapper start -->
+                @if(count($products)>0)
                 <div class="shop-products-wrapper">
                     <div class="tab-content">
                         <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
@@ -698,6 +699,9 @@
                         </div> --}}
                     </div>
                 </div>
+                @else
+                <div style="margin-top: 125px; margin-left: 300px; font-size: 20px; color: #a4a4a4">Không có sản phẩm  nào !!!</div>
+                @endif
                 <!-- shop-products-wrapper end -->
             </div>
             <div class="col-lg-3 order-2 order-lg-1">
@@ -737,6 +741,16 @@
                                 <li><a href="{{route('category.index.order',[$category->c_name_slug,$category->id,'gd'])}}">Giá giảm dần</a></li>
                             </ul>
                         </div>
+                        @foreach($category->Attributes as $attributes)
+                        <div class="filter-sub-titel mt-3">{{$attributes->at_name}}: </div>
+                        <div style="padding-left: 5%">
+                            <ul class="sort_product" style="padding: 6px">
+                                @foreach($attributes->AttributeValue as $attributeValue)
+                                    <li><a href="{{route('category.index.order.attribute',[$category->c_name_slug,$category->id,$attributeValue->id])}}">{{$attributeValue->atv_value}}</a></li>
+                                @endforeach                   
+                            </ul>
+                        </div>
+                        @endforeach
                      </div>
                     <!-- filter-sub-area end -->
                 </div>

@@ -1877,9 +1877,10 @@ textarea:focus {
     background: #fff;
     border-radius: 5px;
     border: 1px solid #e1e1e1;
-    min-width: 536px;
+    min-width: 600px;
     height: 45px;
     float: left;
+    margin-left: 15px;
 }
 
 .hm-searchbox .nice-select.select-search-category {
@@ -1898,7 +1899,7 @@ textarea:focus {
 }
 
 .select-search-category ul.list {
-    height: 440px;
+    /* height: 440px; */
     overflow-y: auto;
     overscroll-behavior-x: none;
 }

@@ -7,6 +7,13 @@
 .product-description p h1,h2,h3{
     font-size: 22px;
 }
+.product-description img {
+    display: block;
+    margin: 0 auto;
+    width: 56%;
+    height: 50%;
+    overflow: hidden;
+}
 .list_text{
     display: inline-block;
     margin-left: 10px;
@@ -173,7 +180,7 @@
             <div class="col-lg-12">
                 <div class="li-product-tab">
                     <ul class="nav li-product-menu">
-                       <li><a class="active" data-toggle="tab" href="#description"><span>Mô tả</span></a></li>
+                       <li><a class="active" data-toggle="tab" href="#description"><span>Thông tin chi tiết</span></a></li>
                        {{-- <li><a data-toggle="tab" href="#product-details"><span>Chi tiết sản phẩm</span></a></li> --}}
                        <li><a data-toggle="tab" href="#reviews"><span>Đánh giá</span></a></li>
                     </ul>               

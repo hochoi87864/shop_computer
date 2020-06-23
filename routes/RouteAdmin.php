@@ -48,6 +48,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin','middleware'=>'checkAdminL
         Route::get('/orderItem/{id}','AdminTransactionController@getOrderItem')->name('admin.get.order.item');
         Route::get('/paid/{id}','AdminTransactionController@transactionPaid')->name('admin.transaction.paid');
         Route::get('/{action}/{id}','AdminTransactionController@handle')->name('admin.transaction.handle');
+        Route::get('/export/transaction-pdf/{id}','AdminTransactionController@exportTransactionPdf')->name('admin.get.export.transaction');
     });
 
     Route::group(['prefix'=>'comment'],function(){

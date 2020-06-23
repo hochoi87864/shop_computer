@@ -5,7 +5,7 @@
     @font-face {
             font-family: 'DejaVuSans';
             src: url({{ storage_path('fonts/DejaVuSans.ttf') }});
-            font-weight: Boldest.; 
+            font-weight: bold; 
             font-style: normal;
          }
         body{
@@ -23,16 +23,17 @@
         ?>
         
         <center><h3>BÁO CÁO DOANH THU</h3></center>
-        <div>
-            Người xuất: Le Tien Trung<br/>
-            Chức vụ: Admin
+        <div style="font-size: 14px">
+            Cửa hàng: Kinh doanh linh kiện máy tính Gaming.<br/>
+            Địa chỉ cửa hàng: 41A Đường Phú Diễn, Cầu Diễn, Bắc Từ Liêm, Hà Nội.<br/>
+            Người tạo thống kê: {{Auth::user()->name}}<br/>
         </div>
-        <p>
+        <p style="font-size: 14px">
             Thống kê bán sản phẩm từ {{$statistical_date_start}} đến {{$statistical_date_end}}.
         </p>
         <p>
             {{-- @include('admin::components.listStatistical') --}}
-            <table class="table table-bordered" style="font-size: 10px;">
+            <table class="table table-bordered" style="font-size: 13px;">
                 <thead class="thead-dark">
                         <th  >STT</th>
                         <th   style="">Sản phẩm</th>
@@ -60,11 +61,18 @@
                     @endforeach    
                 @endforeach       
                         <tr>
-                            <td colspan="5" style="text-align: center;font-weight: bold;font-size: 20px;">Tổng tiền:</td>
-                            <td colspan="2" style="text-align: center;font-weight: bold;font-size: 20px;">{{number_format($total_earn_money,'0',',','.')}} VNĐ</td>
+                            <td colspan="5" style="text-align: center;font-weight: bold;font-size: 16px;">Tổng tiền:</td>
+                            <td colspan="2" style="text-align: center;font-weight: bold;font-size: 16px;">{{number_format($total_earn_money,'0',',','.')}} VNĐ</td>
                         </tr>
                 </tbody>
             </table>
+            <div style="float: right; text-align: center">
+                <span style="font-size: 13px">Hà Nội, ngày {{$day}} tháng {{$month}} năm {{$year}}</span><br/>
+                Người xuất giao dịch<br/>
+            <br/>
+            <br/>
+                <span class="margin-top:20px">{{Auth::user()->name}}</span>
+            </div>
         </p>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

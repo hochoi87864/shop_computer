@@ -72,10 +72,12 @@
                                 <a href="{{route('admin.transaction.handle',['send',$transaction->id])}}"><span class="badge badge-danger">Chưa xử lý</span></a>
                               @endif
                             </td>
-                            <td style="width: 11%;">
+                            <td style="width: 15%;">
                               <a href="{{route('admin.transaction.handle',['delete',$transaction->id])}}" data-id="{{$transaction->id}}" class="btn_delete_sweet btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a>
-                              &nbsp
-                            <a href="{{route('admin.get.order.item',$transaction->id)}}" data-id="{{$transaction->id}}" class="js_order_item btn btn-primary btn-circle" data-toggle="modal" data-target="#showOrderItem"> <i class="fas fa-eye"></i></a>
+                              
+                              <a href="{{route('admin.get.order.item',$transaction->id)}}" data-id="{{$transaction->id}}" class="js_order_item btn btn-primary btn-circle" data-toggle="modal" data-target="#showOrderItem"> <i class="fas fa-eye"></i></a>
+                              
+                              <a href="{{route('admin.get.export.transaction',$transaction->id)}}" class="btn btn-success btn-circle"><i class="fa fa-file" aria-hidden="true"></i></a>
                             </td>
                         </tr>
 {{-- custom modal by me --}}
@@ -137,7 +139,31 @@
 <script>
   $(document).ready( function () {
     $('#dataTable').DataTable({
-      "order": [[ 0, "desc" ]]
+      "order": [[ 6, "asc" ]],
+      "language" : {
+        "decimal":        "",
+        "emptyTable":     "Không có dữ liệu hiển thị trong bảng",
+        "info":           "Đang hiển thị bản ghi _START_ to _END_ trên _TOTAL_ bản ghi",
+        "infoEmpty":      "Hiển thị 0 đến 0 của 0 bản ghi",
+        "infoFiltered":   "(đã lọc từ _MAX_ total bản ghi)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "Hiển thị _MENU_ bản ghi",
+        "loadingRecords": "Đang tải...",
+        "processing":     "Đang xử lý...",
+        "search":         "Tìm kiếm:",
+        "zeroRecords":    "Không có bản ghi nào được tìm thấy",
+        "paginate": {
+            "first":      "Đầu",
+            "last":       "Cuối",
+            "next":       "Tiếp",
+            "previous":   "Trước"
+        },
+        "aria": {
+            "sortAscending":  ": activate to sort column ascending",
+            "sortDescending": ": activate to sort column descending"
+        }
+      }
     });
   });
 </script>

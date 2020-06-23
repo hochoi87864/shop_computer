@@ -52,7 +52,7 @@ class CategoryController extends CustomerController
         ]);
         switch ($order) {
             case 'd1t':
-                $products->where('pro_price','<',1000000000);
+                $products->where('pro_price','<',1000000);
                 break;
             case '1t-10t':
                 $products->whereBetween('pro_price',[1000000,10000000]);
@@ -100,6 +100,42 @@ class CategoryController extends CustomerController
         $data =  [
             'category' => $category,
             'products' => $products,
+            'checklink' => $checklink
+        ];
+        return view('customer.category.index',$data);
+    }
+    public function indexOrderAttribute($slugname, $id, $idatv)
+    {
+        $checklink = 0;
+        $category = Category::find($id);
+        $products = Product::where([
+            'pro_category_id' =>$id,
+            'pro_status'       => 1,
+        ])->get();
+        $filterattritebuteproduct = array();
+        foreach ($products as $product) {
+            foreach($product->ProductAndAttributeValue as $atv)
+            {
+                if($atv->id == $idatv)
+                {
+                    array_push($filterattritebuteproduct,$product);
+                }
+            };
+        }
+        // dd($filterattritebuteproduct);
+        // $checkproduct = count($filterattritebuteproduct);
+        // if($checkproduct>9)
+        // {
+        //     $checklink = 1;
+        //     $products =$products->paginate(3);
+        // }
+        // else
+        // {
+        //     $products =$products->get();
+        // }
+        $data =  [
+            'category' => $category,
+            'products' => $filterattritebuteproduct,
             'checklink' => $checklink
         ];
         return view('customer.category.index',$data);

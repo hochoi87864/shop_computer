@@ -19,6 +19,7 @@ Route::group(['prefix'=>'category'],function()
 {
     Route::get('/{slugname}/{id}','CategoryController@index')->name('category.index');
     Route::get('/{slugname}/{id}/{order}','CategoryController@indexOrder')->name('category.index.order');
+    Route::get('/{slugname}/{id}/attribute/{at}','CategoryController@indexOrderAttribute')->name('category.index.order.attribute');
 });
 
 Route::group(['prefix'=>'product'],function()
@@ -33,6 +34,9 @@ Route::group(['namespace'=>'Auth'],function()
     Route::get('dang-nhap','LoginController@getLogin')->name('get.login');
     Route::post('dang-nhap','LoginController@postLogin');
     Route::get('dang-xuat','LoginController@getLogout')->name('get.logout');
+    Route::post('lay-lai-mat-khau','ForgotPasswordController@postResetPassword')->name('post.reset.password');
+    Route::get('doi-mat-khau-lay-lai','ForgotPasswordController@getChangePasswordReset')->name('get.change.reset.password');
+    Route::post('doi-mat-khau-lay-lai','ForgotPasswordController@postChangePasswordReset');
 });
 
 Route::group(['prefix'=>'shopping'],function()

@@ -28,6 +28,7 @@
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
                                         @if(Auth::check())
+                                            <li><a href="{{route('favorite.product.index')}}">Sản phẩm yêu thích</a></li>
                                             <li><a href="{{route('history.index')}}">Nhật ký mua hàng</a></li>
                                             <li><a href="{{route('get.logout')}}">Đăng xuất</a></li>
                                         @else
@@ -77,7 +78,7 @@
                 <!-- Begin Header Logo Area -->
                 <div class="col-lg-3">
                     <div class="logo pb-sm-30 pb-xs-30">
-                        <a href="index.html">
+                        <a href="{{route('home')}}">
                             <img src="{{asset('images/menu/logo/1.jpg')}}" alt="">
                         </a>
                     </div>
@@ -102,12 +103,12 @@
                         <ul class="hm-menu">
                             <!-- Begin Header Middle Wishlist Area -->
                             @if(Auth::check())
-                            <li class="hm-wishlist">
+                            {{-- <li class="hm-wishlist">
                                 <a href="{{route('favorite.product.index')}}">
                                     <span class="cart-item-count wishlist-item-count wishlist-item-count-custom">{{Auth::user()->FavoriteProduct->count()}}</span>
                                     <i class="fa fa-heart-o"></i>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="hm-wishlist">
                                 <a href="#" data-toggle="modal" data-target="#exampleModal">
                                     <span class="cart-item-count wishlist-item-count">{{Auth::user()->NofiticationReceive->count()}}</span>

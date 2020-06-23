@@ -10,12 +10,12 @@
         </div>
     </div>
 </div>
+    @if(count($products)>0)
     <center><h3 class="mt-10">Danh sách tìm kiếm</h3></center>
 <div class="col-sm-10 mx-auto">
 <!-- shop-products-wrapper start -->
 <div class="shop-products-wrapper">
     <div class="tab-content">
-        
         <div id="list-view" class="tab-pane fade product-list-view active show" role="tabpanel">
             <div class="row">
                 <div class="col">
@@ -84,11 +84,13 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                    
+                    @endforeach           
                 </div>
             </div>
         </div>
+        @else
+            <div class="pt-60 pb-60" style="text-align: center; font-size: 20px; color: #a4a4a4">Không tìm kiếm được sản phẩm nào phù hợp !!!</div>
+        @endif
     </div>
 </div>
 <!-- shop-products-wrapper end -->

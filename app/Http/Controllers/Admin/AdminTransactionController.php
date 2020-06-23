@@ -8,6 +8,7 @@ use App\Models\Nofitication;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Transaction;
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -143,5 +144,21 @@ class AdminTransactionController extends Controller
             $transaction->save();
         }
         return redirect()->route('admin.transaction.index');
+    }
+    public function exportTransactionPdf($id)
+    {
+        $day = Carbon::now()->day;
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+        $transaction = Transaction::find($id);
+        $data = [
+            'transaction' => $transaction,
+            'day' => $day,
+            'month' => $month,
+            'year' => $year
+        ];
+        // return view('admin.transaction.transactionPdf',$data);
+        $pdf = \PDF::loadView('admin.transaction.transactionPdf', $data);
+        return $pdf->download('DetailTransaction'.$transaction->User->name.'MGD'.$transaction->id.'.pdf');
     }
 }
