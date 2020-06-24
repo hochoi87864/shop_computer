@@ -25,4 +25,8 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class,'favorite_product','fp_product_id','fp_user_id');
     }
+    public function Warehouse()
+    {
+        return $this->hasMany(WareHouse::class,'wh_product_id');
+    }
 }

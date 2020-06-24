@@ -40,7 +40,17 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="#">Số lượng: {{$product->pro_number}}</a>
+                                                <a href="#">Tình trạng: 
+                                                    @if($product->pro_number > 10)
+                                                    <b>Còn hàng</b>
+                                                    @elseif($product->pro_number < 10 && $product->pro_number > 0)
+                                                        <b>Số lượng gần hết</b>
+                                                    @elseif($product->pro_number == 0)
+                                                        <b>Hết hàng</b>
+                                                    @else
+                                                        <b>Không xác định</b> 
+                                                    @endif
+                                                </a>
                                             </h5>
                                             <div class="rating-box">
                                                 <?php
@@ -59,8 +69,9 @@
                                                         text-transform: capitalize;
                                                         transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
                                                     @else
+                                                    Đánh Giá: 
                                                         @for($i=1; $i<=5; $i++)
-                                                            <li class="{{$i<=$point_product_searh ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
+                                                            <li class="{{$i<=$point_product_searh ? '':'no-star'}}"><i class="fa fa-star"></i></li>
                                                         @endfor
                                                     @endif
                                                 </ul>
@@ -77,7 +88,7 @@
                             <div class="col-lg-4">
                                 <div class="shop-add-action mb-xs-30">
                                     <ul class="add-actions-link">
-                                        <li class="add-cart"><a class="button_add_cart" data-product-name="{{$product->pro_name}}" href="{{route('shopping.add.product',$product->id)}}">Mua Hàng</a></li>
+                                        <li class="add-cart"><a class="button_add_cart" data-product-name="{{$product->pro_name}}" href="{{route('shopping.add.product',$product->id)}}">Mua sản phẩm</a></li>
                                         <li class="wishlist"><a class="button_add_favorite_product" href="{{route('get.add.favorite.product',$product->id)}}" data-product-name="{{$product->pro_name}}"><i class="fa fa-heart-o"></i>Thêm vào sản phẩm yêu thích</a></li>
                                         <li><a class="quick-view"  href="{{route('product.index',[$product->pro_name_slug,$product->id])}}"><i class="fa fa-eye"></i>Xem chi tiết</a></li>
                                     </ul>

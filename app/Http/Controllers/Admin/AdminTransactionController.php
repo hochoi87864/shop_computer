@@ -53,7 +53,7 @@ class AdminTransactionController extends Controller
                                 [
                                     'nof_sender' => Auth::user()->id,
                                     'nof_receiver' =>$transaction->tr_user_id,
-                                    'nof_content' => 'Giao dịch mã số '.$id.' với nội dung "'.$transaction->nof_content.'" đã bị hủy ! Có thể do thiếu số lượng sản phẩm bạn yêu cầu, liên hệ lại chủ cửa hàng để biết thêm chi tiết !!!',
+                                    'nof_content' => 'Giao dịch <b>mã số '.$id.'</b> với ghi chú "'.$transaction->tr_note.'" <b>ĐÃ BỊ HỦY</b> ! Có thể do thiếu số lượng sản phẩm bạn yêu cầu, liên hệ lại chủ cửa hàng để biết thêm chi tiết !!!',
                                     'created_at' => Carbon::now(),
                                 ]
                                 );
@@ -78,7 +78,7 @@ class AdminTransactionController extends Controller
                                 [
                                     'nof_sender' => Auth::user()->id,
                                     'nof_receiver' =>$transaction->tr_user_id,
-                                    'nof_content' => 'Giao dịch mã số '.$id.' với nội dung "'.$transaction->nof_content.'" đã bị hủy trong khi vận chuyển !! Liên lạc lại chủ cửa hàng để biết thêm chi tiết !',
+                                    'nof_content' => 'Giao dịch <b>mã số '.$id.'</b> với ghi chú "'.$transaction->tr_note.'" <b>đã bị hủy</b> trong khi vận chuyển !! Liên lạc lại chủ cửa hàng để biết thêm chi tiết !',
                                     'created_at' => Carbon::now()
                                 ]
                                 );
@@ -106,7 +106,7 @@ class AdminTransactionController extends Controller
                                         [
                                             'nof_sender' => Auth::user()->id,
                                             'nof_receiver' =>$transaction->tr_user_id,
-                                            'nof_content' => 'Giao dịch mã số '.$id.' có sản phẩm '.$product->pro_name.' đã hết hàng ! Chủ cửa hàng có thể nhập thêm hoặc đơn hàng này sẽ bị hủy !!!',
+                                            'nof_content' => 'Giao dịch mã số '.$id.' có sản phẩm '.$product->pro_name.' đã hết hàng ! Chủ cửa hàng có thể nhập thêm hoặc đơn hàng này sẽ bị <b>HỦY</b> trong thời gian tới !!!',
                                             'created_at' => Carbon::now()
                                         ]
                                         );
@@ -141,6 +141,14 @@ class AdminTransactionController extends Controller
                 $product->save();
             }
             $transaction->tr_status = 2;
+            Nofitication::insert(
+                [
+                    'nof_sender' => Auth::user()->id,
+                    'nof_receiver' =>$transaction->tr_user_id,
+                    'nof_content' => 'Giao dịch <b>mã số '.$id.'</b> đã <b>GIAO DỊCH THÀNH CÔNG</b> !! Bạn có thể đánh giá các sản phẩm trong giao dịch này bằng cách tìm sản phẩm hoặc kiểm tra tại Lịch sử mua hàng !!!',
+                    'created_at' => Carbon::now(),
+                ]
+                );
             $transaction->save();
         }
         return redirect()->route('admin.transaction.index');

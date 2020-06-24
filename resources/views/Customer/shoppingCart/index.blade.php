@@ -82,7 +82,9 @@
                                 <ul>
                                     <li>Tổng <span>{{\Cart::subtotal(0,',','.')}} VNĐ</span></li>
                                 </ul>
+                                @if(\Cart::subtotal()>0)
                                 <a href="{{route('feature.user.checkout')}}" style="float: right">Xác nhận đặt hàng</a>
+                                @endif
                                 <div style="clear: both"></div>
                             </div>
                         </div>

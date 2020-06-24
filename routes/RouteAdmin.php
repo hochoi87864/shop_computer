@@ -79,4 +79,12 @@ Route::group(['namespace'=>'Admin','prefix'=>'/admin','middleware'=>'checkAdminL
         Route::post('/update/{id}','AdminSlideController@update');
         Route::get('/{action}/{id}','AdminSlideController@handle')->name('admin.slide.handle');
     });
+    Route::group(['prefix'=>'warehouse'],function(){
+        Route::get('/','AdminWarehouseController@import')->name('admin.warehouse.import');
+        Route::get('/import/{id}','AdminWarehouseController@importProduct')->name('admin.warehouse.import.product');
+        Route::get('/history','AdminWarehouseController@history')->name('admin.warehouse.history');
+        Route::get('/iventory','AdminWarehouseController@iventory')->name('admin.warehouse.iventory');
+        Route::get('/bestseller','AdminWarehouseController@bestSeller')->name('admin.warehouse.bestseller');
+        Route::get('/hotproduct/{id}','AdminWarehouseController@hotProduct')->name('admin.warehouse.hotproduct');
+    });
 });

@@ -65,7 +65,7 @@
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>{{$user->phone}}</td>
-                          <td style="text-align: center"><span class="badge badge-{{($user->role==1)?"success":"secondary"}}">{{($user->role==1)?"Admin":"Người thường"}}</span></td>
+                          <td style="text-align: center"><a href="{{route('admin.user.action',['role',$user->id])}}"><span class="badge badge-{{($user->role==1)?"success":"secondary"}}">{{($user->role==1)?"Admin":"Khách hàng"}}</span></a></td>
                           <td style="width: 16%">
                             <a href="{{route('admin.user.edit',$user->id)}}" class="btn btn-success btn-circle"><i class="fas fa-edit"></i></a> &nbsp;
                             <a href="{{route('admin.user.action',['delete',$user->id])}}" class="btn_delete_sweet btn btn-danger btn-circle" data-id="{{$user->id}}"><i class="fas fa-trash-alt"></i></a> &nbsp;

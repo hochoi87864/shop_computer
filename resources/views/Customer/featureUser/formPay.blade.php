@@ -73,7 +73,7 @@
                                 @foreach($products as $product)
                                     <tr class="cart_item">
                                         <td class="cart-product-name"> {{$product->name}}<strong class="product-quantity"> × {{$product->qty}}</strong></td>
-                                        <td class="cart-product-total"><span class="amount">{{number_format($product->price*$product->qty,0,',','.')}} VN</span></td>  
+                                        <td class="cart-product-total"><span class="amount">{{number_format($product->price*$product->qty,0,',','.')}} VNĐ</span></td>  
                                     </tr>    
                                 @endforeach
                             </tbody>

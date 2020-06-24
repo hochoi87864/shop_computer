@@ -31,10 +31,6 @@
       <input type="number" class="form-control" name="pro_price" value="{{old('pro_price',isset($product->pro_price)?$product->pro_price:"")}}" placeholder="Nhập giá sản phẩm...">
     </div>
     <div class="form-group">
-      <label>Số lượng sản phẩm: </label>
-      <input type="number" class="form-control" name="pro_number" value="{{old('pro_number',isset($product->pro_number)?$product->pro_number:"")}}" placeholder="Nhập số lượng sản phẩm...">
-    </div>
-    <div class="form-group">
       <label>Giảm giá: </label>
       <input type="number" class="form-control" name="pro_sale" value="{{old('pro_sale',isset($product->pro_sale)?$product->pro_sale:"")}}" placeholder="Giảm giá sản phẩm...">
     </div>

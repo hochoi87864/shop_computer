@@ -87,7 +87,17 @@
                 <div class="product-details-view-content sp-normal-content pt-30">
                     <div class="product-info">
                         <h2>{{$product->pro_name}}</h2>
-                        <span class="product-details-ref">Số lượng: {{$product->pro_number}}</span>
+                        <span class="product-details-ref">Tình trạng:
+                            @if($product->pro_number > 10)
+                                <b>Còn hàng</b>
+                            @elseif($product->pro_number < 10 && $product->pro_number > 0)
+                                <b>Số lượng gần hết</b>
+                            @elseif($product->pro_number == 0)
+                                <b>Hết hàng</b>
+                            @else
+                                <b>Không xác định</b> 
+                            @endif
+                        </span>
                         <div class="rating-box pt-20">
                             <?php
                             $point= 0;
@@ -289,7 +299,10 @@
                                     @for($i=1; $i <= 5; $i++)
                                         <i class="fa fa-star {{$i<=$rating->ra_number?'active':''}}"></i>
                                     @endfor
-                                    <a href="#" style="color:#1cc88a"><i class="fa fa-check-circle-o"></i> Đã đánh giá</a> - <span><i class="fa fa-clock-o"></i> {{$rating->created_at}}</span>
+                                    <a href="#" style="color:#1cc88a"><i class="fa fa-check-circle-o"></i> Đã mua hàng</a> - <span><i class="fa fa-clock-o"></i> {{$rating->created_at}}</span>
+                                    @if(Auth::user()->id == $rating->ra_user_id)
+                                        <span style="float: right"><a href="{{route('get.delete.rating.product',$rating->id)}}" class="btn btn-danger btn_delete_rating">Xóa</a></span><span style="clear: both"></span>
+                                    @endif
                                 </div>
                                 <div style="margin-top:5px;padding-left: 15px">
                                     <span>
@@ -516,10 +529,39 @@
                 });
                 
             }
+            else if(result.code == 2)
+            {
+                swal("Thất bại!","Bạn đã gửi đánh giá sản phẩm này rồi","error");
+            }
+            else if(result.code == 3)
+            {
+                swal("Có thể bạn chưa biết !","Bạn chưa được phép đánh giá sản phẩm này","info");
+            }
             else
             {
                 swal("Thất bại!","Có lỗi xảy ra","error");
             }
+        });
+    });
+</script>
+<script>
+    $(".btn_delete_rating").click(function(e)
+    {
+        e.preventDefault();
+        url = $(this).attr('href');
+        swal({
+            title : "Bạn có chắc chắn ?",
+            text  : "Bạn có chắc chắn xóa đánh giá của bạn khỏi sản phẩm này !",
+            icon: "info",
+            buttons: ["Không","Có"],
+            dangerMode: true,
+            }).then((willdelete)=>{
+                if(willdelete)
+                {
+                    swal("Thành công","Hệ thống chuẩn bị xóa đánh giá của bạn khỏi sản phẩm này !",'success').then(function() {
+                    window.location.href = url;
+                    });
+                }
         });
     });
 </script>

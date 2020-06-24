@@ -132,7 +132,12 @@ class AdminUserController extends Controller
                 $request->session()->flash('delete_user_success', 'Đã xóa thành công tài khoản mang ID số'.$id.'!');
                 return redirect()->route('admin.user.index');
                 break;
-            
+            case "role":
+                $user->role = $user->role==1?0:1;
+                $user->save();
+                return redirect()->route('admin.user.index');
+                break;
+                
             default:
                 dd("Lỗi r");
                 break;

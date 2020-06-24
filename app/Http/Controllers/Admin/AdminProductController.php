@@ -40,7 +40,6 @@ class AdminProductController extends Controller
             'pro_content' => 'required|min:3',
             'pro_category_id' => 'required',
             'pro_price' => 'required|integer|gte:0',
-            'pro_number' => 'required|numeric',
             'pro_sale' => 'required|integer|gte:0|lte:100',
         ],
         [
@@ -57,8 +56,6 @@ class AdminProductController extends Controller
             'pro_price.required' => 'Bạn cần nhập trường giá sản phẩm',
             'pro_price.integer' => 'Giá sản phẩm là kiểu số',
             'pro_price.gte' => 'Giá sản phẩm phải là 1 số nguyên dương !',
-            'pro_number.required' => 'Bạn cần nhập trường số lượng sản phẩm',
-            'pro_number.numeric' => 'Số lượng sản phẩm kiểu số',
             'pro_sale.integer' => 'Giảm giá sản phẩm là kiểu số nguyên dương',
             'pro_sale.required' => 'Bạn cần nhập trường giảm giá sản phẩm, Nếu k muốn giảm giá hãy nhập giá trị bằng 0 xin cảm ơn !!',
             'pro_sale.gte' => 'Giảm giá sản phẩm phải lớn hơn hoặc bằng 0 !',
@@ -96,7 +93,6 @@ class AdminProductController extends Controller
             'pro_content' => 'required|min:3',
             'pro_category_id' => 'required',
             'pro_price' => 'required|integer|gte:0',
-            'pro_number' => 'required|numeric',
             'pro_sale' => 'required|integer|gte:0|lte:100',
         ],
         [
@@ -112,8 +108,6 @@ class AdminProductController extends Controller
             'pro_price.required' => 'Bạn cần nhập trường giá sản phẩm',
             'pro_price.integer' => 'Giá sản phẩm là kiểu số',
             'pro_price.gte' => 'Giá sản phẩm phải là 1 số nguyên dương !',
-            'pro_number.required' => 'Bạn cần nhập trường số lượng sản phẩm',
-            'pro_number.numeric' => 'Số lượng sản phẩm kiểu số',
             'pro_sale.integer' => 'Giảm giá sản phẩm là kiểu số nguyên dương',
             'pro_sale.required' => 'Bạn cần nhập trường giảm giá sản phẩm, Nếu k muốn giảm giá hãy nhập giá trị bằng 0 xin cảm ơn !!',
             'pro_sale.gte' => 'Giảm giá sản phẩm phải lớn hơn hoặc bằng 0 !',
@@ -144,7 +138,6 @@ class AdminProductController extends Controller
         $product->pro_content = $request->pro_content;
         $product->pro_category_id = $request->pro_category_id;
         $product->pro_price = $request->pro_price;
-        $product->pro_number = $request->pro_number;
         $product->pro_sale = $request->pro_sale;
         // check img exist for insert img in database
         if($request->hasFile('pro_image')){

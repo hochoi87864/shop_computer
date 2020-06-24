@@ -89,31 +89,33 @@
                                                     <div class="product_desc_info">
                                                         <div class="product-review">
                                                             <h5 class="manufacturer">
-                                                                <a href="product-details.html">Số lượng: {{$product->pro_number}}</a>
+                                                                {{-- <a href="product-details.html">Số lượng: {{$product->pro_number}}</a> --}}
+                                                                <div class="rating-box">
+                                                                    <?php
+                                                                    $point= 0;
+                                                                    if($product->pro_number_of_reviewers>0){
+                                                                        $point= round($product->pro_total_star/$product->pro_number_of_reviewers);
+                                                                    }
+                                                                    else {
+                                                                        $point = -1;
+                                                                    }
+                                                                    ?>
+                                                                    <ul class="rating">
+                                                                        @if($point == -1)
+                                                                        <li style="color: #a4a4a4;
+                                                                        font-size: 13px;
+                                                                        text-transform: capitalize;
+                                                                        transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
+                                                                        @else
+                                                                        Đánh Giá: 
+                                                                            @for($i=1; $i<=5; $i++)
+                                                                                <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star"></i></li>
+                                                                            @endfor
+                                                                        @endif
+                                                                    </ul>
+                                                                </div>
                                                             </h5>
-                                                            <div class="rating-box">
-                                                                <?php
-                                                                $point= 0;
-                                                                if($product->pro_number_of_reviewers>0){
-                                                                    $point= round($product->pro_total_star/$product->pro_number_of_reviewers);
-                                                                }
-                                                                else {
-                                                                    $point = -1;
-                                                                }
-                                                                ?>
-                                                                <ul class="rating">
-                                                                    @if($point == -1)
-                                                                    <li style="color: #a4a4a4;
-                                                                    font-size: 13px;
-                                                                    text-transform: capitalize;
-                                                                    transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
-                                                                    @else
-                                                                        @for($i=1; $i<=5; $i++)
-                                                                            <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
-                                                                        @endfor
-                                                                    @endif
-                                                                </ul>
-                                                            </div>
+                                                           
                                                         </div>
                                                         <h4><a class="product_name" href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">{{$product->pro_name}}</a></h4>
                                                         <div class="price-box">

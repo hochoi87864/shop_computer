@@ -234,16 +234,17 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        @if(Auth::check())
         <div class="modal-body">
-            @if(isset(Auth::user()->NofiticationReceive))
-                @foreach(Auth::user()->NofiticationReceive as $nofitication)
+            @if(Auth::user()->NofiticationReceive->count()>0)
+                @foreach(Auth::user()->NofiticationReceive->sortByDesc('created_at') as $nofitication)
                     <div style="display: flex">
                         <div class="col-sm-1">
                             <a href="{{route('feature.user.delete.nofication',$nofitication->id)}}">Xóa</a>
                         </div>
                         <div class="col-sm-11">
                             <div><b>{{$nofitication->created_at}}</b></div>
-                            {{$nofitication->nof_content}}
+                            {!!$nofitication->nof_content!!}
                         </div>
                     </div>
                     <hr style="margin: 15px 0px"/>
@@ -253,9 +254,9 @@
                     Không có thông báo gì cả !!!
                 </div>
                 <hr style="margin: 15px 0px"/>
-            @endif
-            
+            @endif 
         </div>
+        @endif
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>

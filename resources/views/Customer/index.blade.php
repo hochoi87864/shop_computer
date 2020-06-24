@@ -121,31 +121,33 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Số lượng: {{$prn->pro_number}}</a>
+                                                {{-- <a href="shop-left-sidebar.html">Số lượng: {{$prn->pro_number}}</a> --}}
+                                                <div class="rating-box">
+                                                    <?php
+                                                    $point= 0;
+                                                    if($prn->pro_number_of_reviewers>0){
+                                                        $point_product_new= round($prn->pro_total_star/$prn->pro_number_of_reviewers);
+                                                    }
+                                                    else {
+                                                        $point_product_new = -1;
+                                                    }
+                                                    ?>
+                                                    <ul class="rating">
+                                                        @if($point_product_new == -1)
+                                                            <li style="color: #a4a4a4;
+                                                            font-size: 13px;
+                                                            text-transform: capitalize;
+                                                            transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
+                                                        @else
+                                                        Đánh Giá:  
+                                                            @for($i=1; $i<=5; $i++)
+                                                                <li class="{{$i<=$point_product_new ? '':'no-star'}}"><i class="fa fa-star"></i></li>
+                                                            @endfor
+                                                        @endif
+                                                    </ul>
+                                                </div>
                                             </h5>
-                                            <div class="rating-box">
-                                                <?php
-                                                $point= 0;
-                                                if($prn->pro_number_of_reviewers>0){
-                                                    $point_product_new= round($prn->pro_total_star/$prn->pro_number_of_reviewers);
-                                                }
-                                                else {
-                                                    $point_product_new = -1;
-                                                }
-                                                ?>
-                                                <ul class="rating">
-                                                    @if($point_product_new == -1)
-                                                        <li style="color: #a4a4a4;
-                                                        font-size: 13px;
-                                                        text-transform: capitalize;
-                                                        transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
-                                                    @else
-                                                        @for($i=1; $i<=5; $i++)
-                                                            <li class="{{$i<=$point_product_new ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
-                                                        @endfor
-                                                    @endif
-                                                </ul>
-                                            </div>
+                                            
                                         </div>
                                         <h4><a class="product_name" href="{{route('product.index',[$prn->pro_name_slug,$prn->id])}}">{{$prn->pro_name}}</a></h4>
                                         <div class="price-box">
@@ -160,7 +162,7 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$prn->pro_name}}" href="{{route('shopping.add.product',$prn->id)}}">Mua hàng</a></li>
+                                            <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$prn->pro_name}}" href="{{route('shopping.add.product',$prn->id)}}">Mua sản phẩm</a></li>
                                             <li><a class="links-details button_add_favorite_product" data-product-name="{{$prn->pro_name}}" href="{{route('get.add.favorite.product',$prn->id)}}"><i class="fa fa-heart-o"></i></a></li>
                                             <li><a href="{{route('product.index',[$prn->pro_name_slug,$prn->id])}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -214,31 +216,32 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Số lượng: {{$product_best_pay->pro_number}}</a>
+                                                            <div class="rating-box">
+                                                                <?php
+                                                                $point_product_best_pay= 0;
+                                                                if($product_best_pay->pro_number_of_reviewers>0){
+                                                                    $point_product_best_pay= round($product_best_pay->pro_total_star/$product_best_pay->pro_number_of_reviewers);
+                                                                }
+                                                                else {
+                                                                    $point_product_best_pay = -1;
+                                                                }
+                                                                ?>
+                                                                <ul class="rating">
+                                                                    @if($point_product_best_pay == -1)
+                                                                        <li style="color: #a4a4a4;
+                                                                        font-size: 13px;
+                                                                        text-transform: capitalize;
+                                                                        transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
+                                                                    @else
+                                                                    Đánh Giá: 
+                                                                        @for($i=1; $i<=5; $i++)
+                                                                            <li class="{{$i<=$point_product_best_pay ? '':'no-star'}}"><i class="fa fa-star"></i></li>
+                                                                        @endfor
+                                                                    @endif
+                                                                </ul>
+                                                            </div>
                                                         </h5>
-                                                        <div class="rating-box">
-                                                            <?php
-                                                            $point_product_best_pay= 0;
-                                                            if($product_best_pay->pro_number_of_reviewers>0){
-                                                                $point_product_best_pay= round($product_best_pay->pro_total_star/$product_best_pay->pro_number_of_reviewers);
-                                                            }
-                                                            else {
-                                                                $point_product_best_pay = -1;
-                                                            }
-                                                            ?>
-                                                            <ul class="rating">
-                                                                @if($point_product_best_pay == -1)
-                                                                    <li style="color: #a4a4a4;
-                                                                    font-size: 13px;
-                                                                    text-transform: capitalize;
-                                                                    transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
-                                                                @else
-                                                                    @for($i=1; $i<=5; $i++)
-                                                                        <li class="{{$i<=$point_product_best_pay ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
-                                                                    @endfor
-                                                                @endif
-                                                            </ul>
-                                                        </div>
+                                                        
                                                     </div>
                                                     <h4><a class="product_name" href="{{route('product.index',[$product_best_pay->pro_name_slug,$product_best_pay->id])}}">{{$product_best_pay->pro_name}}</a></h4>
                                                     <div class="price-box">
@@ -253,7 +256,7 @@
                                                 </div>
                                                 <div class="add-actions">
                                                     <ul class="add-actions-link">
-                                                        <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$product_best_pay->pro_name}}" href="{{route('shopping.add.product',$product_best_pay->id)}}">Mua hàng</a></li>
+                                                        <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$product_best_pay->pro_name}}" href="{{route('shopping.add.product',$product_best_pay->id)}}">Mua sản phẩm</a></li>
                                                         <li><a class="links-details button_add_favorite_product" data-product-name="{{$product_best_pay->pro_name}}" href="{{route('get.add.favorite.product',$product_best_pay->id)}}"><i class="fa fa-heart-o"></i></a></li>
                                                         <li><a href="{{route('product.index',[$product_best_pay->pro_name_slug,$product_best_pay->id])}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
@@ -348,31 +351,31 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="shop-left-sidebar.html">Số lượng: {{$product->pro_number}}</a>
+                                                    <div class="rating-box">
+                                                        <?php
+                                                        $point= 0;
+                                                        if($product->pro_number_of_reviewers>0){
+                                                            $point= round($product->pro_total_star/$product->pro_number_of_reviewers);
+                                                        }
+                                                        else {
+                                                            $point = -1;
+                                                        }
+                                                        ?>
+                                                        <ul class="rating">
+                                                            @if($point == -1)
+                                                                <li style="color: #a4a4a4;
+                                                                font-size: 13px;
+                                                                text-transform: capitalize;
+                                                                transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
+                                                            @else
+                                                            Đánh Giá: 
+                                                                @for($i=1; $i<=5; $i++)
+                                                                    <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star"></i></li>
+                                                                @endfor
+                                                            @endif
+                                                        </ul>
+                                                    </div>
                                                 </h5>
-                                                <div class="rating-box">
-                                                    <?php
-                                                    $point= 0;
-                                                    if($product->pro_number_of_reviewers>0){
-                                                        $point= round($product->pro_total_star/$product->pro_number_of_reviewers);
-                                                    }
-                                                    else {
-                                                        $point = -1;
-                                                    }
-                                                    ?>
-                                                    <ul class="rating">
-                                                        @if($point == -1)
-                                                            <li style="color: #a4a4a4;
-                                                            font-size: 13px;
-                                                            text-transform: capitalize;
-                                                            transition: all 0.3s ease-in-out;">Chưa đánh giá</li>
-                                                        @else
-                                                            @for($i=1; $i<=5; $i++)
-                                                                <li class="{{$i<=$point ? '':'no-star'}}"><i class="fa fa-star-o"></i></li>
-                                                            @endfor
-                                                        @endif
-                                                    </ul>
-                                                </div>
                                             </div>
                                             <h4><a class="product_name" href="{{route('product.index',[$product->pro_name_slug,$product->id])}}">{{$product->pro_name}}</a></h4>
                                             <div class="price-box">
@@ -387,7 +390,7 @@
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
-                                                <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$product->pro_name}}" href="{{route('shopping.add.product',$product->id)}}">Add to cart</a></li>
+                                                <li class="add-cart active"><a class="button_add_cart" data-product-name="{{$product->pro_name}}" href="{{route('shopping.add.product',$product->id)}}">Mua sản phẩm</a></li>
                                                 <li><a class="links-details button_add_favorite_product" data-product-name="{{$product->pro_name}}" href="{{route('get.add.favorite.product',$product->id)}}"><i class="fa fa-heart-o"></i></a></li>
                                                 <li><a href="{{route('product.index',[$product->pro_name_slug,$product->id])}}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                             </ul>

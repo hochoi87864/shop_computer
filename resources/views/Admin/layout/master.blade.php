@@ -193,7 +193,7 @@
               <a href="{{route('admin.home')}}" class="nav-link {{(request()->is('admin'))?"active":""}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Trang chủ
               </p>
             </a>
           </li>  
@@ -286,7 +286,7 @@
         {{-- Tab product --}}
         <li class="nav-item has-treeview {{(request()->is('admin/product*'))?'menu-open':'' }}">
           <a class="nav-link {{(request()->is('admin/product*'))?"active":""}}">
-          <i class="nav-icon fa fa-archive"></i>
+          <i class="nav-icon fa fa-desktop"></i>
           <p>
             Sản phẩm
             <i class="fas fa-angle-left right"></i>
@@ -302,7 +302,7 @@
           </ul>
           <ul class="nav nav-treeview">        
             <li class="nav-item">
-              <a href="{{route('admin.product.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link ">
+              <a href="{{route('admin.product.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/product/create'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm</p>
               </a>
@@ -310,6 +310,49 @@
           </ul>
        </li>
         {{-- End tab product --}}
+        {{-- Tab warehouse --}}
+        <li class="nav-item has-treeview {{(request()->is('admin/warehouse*'))?'menu-open':'' }}">
+          <a class="nav-link {{(request()->is('admin/warehouse*'))?"active":""}}">
+          <i class="nav-icon fa fa-archive"></i>
+          <p>
+            Kho hàng
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+            <a href="{{Route('admin.warehouse.import')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Nhập hàng</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{route('admin.warehouse.history')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse/history'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Lịch sử nhập hàng</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{route('admin.warehouse.iventory')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse/iventory'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Hàng tồn kho</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">        
+            <li class="nav-item">
+              <a href="{{route('admin.warehouse.bestseller')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse/bestseller'))?"active":""}}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Hàng bán chạy</p>
+              </a>
+            </li>
+          </ul>
+       </li>
+        {{-- End tab warehouse --}}
         {{-- Tab article --}}
         <li class="nav-item has-treeview {{(request()->is('admin/article*'))?'menu-open':'' }}">
           <a class="nav-link {{(request()->is('admin/article*'))?"active":""}}">

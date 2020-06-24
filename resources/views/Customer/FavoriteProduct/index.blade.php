@@ -27,7 +27,7 @@
                                     <th class="li-product-thumbnail">Image</th>
                                     <th class="cart-product-name">Tên sản phẩm</th>
                                     <th class="li-product-price">Giá</th>
-                                    <th class="li-product-stock-status">Số lượng</th>
+                                    <th class="li-product-stock-status">Tình trạng</th>
                                     <th class="li-product-add-cart">Thêm vào giỏ hàng</th>
                                 </tr>
                             </thead>
@@ -38,7 +38,17 @@
                                         <td class="li-product-thumbnail"><a href="#"><img width="200px" src="{{asset('upload/pro_image/'.$product->pro_image)}}" alt=""></a></td>
                                         <td class="li-product-name"><a href="#">{{$product->pro_name}}</a></td>
                                         <td class="li-product-price"><span class="amount">{{number_format($product->pro_price,2,',','.')}} VNĐ</span></td>
-                                        <td class="li-product-stock-status"><span>{{$product->pro_number}}</span></td>
+                                        <td class="li-product-stock-status">
+                                            @if($product->pro_number > 10)
+                                            <b>Còn hàng</b>
+                                            @elseif($product->pro_number < 10 && $product->pro_number > 0)
+                                                <b>Số lượng gần hết</b>
+                                            @elseif($product->pro_number == 0)
+                                                <b>Hết hàng</b>
+                                            @else
+                                                <b>Không xác định</b> 
+                                            @endif
+                                        </td>
                                         <td class="li-product-add-cart"><a data-product-name="{{$product->pro_name}}" class="button_add_cart" href="{{route('shopping.add.product',$product->id)}}">Mua hàng</a></td>
                                     </tr>
                                 @endforeach
@@ -70,7 +80,7 @@
             })
             .then((willDelete) => {
             if (willDelete) {
-                swal("Thành công","Bạn đã xóa sản phẩm này khỏi danh sách yêu thích của bạn !",'success').then(function() {
+                swal("Thành công","Hệ thống chuẩn bị xóa sản phẩm này khỏi danh sách yêu thích của bạn !",'success').then(function() {
                     window.location.href = url;
                 });
             }

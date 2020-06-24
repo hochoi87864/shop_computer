@@ -57,6 +57,7 @@ Route::group(['prefix'=>'feature-user','middleware'=>'checkLoginUser'],function(
 Route::group(['prefix'=>'rating','middleware'=>'checkLoginUser'],function()
 {
     Route::post('/{id}','RatingController@saveRating')->name('post.rating.product');
+    Route::get('/delete/{id}','RatingController@deleteRating')->name('get.delete.rating.product');
 });
 
 // favorite_product
