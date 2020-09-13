@@ -16,7 +16,7 @@ class HomeController extends CustomerController
         $slides = Slide::all();
         $categories = Category::where('c_status','1')->get();
         $product_news = Product::where('pro_status',1)->orderBy('created_at','DESC')->limit(4)->get();
-        $articles = Article::where('a_status','1')->take(3)->get();
+        $articles = Article::where('a_status','1')->orderBy('created_at','DESC')->take(3)->get();
         // $hotproducts = Product::where([
         //     'pro_status' => '1',
         //     'pro_hot' => '1'

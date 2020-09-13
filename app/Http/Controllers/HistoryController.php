@@ -14,7 +14,7 @@ class HistoryController extends CustomerController
     public function index()
     {
         $user = Auth::user();
-        $transactions = $user->Transaction;
+        $transactions = $user->Transaction->sortByDesc('id');
         $data =  [
             'transactions' => $transactions
         ];

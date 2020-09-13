@@ -137,10 +137,10 @@
                             
                         </div>
                         <div class="product-desc">
-                            <p>
+                            {{-- <p>
                                 <span>{{$product->pro_description}}
                                 </span>
-                            </p>
+                            </p> --}}
                         </div>
                         <div class="single-add-to-cart">
                             <div style="display: flex">
@@ -300,8 +300,10 @@
                                         <i class="fa fa-star {{$i<=$rating->ra_number?'active':''}}"></i>
                                     @endfor
                                     <a href="#" style="color:#1cc88a"><i class="fa fa-check-circle-o"></i> Đã mua hàng</a> - <span><i class="fa fa-clock-o"></i> {{$rating->created_at}}</span>
+                                    @if(Auth::check())
                                     @if(Auth::user()->id == $rating->ra_user_id)
                                         <span style="float: right"><a href="{{route('get.delete.rating.product',$rating->id)}}" class="btn btn-danger btn_delete_rating">Xóa</a></span><span style="clear: both"></span>
+                                    @endif
                                     @endif
                                 </div>
                                 <div style="margin-top:5px;padding-left: 15px">

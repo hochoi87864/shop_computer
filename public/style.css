@@ -190,7 +190,7 @@ p {
     font-size: 14px;
     font-weight: normal;
     line-height: 24px;
-    color: #898989;
+    color: black;
     margin-bottom: 15px;
 }
 
@@ -3549,11 +3549,11 @@ textarea:focus {
     margin: 20px 0 25px;
     font-size: 14px;
     line-height: 24px;
-    color: #888;
+    color: black;
 }
 
 .footer-static-middle .des>li {
-    color: #888;
+    color: black;
     font-size: 14px;
     margin: 0;
     font-weight: 400;

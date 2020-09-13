@@ -62,7 +62,7 @@
                                             <input type="hidden" name="pro_id" value="{{$product->id}}"/>
                                             <span style="color: #242424l;font-size: 16px;font-weight: 700;">{{$product->qty}} Sản phẩm</span>
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="{{$product->qty}}" name="number_product_edit" type="text">
+                                                <input class="cart-plus-minus-box" value="{{$product->qty}}" name="number_product_edit" type="number" min="0" max="10">
                                                 <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                 <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                             </div>

@@ -45,11 +45,11 @@
                       <tr>
                         <td>{{$wh->id}}</td>
                         <td>
-                          <b>{{$wh->Product->pro_name}}</b><br/>
+                          <b>{{isset($wh->Product->pro_name)?$wh->Product->pro_name:"Đã bị xóa"}}</b><br/>
                         </td>
-                        <td>{{$wh->Product->Category->c_name}}</td>
+                        <td>{{isset($wh->Product->Category->c_name)?$wh->Product->Category->c_name:"Đã bị xóa"}}</td>
                         <td>
-                          @if($wh->Product->pro_image)
+                          @if(isset($wh->Product->pro_image))
                             <img style="width:80px;height:80px" src="{{asset('upload/pro_image/'.$wh->Product->pro_image)}}" alt="No Avatar"/>
                           @else
                           <img style="width:80px;height:80px" src="{{asset('noimg.png')}}" alt="No Avatar"/>

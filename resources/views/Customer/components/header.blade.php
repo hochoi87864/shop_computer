@@ -29,7 +29,7 @@
                                     <ul class="ht-setting-list">
                                         @if(Auth::check())
                                             <li><a href="{{route('favorite.product.index')}}">Sản phẩm yêu thích</a></li>
-                                            <li><a href="{{route('history.index')}}">Nhật ký mua hàng</a></li>
+                                            <li><a href="{{route('history.index')}}">Lịch sử mua hàng</a></li>
                                             <li><a href="{{route('get.logout')}}">Đăng xuất</a></li>
                                         @else
                                             <li><a href="{{route('get.login')}}">Đăng nhập</a></li>

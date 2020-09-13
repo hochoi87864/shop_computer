@@ -747,7 +747,7 @@
                         <div class="filter-sub-titel mt-3">{{$attributes->at_name}}: </div>
                         <div style="padding-left: 5%">
                             <ul class="sort_product" style="padding: 6px">
-                                @foreach($attributes->AttributeValue as $attributeValue)
+                                @foreach($attributes->AttributeValue->sortbyDesc('atv_value') as $attributeValue)
                                     <li><a href="{{route('category.index.order.attribute',[$category->c_name_slug,$category->id,$attributeValue->id])}}">{{$attributeValue->atv_value}}</a></li>
                                 @endforeach                   
                             </ul>

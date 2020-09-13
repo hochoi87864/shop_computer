@@ -20,7 +20,7 @@
                 <form method="POST" id="formSaveInfo">
                     @csrf
                     <div class="checkbox-form">
-                        <h3>Chi tiết hóa đơn</h3>
+                        <h3>Chi tiết giao dịch</h3>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="checkout-form-list">

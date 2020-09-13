@@ -197,11 +197,11 @@
               </p>
             </a>
           </li>  
-          <li class="nav-header">MANAGE</li>
+          
           {{-- Tab Slide --}}
           <li class="nav-item has-treeview {{(request()->is('admin/slide*'))?"menu-open":""}}">
             <a class="nav-link {{(request()->is('admin/slide*'))?"active":""}}">
-            <i class="nav-icon fa fa-cubes"></i>
+            <i class="nav-icon fa fa-window-maximize"></i>
             {{-- <i class=""></i> --}}
             <p>
               Slide
