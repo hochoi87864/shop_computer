@@ -3,6 +3,7 @@ Route::get('admin/login','Admin\AdminController@getLogin');
 Route::post('admin/login','Admin\AdminController@postLogin')->name("admin.login");
 Route::get('admin/logout','Admin\AdminController@getLogout')->name('admin.logout');
 Route::group(['namespace'=>'Admin','prefix'=>'/admin','middleware'=>'checkAdminLogin'],function(){
+    
     Route::get('/','AdminController@index')->name('admin.home');
     Route::get('/test','AdminTestController@index')->name('admin.test');
     Route::group(['prefix'=>'category'],function(){

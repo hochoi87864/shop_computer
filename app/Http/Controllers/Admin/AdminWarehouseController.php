@@ -16,7 +16,7 @@ class AdminWarehouseController extends Controller
         $data = [
             'products' => $products
         ];
-        return view('admin.warehouse.import',$data);
+        return view('Admin.warehouse.import',$data);
     }
     public function importProduct(Request $request,$id)
     {
@@ -24,7 +24,7 @@ class AdminWarehouseController extends Controller
         if($product->pro_number + $request->product_number < 0)
         {
             $request->session()->flash('import_error', 'Sản phẩm "'.$product->pro_name.' " mã sản phẩm là '.$id.' chỉ còn '.$product->pro_number.' trong kho !');
-            return redirect()->route('admin.warehouse.import');
+            return redirect()->route('Admin.warehouse.import');
         }
         $product->pro_number = $product->pro_number + $request->product_number;
         $product->save();
@@ -36,7 +36,7 @@ class AdminWarehouseController extends Controller
             ]
         );
         $request->session()->flash('import_success', 'Đã thêm '.$request->product_number.' sản phẩm "'.$product->pro_name.' " mã sản phẩm là '.$id.' vào kho !');
-        return redirect()->route('admin.warehouse.import');
+        return redirect()->route('Admin.warehouse.import');
     }
     public function history()
     {
@@ -44,7 +44,7 @@ class AdminWarehouseController extends Controller
         $data = [
             'warehouse' => $warehouse
         ];
-        return view('admin.warehouse.history',$data);
+        return view('Admin.warehouse.history',$data);
     }
     public function iventory()
     {
@@ -64,7 +64,7 @@ class AdminWarehouseController extends Controller
         $data = [
             'products' => $products_iventory
         ];
-        return view('admin.warehouse.iventory',$data);
+        return view('Admin.warehouse.iventory',$data);
     }
     public function bestseller()
     {
@@ -72,7 +72,7 @@ class AdminWarehouseController extends Controller
         $data = [
             'product_best_seller' => $product_best_seller
         ];
-        return view('admin.warehouse.bestseller',$data);
+        return view('Admin.warehouse.bestseller',$data);
     }
     public function hotproduct($id)
     {

@@ -12,7 +12,8 @@
 */
 
 include('RouteAdmin.php');
-Route::get('/','HomeController@index')->name('home');
+Route::get('/', 'Admin\AdminUserController@ajaxDatatable')->name('datatable.example');
+// Route::get('/','HomeController@index')->name('home');
 Route::get('/about-us','HomeController@aboutUs')->name('about.us');
 Route::get('/contact','HomeController@contact')->name('contact');
 Route::group(['prefix'=>'category'],function()

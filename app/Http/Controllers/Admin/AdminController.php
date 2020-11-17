@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function getLogin()
     {
-        return view('admin.login.login'); 
+        return view('Admin.login.login'); 
     }
     public function postLogin(Request $request)
     {
@@ -22,14 +22,14 @@ class AdminController extends Controller
         if(Auth::attempt($credentials)){
             $user = Auth::user();
             if($user->role == 1){
-                return redirect()->route('admin.home');
+                return redirect()->route('Admin.home');
             } 
         }
         return redirect()->back()->with('error','Đăng nhập không thành công');
     }
     public function getLogout(){
         Auth::logout();
-        return view('admin.login.login');
+        return view('Admin.login.login');
     }
     public function index(){
         // get 7 day formar Y-m-d

@@ -16,11 +16,11 @@ class AdminArticleController extends Controller
         $data = [
             'articles' => $articles
         ];
-        return view('admin.article.index',$data);
+        return view('Admin.article.index',$data);
     }
     public function create()
     {
-        return view('admin.article.create');
+        return view('Admin.article.create');
     }
     public function store(Request $request)
     {
@@ -46,7 +46,7 @@ class AdminArticleController extends Controller
          }
         $this->insertOrUpdate($request);
         $request->session()->flash('create_article_success', 'Đã thêm 1 bài viết!');
-        return redirect()->route('admin.article.index');
+        return redirect()->route('Admin.article.index');
     }
     public function edit($id)
     {
@@ -54,7 +54,7 @@ class AdminArticleController extends Controller
         $data= [
             'article' => $article
         ];
-        return view('admin.article.edit',$data);
+        return view('Admin.article.edit',$data);
     }
     public function update(Request $request, $id)
     {
@@ -79,7 +79,7 @@ class AdminArticleController extends Controller
         }
         $this->insertOrUpdate($request, $id);
         $request->session()->flash('edit_article_success', 'Đã sửa thành công bài viết mang ID số'.$id.'!');
-        return redirect()->route('admin.article.index');
+        return redirect()->route('Admin.article.index');
     }
     public function handle(Request $request,$action,$id)
     {
@@ -97,7 +97,7 @@ class AdminArticleController extends Controller
                 dd("Lỗi r");
                 break;
         }
-        return redirect()->route('admin.article.index');
+        return redirect()->route('Admin.article.index');
     }
     public function insertOrUpdate($request, $id='')
     {
