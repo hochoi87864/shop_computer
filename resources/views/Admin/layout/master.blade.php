@@ -19,7 +19,7 @@
   <link href="{{asset('jquery-datatables/jquery.dataTables.min.css')}}" rel="stylesheet">
   @yield('css')
   <style>
-    .btn-circle { 
+    .btn-circle {
       border-radius: 100%;
       height: 2.5rem;
       width: 2.5rem;
@@ -196,8 +196,8 @@
                 Trang chủ
               </p>
             </a>
-          </li>  
-          
+          </li>
+
           {{-- Tab Slide --}}
           <li class="nav-item has-treeview {{(request()->is('admin/slide*'))?"menu-open":""}}">
             <a class="nav-link {{(request()->is('admin/slide*'))?"active":""}}">
@@ -208,7 +208,7 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{Route('admin.slide.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/slide'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -216,7 +216,7 @@
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.slide.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/slide/create'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -236,7 +236,7 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">        
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{Route('admin.category.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/category'))?"active":""}}">
                   <i class="far fa-circle nav-icon"></i>
@@ -244,7 +244,7 @@
                 </a>
               </li>
             </ul>
-            <ul class="nav nav-treeview">        
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.category.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/category/create'))?"active":""}}">
                   <i class="far fa-circle nav-icon"></i>
@@ -264,16 +264,16 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{Route('admin.attribute.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/attribute'))?"active":""}}">
-              
+
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách</p>
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.attribute.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/attribute/create'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -292,7 +292,7 @@
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
             <a href="{{Route('admin.product.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/product'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -300,7 +300,7 @@
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.product.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/product/create'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -319,7 +319,7 @@
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
             <a href="{{Route('admin.warehouse.import')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -327,7 +327,7 @@
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.warehouse.history')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse/history'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -335,7 +335,7 @@
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.warehouse.iventory')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse/iventory'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -343,7 +343,7 @@
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.warehouse.bestseller')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/warehouse/bestseller'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -362,7 +362,7 @@
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
             <a href="{{Route('admin.article.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/article'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -370,7 +370,7 @@
               </a>
             </li>
           </ul>
-          <ul class="nav nav-treeview">        
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('admin.article.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/article/create'))?"active":""}}">
                 <i class="far fa-circle nav-icon"></i>
@@ -386,7 +386,7 @@
           <i class="nav-icon fas fa-file-invoice-dollar"></i>
           <p>
             Giao dịch
-            
+
           </p>
           </a>
        </li>
@@ -420,7 +420,7 @@
           <i class="fas fa-angle-left right"></i>
         </p>
         </a>
-        <ul class="nav nav-treeview">        
+        <ul class="nav nav-treeview">
           <li class="nav-item">
           <a href="{{Route('admin.user.index')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/user'))?"active":""}}">
               <i class="far fa-circle nav-icon"></i>
@@ -428,7 +428,7 @@
             </a>
           </li>
         </ul>
-        <ul class="nav nav-treeview">        
+        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="{{route('admin.user.create')}}" style="margin-left: 15%;padding-left: 0px;" class="nav-link {{(request()->is('admin/user/create'))?"active":""}}">
               <i class="far fa-circle nav-icon"></i>
@@ -438,7 +438,7 @@
         </ul>
       </li>
       {{-- End tab transaction --}}
-       
+
           {{-- Start Multi level --}}
           {{-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item has-treeview">
