@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function getLogin()
     {
-        return view('Admin.login.login'); 
+        return view('Admin.login.login');
     }
     public function postLogin(Request $request)
     {
@@ -22,8 +22,8 @@ class AdminController extends Controller
         if(Auth::attempt($credentials)){
             $user = Auth::user();
             if($user->role == 1){
-                return redirect()->route('Admin.home');
-            } 
+                return redirect()->route('admin.home');
+            }
         }
         return redirect()->back()->with('error','Đăng nhập không thành công');
     }
